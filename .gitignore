@@ -1,0 +1,27 @@
+# Created by https://www.gitignore.io/api/visualstudiocode
+# Edit at https://www.gitignore.io/?templates=visualstudiocode
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.gitignore.io/api/visualstudiocode
+TT.Diary.WebAPI/bin/
+TT.Diary.WebAPI/obj/
+TT.Diary.BusinessLogic/bin/
+TT.Diary.BusinessLogic/obj/
+TT.Diary.DataAccessLogic/bin/
+TT.Diary.DataAccessLogic/obj/
+TT.Diary.DataAccessLogic/Migrations
+TT.Diary.UnitTests/bin/
+TT.Diary.UnitTests/obj/
+TT.Diary.Documentation/
+TT.Diary.Logs/
+TTDiary.db
