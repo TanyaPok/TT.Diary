@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace TT.Diary.BusinessLogic.Dictionaries.Books.Commands
+namespace TT.Diary.BusinessLogic.Dictionaries.Wishes.Commands
 {
     public class RemoveCommand : IRequest
     {

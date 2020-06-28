@@ -5,7 +5,7 @@ using MediatR;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 
-namespace TT.Diary.BusinessLogic.Dictionaries.Books.Commands
+namespace TT.Diary.BusinessLogic.Dictionaries.Wishes.Commands
 {
     public class RemoveHandler : AsyncRequestHandler<RemoveCommand>
     {
@@ -17,7 +17,7 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Books.Commands
 
         protected override async Task Handle(RemoveCommand request, CancellationToken cancellationToken)
         {
-            var book = _context.Find<Book>(request.Id);
+            var book = _context.Find<Wish>(request.Id);
             _context.Remove(book);
             await _context.SaveChangesAsync(cancellationToken);
         }

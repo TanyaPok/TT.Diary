@@ -13,8 +13,8 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Validation
         {
             RuleFor(r => r).Custom((command, context) =>
             {
-                var category = dbContext.GetRecursively<Category, Book>(command.Id, c => c.Subcategories, c => c.Books);
-                if (category.HasBook())
+                var category = dbContext.GetRecursively<Category, Wish>(command.Id, c => c.Subcategories, c => c.Wishes);
+                if (category.HasItem())
                 {
                     context.AddFailure(ValidationMessages.HasNestedItems.GetDescription());
                 }

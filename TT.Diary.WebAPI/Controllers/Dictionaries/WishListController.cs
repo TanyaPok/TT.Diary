@@ -11,9 +11,9 @@ using TT.Diary.BusinessLogic.ViewModel;
 
 namespace TT.Diary.WebAPI.Controllers.Dictionaries
 {
-    public class BooksController : ApiControllerBase
+    public class WishListController : ApiControllerBase
     {
-        public BooksController(ILogger<BooksController> logger, IMediator mediator) : base(logger, mediator)
+        public WishListController(ILogger<WishListController> logger, IMediator mediator) : base(logger, mediator)
         {
         }
 
@@ -25,14 +25,14 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
         {
             try
             {
-                var data = Query<Category>(new GetBooksQuery { Id = id });
+                var data = Query<Category>(new GetWishListQuery { Id = id });
                 if (data == null)
                     return NotFound();
                 return data;
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetBooks.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetWishList.GetDescription(), ex.Message));
             }
         }
     }

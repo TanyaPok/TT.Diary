@@ -6,7 +6,7 @@ using MediatR;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 
-namespace TT.Diary.BusinessLogic.Dictionaries.Books.Commands
+namespace TT.Diary.BusinessLogic.Dictionaries.Wishes.Commands
 {
     public class AddHandler : IRequestHandler<AddCommand, int>
     {
@@ -21,12 +21,11 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Books.Commands
 
         public async Task<int> Handle(AddCommand request, CancellationToken cancellationToken)
         {
-            var category = _context.Get<Category, Book>(request.CategoryId, c => c.Books);
-            var newBook = _mapper.Map<Book>(request);
-            newBook.CreatedDateUtc = DateTime.Now;
-            category.AddBook(newBook);
+            var category = _context.Get<Category, Wish>(request.CategoryId, c => c.Wishes);
+            var wish = _mapper.Map<Wish>(request);
+            category.AddWish(wish);
             await _context.SaveChangesAsync(cancellationToken);
-            return newBook.Id;
+            return wish.Id;
         }
     }
 }

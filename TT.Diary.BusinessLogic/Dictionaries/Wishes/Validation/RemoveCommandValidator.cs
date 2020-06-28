@@ -1,11 +1,11 @@
 using FluentValidation;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Dictionaries.Books.Commands;
+using TT.Diary.BusinessLogic.Dictionaries.Wishes.Commands;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 
-namespace TT.Diary.BusinessLogic.Dictionaries.Books.Validation
+namespace TT.Diary.BusinessLogic.Dictionaries.Wishes.Validation
 {
     public class RemoveCommandValidator : AbstractValidator<RemoveCommand>
     {
@@ -13,11 +13,11 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Books.Validation
         {
             RuleFor(r => r).Custom((command, context) =>
                 {
-                    var book = dbContext.Get<Book, Schedule>(command.Id, c => c.Schedule);
+                    var book = dbContext.Get<Wish, Schedule>(command.Id, c => c.Schedule);
                     var isForbidden = book.Schedule != null && book.Schedule.CompletionDateUtc == null;
                     if (isForbidden)
                     {
-                        context.AddFailure(ValidationMessages.BookOnSchedule.GetDescription());
+                        context.AddFailure(ValidationMessages.WishOnSchedule.GetDescription());
                     }
                 });
         }

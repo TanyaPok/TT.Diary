@@ -12,8 +12,8 @@ namespace TT.Diary.BusinessLogic.Configurations
         HasNestedItems,
         [Description("Please set category.")]
         CategoryEmpty,
-        [Description("Book is on schedule.")]
-        BookOnSchedule
+        [Description("Wish is on schedule.")]
+        WishOnSchedule
     }
 
     public enum ErrorMessages
@@ -24,13 +24,13 @@ namespace TT.Diary.BusinessLogic.Configurations
         SaveCategory,
         [Description("Category cannot be removed")]
         RemovedCategory,
-        [Description("Book cannot be recieved")]
-        GetBook,
-        [Description("Book cannot be saved")]
-        SaveBook,
-        [Description("Book cannot be removed")]
-        RemoveBook,
-        [Description("Books cannot be recieved")]
-        GetBooks
+        [Description("Wish cannot be recieved")]
+        GetWish,
+        [Description("Wish cannot be saved")]
+        SaveWish,
+        [Description("Wish cannot be removed")]
+        RemoveWish,
+        [Description("Wish list cannot be recieved")]
+        GetWishList
     }
 }

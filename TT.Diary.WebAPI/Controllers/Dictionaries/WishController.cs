@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Dictionaries.Books.Commands;
-using TT.Diary.BusinessLogic.Dictionaries.Books.Queries;
+using TT.Diary.BusinessLogic.Dictionaries.Wishes.Commands;
+using TT.Diary.BusinessLogic.Dictionaries.Wishes.Queries;
 using TT.Diary.BusinessLogic.ViewModel;
 
 namespace TT.Diary.WebAPI.Controllers.Dictionaries
 {
-    public class BookController : ApiControllerBase
+    public class WishController : ApiControllerBase
     {
-        public BookController(ILogger<BookController> logger, IMediator mediator) : base(logger, mediator)
+        public WishController(ILogger<WishController> logger, IMediator mediator) : base(logger, mediator)
         {
         }
 
@@ -21,18 +21,18 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public ActionResult<Book> Get(int id)
+        public ActionResult<Wish> Get(int id)
         {
             try
             {
-                var data = Query<Book>(new GetQuery() { Id = id });
+                var data = Query<Wish>(new GetQuery() { Id = id });
                 if (data == null)
                     return NotFound();
                 return data;
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetBook.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetWish.GetDescription(), ex.Message));
             }
         }
 
@@ -47,7 +47,7 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveBook.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveWish.GetDescription(), ex.Message));
             }
         }
 
@@ -62,7 +62,7 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveBook.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveWish.GetDescription(), ex.Message));
             }
         }
 
@@ -77,7 +77,7 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveBook.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveWish.GetDescription(), ex.Message));
             }
         }
     }

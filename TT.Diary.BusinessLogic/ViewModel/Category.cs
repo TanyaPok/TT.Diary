@@ -14,14 +14,14 @@ namespace TT.Diary.BusinessLogic.ViewModel
         {
             get
             {
-                return Children?.Where(c => c is Category).Cast<Category>();
+                return Children?.OfType<Category>();
             }
         }
-        public IEnumerable<Book> Books
+        public IEnumerable<Wish> WishList
         {
             get
             {
-                return Children?.Where(c => c is Book).Cast<Book>();
+                return Children?.OfType<Wish>();
             }
         }
     }

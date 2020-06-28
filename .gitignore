@@ -3,10 +3,6 @@
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
@@ -24,4 +20,4 @@ TT.Diary.UnitTests/bin/
 TT.Diary.UnitTests/obj/
 TT.Diary.Documentation/
 TT.Diary.Logs/
-TTDiary.db
+TTDiary.db*

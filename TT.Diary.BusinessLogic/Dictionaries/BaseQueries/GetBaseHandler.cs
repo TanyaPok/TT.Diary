@@ -7,11 +7,11 @@ using TT.Diary.BusinessLogic.ViewModel;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 
-namespace TT.Diary.BusinessLogic.Dictionaries.Queries
+namespace TT.Diary.BusinessLogic.Dictionaries.BaseQueries
 {
     public class GetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
         where TComponent : IComponent
-        where TModel : Entity
+        where TModel : AbstractEntity
         where TQuery : AbstractGetBaseQuery<TComponent>
     {
         private readonly IMapper _mapper;

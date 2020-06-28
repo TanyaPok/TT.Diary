@@ -13,8 +13,11 @@ namespace TT.Diary.DataAccessLogic
     public partial class DiaryDBContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Book> Books { get; set; }
+        public DbSet<Wish> Wishes { get; set; }
+        public DbSet<ToDo> ToDoList { get; set; }
+        public DbSet<Habit> Habits { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Tracker> Trackers { get; set; }
 
         public DiaryDBContext(DbContextOptions<DiaryDBContext> options) : base(options)
         {
@@ -41,14 +44,14 @@ namespace TT.Diary.DataAccessLogic
         }
 
         public async Task<T> GetAsync<T>(int id, CancellationToken cancellationToken)
-            where T : Entity
+            where T : AbstractEntity
         {
             return await this.Set<T>().SingleAsync(b => b.Id == id, cancellationToken);
         }
 
         public T Get<T, P>(int id, Expression<Func<T, IEnumerable<P>>> expression)
-            where T : Entity
-            where P : Entity
+            where T : AbstractEntity
+            where P : AbstractEntity
         {
             var entity = Find<T>(id);
             Entry(entity).Collection(expression).Load();
@@ -56,8 +59,8 @@ namespace TT.Diary.DataAccessLogic
         }
 
         public T Get<T, P>(int id, Expression<Func<T, P>> expression)
-            where T : Entity
-            where P : Entity
+            where T : AbstractEntity
+            where P : AbstractEntity
         {
             var entity = Find<T>(id);
             Entry(entity).Reference(expression).Load();
@@ -65,7 +68,7 @@ namespace TT.Diary.DataAccessLogic
         }
 
         public T GetRecursively<T>(int id, Expression<Func<T, IEnumerable<T>>> recursiveExpression)
-            where T : Entity
+            where T : AbstractEntity
         {
             return this.Set<T>().Include(recursiveExpression).AsEnumerable().Single(c => c.Id == id);
         }
@@ -73,8 +76,8 @@ namespace TT.Diary.DataAccessLogic
         public T GetRecursively<T, P>(int id,
                 Expression<Func<T, IEnumerable<T>>> recursiveExpression,
                 Expression<Func<T, IEnumerable<P>>> expression)
-            where T : Entity
-            where P : Entity
+            where T : AbstractEntity
+            where P : AbstractEntity
         {
             return this.Set<T>()
                 .Include(expression)

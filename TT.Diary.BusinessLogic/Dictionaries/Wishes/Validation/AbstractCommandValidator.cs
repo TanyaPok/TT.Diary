@@ -1,12 +1,12 @@
 using FluentValidation;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Dictionaries.Books.Commands;
+using TT.Diary.BusinessLogic.Dictionaries.BaseCommands;
 
-namespace TT.Diary.BusinessLogic.Dictionaries.Books.Validation
+namespace TT.Diary.BusinessLogic.Dictionaries.Wishes.Validation
 {
     public abstract class AbstractCommandValidator<TCommand> : AbstractValidator<TCommand>
-        where TCommand : ICommand
+        where TCommand : AbstractCommand
     {
         public AbstractCommandValidator()
         {

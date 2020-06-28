@@ -20,7 +20,7 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                         var categories = context.Mapper
                             .Map<IList<DataAccessLogic.Model.Category>, IList<ViewModel.IComponent>>(src.Subcategories ?? new List<DataAccessLogic.Model.Category>());
                         var books = context.Mapper
-                            .Map<IList<DataAccessLogic.Model.Book>, IList<ViewModel.IComponent>>(src.Books ?? new List<DataAccessLogic.Model.Book>());
+                            .Map<IList<DataAccessLogic.Model.Wish>, IList<ViewModel.IComponent>>(src.Wishes ?? new List<DataAccessLogic.Model.Wish>());
                         return categories.Union(books);
                     }))
                 .PreserveReferences()
