@@ -1,71 +1,66 @@
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using TT.Diary.DataAccessLogic.Model.Framework;
 
 namespace TT.Diary.DataAccessLogic.Model
 {
-    public class Category : AbstractEntity
+    public class Category : AbstractComposite
     {
-        [Required(ErrorMessage = "Please enter Description")]
-        public string Description { set; get; }
+        public readonly string ARGUMENT_EXCEPTION = "Unexpected type {0}.";
+        [NotMapped]
+        public override IEnumerable<AbstractComponent> Children
+        {
+            get
+            {
+                return Subcategories
+                    .Union<AbstractComponent>(WishList)
+                    .Union<AbstractComponent>(Habits);
+            }
+        }
+
         public IList<Category> Subcategories { set; get; }
-        public IList<Wish> Wishes { set; get; }
+
+        public IList<Wish> WishList { set; get; }
+
         public IList<Habit> Habits { set; get; }
-        public IList<ToDo> ToDoList { set; get; }
-        public void AddCategory(Category category)
-        {
-            Subcategories.Add(category);
-        }
-        public void RemoveCategory(Category category)
-        {
-            Subcategories.Remove(category);
-        }
-        public bool HasCategory(int id)
-        {
-            if (Id == id)
-            {
-                return true;
-            }
 
-            var hasCategory = false;
+        public Category()
+        {
+            Subcategories = new List<Category>();
+            WishList = new List<Wish>();
+            Habits = new List<Habit>();
+        }
 
-            foreach (var category in Subcategories)
+        public override void Add(AbstractComponent component)
+        {
+            switch (component)
             {
-                if (category.HasCategory(id))
-                {
-                    hasCategory = true;
+                case Category category:
+                    Subcategories.Add(category);
                     break;
-                }
-            }
-
-            return hasCategory;
-        }
-
-        public void AddWish(Wish wish)
-        {
-            Wishes.Add(wish);
-        }
-
-        public bool HasItem()
-        {
-            if (Wishes != null && Wishes.Count > 0 ||
-                Habits != null && Habits.Count > 0 ||
-                ToDoList != null && ToDoList.Count > 0)
-            {
-                return true;
-            }
-
-            var has = false;
-
-            foreach (var category in Subcategories)
-            {
-                if (category.HasItem())
-                {
-                    has = true;
+                case Wish wish:
+                    WishList.Add(wish);
                     break;
-                }
+                case Habit habit:
+                    Habits.Add(habit);
+                    break;
+                default:
+                    throw new ArgumentException(string.Format(ARGUMENT_EXCEPTION, component));
             }
+        }
 
-            return has;
+        public override void Remove(AbstractComponent component)
+        {
+            switch (component)
+            {
+                case Category category:
+                    Subcategories.Remove(category);
+                    break;
+                default:
+                    throw new ArgumentException(string.Format(ARGUMENT_EXCEPTION, component));
+            }
         }
     }
 }

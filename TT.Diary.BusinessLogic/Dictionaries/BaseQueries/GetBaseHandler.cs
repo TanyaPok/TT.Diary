@@ -3,15 +3,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using TT.Diary.BusinessLogic.ViewModel;
 using TT.Diary.DataAccessLogic;
-using TT.Diary.DataAccessLogic.Model;
+using TT.Diary.DataAccessLogic.Model.Framework;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.BaseQueries
 {
     public class GetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
-        where TComponent : IComponent
-        where TModel : AbstractEntity
+        where TComponent : ViewModel.AbstractComponent
+        where TModel : AbstractComponent
         where TQuery : AbstractGetBaseQuery<TComponent>
     {
         private readonly IMapper _mapper;
@@ -21,10 +20,10 @@ namespace TT.Diary.BusinessLogic.Dictionaries.BaseQueries
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public async Task<TComponent> Handle(TQuery request, CancellationToken cancellationToken)
+        public Task<TComponent> Handle(TQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.GetAsync<TModel>(request.Id, cancellationToken);
-            return _mapper.Map<TComponent>(entity);
+            var entity = _context.Get<TModel>(request.Id);
+            return Task.FromResult(_mapper.Map<TComponent>(entity));
         }
     }
 }

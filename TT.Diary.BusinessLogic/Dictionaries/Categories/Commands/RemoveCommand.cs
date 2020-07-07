@@ -1,9 +1,8 @@
-using MediatR;
+using TT.Diary.BusinessLogic.Dictionaries.BaseCommands;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Commands
 {
-    public class RemoveCommand : IRequest
+    public class RemoveCommand : AbstractRemoveCommand
     {
-        public int Id { set; get; }
     }
 }

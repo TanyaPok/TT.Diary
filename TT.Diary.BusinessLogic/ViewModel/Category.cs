@@ -4,12 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace TT.Diary.BusinessLogic.ViewModel
 {
-    public class Category : IComponent
+    public class Category : AbstractComponent
     {
-        public int Id { set; get; }
-        public string Description { set; get; }
         [JsonIgnore]
-        public IList<IComponent> Children { set; get; }
+        public IList<AbstractComponent> Children { set; get; }
+
         public IEnumerable<Category> Subcategories
         {
             get
@@ -17,11 +16,20 @@ namespace TT.Diary.BusinessLogic.ViewModel
                 return Children?.OfType<Category>();
             }
         }
+
         public IEnumerable<Wish> WishList
         {
             get
             {
                 return Children?.OfType<Wish>();
+            }
+        }
+
+        public IEnumerable<Habit> Habits
+        {
+            get
+            {
+                return Children?.OfType<Habit>();
             }
         }
     }

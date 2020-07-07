@@ -15,9 +15,11 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Validation
 
             RuleFor(r => r).Custom((command, context) =>
             {
-                var category = dbContext.GetRecursively<Category, Category>(command.Id, c => c.Subcategories, c => c.Subcategories);
+                var category = dbContext.GetRecursively<Category>(
+                    command.Id,
+                    c => c.Subcategories);
 
-                if (category.HasCategory(command.CategoryId))
+                if (category.Has(c => c.Id == command.CategoryId))
                 {
                     context.AddFailure(ValidationMessages.InvalidParent.GetDescription());
                 }

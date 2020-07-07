@@ -12,6 +12,7 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Commands
     {
         private readonly IMapper _mapper;
         private readonly DiaryDBContext _context;
+
         public AddHandler(DiaryDBContext context, IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -28,8 +29,10 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Commands
             }
             else
             {
-                var parent = _context.Get<Category, Category>(request.CategoryId, c => c.Subcategories);
-                parent.AddCategory(newCategory);
+                var parent = _context.Get<Category, Category>(
+                    request.CategoryId,
+                    c => c.Subcategories);
+                parent.Add(newCategory);
             }
 
             await _context.SaveChangesAsync(cancellationToken);

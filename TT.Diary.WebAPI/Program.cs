@@ -22,7 +22,7 @@ namespace TT.Diary.WebAPI
                 .Build();
 
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Warning()
+                .MinimumLevel.Debug()
                 .WriteTo
                 .File(builtConfig[LOG_FILE], rollingInterval: RollingInterval.Day, shared: true)
                 .CreateLogger();

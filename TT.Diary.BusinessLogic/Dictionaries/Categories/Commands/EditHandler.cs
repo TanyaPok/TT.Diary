@@ -8,7 +8,7 @@ using TT.Diary.DataAccessLogic.Model;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Commands
 {
-    public class EditHandler : AsyncRequestHandler<EditCommand>
+    public class EditHandler : IRequestHandler<EditCommand, int>
     {
         private readonly IMapper _mapper;
         private readonly DiaryDBContext _context;
@@ -18,25 +18,29 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Commands
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        protected override async Task Handle(EditCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(EditCommand request, CancellationToken cancellationToken)
         {
-            var category = await _context.FindAsync<Category>(request.Id);
+            var category = _context.Get<Category>(request.Id);
 
-            _mapper.Map<EditCommand, TT.Diary.DataAccessLogic.Model.Category>(request, category);
+            _mapper.Map<EditCommand, Category>(request, category);
 
             if (request.OldCategoryId != 0)
             {
-                var oldParent = _context.Get<Category, Category>(request.OldCategoryId, c => c.Subcategories);
-                oldParent.RemoveCategory(category);
+                var oldParent = _context.Get<Category, Category>(
+                    request.OldCategoryId,
+                    c => c.Subcategories);
+                oldParent.Remove(category);
             }
 
             if (request.CategoryId != 0)
             {
-                var parent = _context.Get<Category, Category>(request.CategoryId, c => c.Subcategories);
-                parent.AddCategory(category);
+                var parent = _context.Get<Category, Category>(
+                    request.CategoryId,
+                    c => c.Subcategories);
+                parent.Add(category);
             }
 
-            await _context.SaveChangesAsync(cancellationToken);
+            return await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

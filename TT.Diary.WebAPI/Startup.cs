@@ -29,7 +29,7 @@ namespace TT.Diary.WebAPI
         {
             services.AddControllers();
 
-            var businessLogicAssembly = typeof(TT.Diary.BusinessLogic.ViewModel.IComponent).Assembly;
+            var businessLogicAssembly = typeof(TT.Diary.BusinessLogic.ViewModel.AbstractComponent).Assembly;
 
             services.AddMediatR(businessLogicAssembly);
 
@@ -43,6 +43,7 @@ namespace TT.Diary.WebAPI
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AllowNullCollections = true;
+                mc.AddProfile(new HabitProfile());
                 mc.AddProfile(new WishProfile());
                 mc.AddProfile(new CategoryProfile());
             });

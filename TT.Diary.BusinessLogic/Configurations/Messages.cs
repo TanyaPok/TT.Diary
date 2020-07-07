@@ -13,7 +13,9 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Please set category.")]
         CategoryEmpty,
         [Description("Wish is on schedule.")]
-        WishOnSchedule
+        WishOnSchedule,
+        [Description("Habit is on schedule.")]
+        HabitOnSchedule
     }
 
     public enum ErrorMessages
@@ -24,13 +26,19 @@ namespace TT.Diary.BusinessLogic.Configurations
         SaveCategory,
         [Description("Category cannot be removed")]
         RemovedCategory,
+        [Description("Category items cannot be recieved")]
+        GetCategoryItems,
         [Description("Wish cannot be recieved")]
         GetWish,
         [Description("Wish cannot be saved")]
         SaveWish,
         [Description("Wish cannot be removed")]
         RemoveWish,
-        [Description("Wish list cannot be recieved")]
-        GetWishList
+        [Description("Habit cannot be recieved")]
+        GetHabit,
+        [Description("Habit cannot be saved")]
+        SaveHabit,
+        [Description("Habit cannot be removed")]
+        RemoveHabit
     }
 }

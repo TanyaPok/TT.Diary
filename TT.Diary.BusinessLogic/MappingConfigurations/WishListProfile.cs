@@ -1,6 +1,6 @@
 using System.Net;
 using AutoMapper;
-using TT.Diary.BusinessLogic.Dictionaries.Wishes.Commands;
+using TT.Diary.BusinessLogic.Dictionaries.WishList.Commands;
 
 namespace TT.Diary.BusinessLogic.MappingConfigurations
 {
@@ -10,7 +10,7 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
         {
             CreateMap<DataAccessLogic.Model.Wish, ViewModel.Wish>();
 
-            CreateMap<DataAccessLogic.Model.Wish, ViewModel.IComponent>().As<ViewModel.Wish>();
+            CreateMap<DataAccessLogic.Model.Wish, ViewModel.AbstractComponent>().As<ViewModel.Wish>();
 
             CreateMap<AddCommand, DataAccessLogic.Model.Wish>()
                 .BeforeMap((src, dest) =>
@@ -25,8 +25,7 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                     src.Description = WebUtility.HtmlEncode(src.Description);
                     src.Author = WebUtility.HtmlEncode(src.Author);
                 })
-                .ForMember(d => d.Schedule, o => o.Ignore())
-                .ForMember(d => d.Rating, o => o.Ignore());
+                .ForMember(d => d.Schedule, o => o.Ignore());
         }
     }
 }

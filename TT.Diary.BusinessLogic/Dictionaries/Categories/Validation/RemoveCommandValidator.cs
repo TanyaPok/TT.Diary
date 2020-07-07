@@ -1,9 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using FluentValidation;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.Dictionaries.Categories.Commands;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
+using TT.Diary.DataAccessLogic.Model.Framework;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Validation
 {
@@ -13,8 +18,13 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Validation
         {
             RuleFor(r => r).Custom((command, context) =>
             {
-                var category = dbContext.GetRecursively<Category, Wish>(command.Id, c => c.Subcategories, c => c.Wishes);
-                if (category.HasItem())
+                var category = dbContext.GetRecursively<Category, AbstractItem>(command.Id,
+                                c => c.Subcategories,
+                                new Expression<Func<Category, IEnumerable<AbstractItem>>>[]{
+                                    c => c.WishList,
+                                    c => c.Habits});
+
+                if (category.Has(c => c.Children != null && c.Children.OfType<AbstractItem>().Any()))
                 {
                     context.AddFailure(ValidationMessages.HasNestedItems.GetDescription());
                 }
