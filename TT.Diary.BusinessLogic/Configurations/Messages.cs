@@ -15,7 +15,9 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Wish is on schedule.")]
         WishOnSchedule,
         [Description("Habit is on schedule.")]
-        HabitOnSchedule
+        HabitOnSchedule,
+        [Description("ToDo is on schedule.")]
+        ToDoOnSchedule
     }
 
     public enum ErrorMessages
@@ -39,6 +41,12 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Habit cannot be saved")]
         SaveHabit,
         [Description("Habit cannot be removed")]
-        RemoveHabit
+        RemoveHabit,
+        [Description("ToDo cannot be recieved")]
+        GetToDo,
+        [Description("ToDo cannot be saved")]
+        SaveToDo,
+        [Description("ToDo cannot be removed")]
+        RemoveToDo
     }
 }

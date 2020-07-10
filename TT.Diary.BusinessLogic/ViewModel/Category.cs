@@ -32,5 +32,13 @@ namespace TT.Diary.BusinessLogic.ViewModel
                 return Children?.OfType<Habit>();
             }
         }
+
+        public IEnumerable<ToDo> ToDoList
+        {
+            get
+            {
+                return Children?.OfType<ToDo>();
+            }
+        }
     }
 }

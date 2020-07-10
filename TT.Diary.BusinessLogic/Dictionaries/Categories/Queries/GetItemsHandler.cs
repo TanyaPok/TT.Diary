@@ -28,7 +28,8 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Queries
                                 c => c.Subcategories,
                                 new Expression<Func<Category, IEnumerable<AbstractItem>>>[]{
                                     c => c.WishList,
-                                    c => c.Habits});
+                                    c => c.Habits,
+                                    c => c.ToDoList});
             var result = _mapper.Map<Category, ViewModel.Category>(category);
             return Task.FromResult(result);
         }

@@ -22,7 +22,8 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Validation
                                 c => c.Subcategories,
                                 new Expression<Func<Category, IEnumerable<AbstractItem>>>[]{
                                     c => c.WishList,
-                                    c => c.Habits});
+                                    c => c.Habits,
+                                    c => c.ToDoList});
 
                 if (category.Has(c => c.Children != null && c.Children.OfType<AbstractItem>().Any()))
                 {

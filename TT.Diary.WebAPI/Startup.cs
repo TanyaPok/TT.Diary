@@ -43,6 +43,7 @@ namespace TT.Diary.WebAPI
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AllowNullCollections = true;
+                mc.AddProfile(new ToDoListProfile());
                 mc.AddProfile(new HabitProfile());
                 mc.AddProfile(new WishProfile());
                 mc.AddProfile(new CategoryProfile());

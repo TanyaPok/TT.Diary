@@ -13,6 +13,7 @@ namespace TT.Diary.DataAccessLogic
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Wish> WishList { get; set; }
+        public DbSet<ToDo> ToDoList { get; set; }
         public DbSet<Habit> Habits { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Tracker> Trackers { get; set; }

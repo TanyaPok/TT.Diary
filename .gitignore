@@ -3,6 +3,8 @@
 
 ### VisualStudioCode ###
 .vscode/*
+.vs/*
+*.csproj.user
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files

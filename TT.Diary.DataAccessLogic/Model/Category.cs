@@ -16,7 +16,8 @@ namespace TT.Diary.DataAccessLogic.Model
             {
                 return Subcategories
                     .Union<AbstractComponent>(WishList)
-                    .Union<AbstractComponent>(Habits);
+                    .Union<AbstractComponent>(Habits)
+                    .Union<AbstractComponent>(ToDoList);
             }
         }
 
@@ -26,11 +27,14 @@ namespace TT.Diary.DataAccessLogic.Model
 
         public IList<Habit> Habits { set; get; }
 
+        public IList<ToDo> ToDoList { set; get; }
+
         public Category()
         {
             Subcategories = new List<Category>();
             WishList = new List<Wish>();
             Habits = new List<Habit>();
+            ToDoList = new List<ToDo>();
         }
 
         public override void Add(AbstractComponent component)
@@ -45,6 +49,9 @@ namespace TT.Diary.DataAccessLogic.Model
                     break;
                 case Habit habit:
                     Habits.Add(habit);
+                    break;
+                case ToDo toDo:
+                    ToDoList.Add(toDo);
                     break;
                 default:
                     throw new ArgumentException(string.Format(ARGUMENT_EXCEPTION, component));
