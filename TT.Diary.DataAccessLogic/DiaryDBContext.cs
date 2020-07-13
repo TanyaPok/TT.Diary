@@ -9,8 +9,9 @@ using TT.Diary.DataAccessLogic.Model.Framework;
 
 namespace TT.Diary.DataAccessLogic
 {
-    public partial class DiaryDBContext : DbContext
+    public class DiaryDBContext : DbContext
     {
+        private readonly IDataSettings _dataSettings;
         public DbSet<Category> Categories { get; set; }
         public DbSet<Wish> WishList { get; set; }
         public DbSet<ToDo> ToDoList { get; set; }
@@ -18,26 +19,15 @@ namespace TT.Diary.DataAccessLogic
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Tracker> Trackers { get; set; }
 
-        public DiaryDBContext(DbContextOptions<DiaryDBContext> options) : base(options)
+        public DiaryDBContext(DbContextOptions<DiaryDBContext> options, IDataSettings dataSettings) : base(options)
         {
+            _dataSettings = dataSettings ?? throw new ArgumentNullException(nameof(dataSettings));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var utcConverter = new ValueConverter<DateTime, DateTime>(
-                outValue => outValue,
-                inValue => DateTime.SpecifyKind(inValue, DateTimeKind.Utc)
-            );
-
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-            {
-                var properties = entityType.GetProperties()
-                     .Where(p => p.ClrType == typeof(DateTime) && p.Name.EndsWith("Utc"));
-                foreach (var property in properties)
-                {
-                    property.SetValueConverter(utcConverter);
-                }
-            }
+            ConfigureUTC(modelBuilder);
+            ConfigurePublicUtilities(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -87,5 +77,29 @@ namespace TT.Diary.DataAccessLogic
 
             return Set<T>().Include(expression).AsEnumerable().Single(c => c.Id == id);
         }
+
+        private void ConfigurePublicUtilities(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().HasData(new { Id = _dataSettings.PublicUtilitiesCategoryId, Description = "Public Utilities" });
+        }
+
+        private void ConfigureUTC(ModelBuilder modelBuilder)
+        {
+            var utcConverter = new ValueConverter<DateTime, DateTime>(
+                outValue => outValue,
+                inValue => DateTime.SpecifyKind(inValue, DateTimeKind.Utc)
+            );
+
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                var properties = entityType.GetProperties()
+                     .Where(p => p.ClrType == typeof(DateTime) && p.Name.EndsWith("Utc"));
+                foreach (var property in properties)
+                {
+                    property.SetValueConverter(utcConverter);
+                }
+            }
+        }
+
     }
 }

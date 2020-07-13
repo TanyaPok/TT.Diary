@@ -4,7 +4,7 @@ namespace TT.Diary.DataAccessLogic.Model.Framework
 {
     public class Tracker : AbstractEntity
     {
-        public DateTime Date { set; get; }
-        public int Progress { set; get; }
+        public DateTime DateUtc { set; get; }
+        public double Value { set; get; }
     }
 }

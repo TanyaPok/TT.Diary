@@ -8,7 +8,6 @@ namespace TT.Diary.DataAccessLogic.Model
 {
     public class Category : AbstractComposite
     {
-        public readonly string ARGUMENT_EXCEPTION = "Unexpected type {0}.";
         [NotMapped]
         public override IEnumerable<AbstractComponent> Children
         {

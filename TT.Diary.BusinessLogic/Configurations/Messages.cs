@@ -47,6 +47,10 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("ToDo cannot be saved")]
         SaveToDo,
         [Description("ToDo cannot be removed")]
-        RemoveToDo
+        RemoveToDo,
+        [Description("PublicUtilities cannot be saved")]
+        SavePublicUtilities,
+        [Description("Incorrect category of public utilities")]
+        IncorrectPublicUtilitiesCategoryId
     }
 }

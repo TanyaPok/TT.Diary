@@ -17,6 +17,7 @@ namespace TT.Diary.WebAPI
     public class Startup
     {
         public const string CONNECTION_STRING = "DefaultConnection";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,16 +30,18 @@ namespace TT.Diary.WebAPI
         {
             services.AddControllers();
 
-            var businessLogicAssembly = typeof(TT.Diary.BusinessLogic.ViewModel.AbstractComponent).Assembly;
+            var businessLogicAssembly = typeof(BusinessLogic.ViewModel.AbstractComponent).Assembly;
 
             services.AddMediatR(businessLogicAssembly);
 
             services.AddValidatorsFromAssembly(businessLogicAssembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+            services.AddSingleton<IDataSettings>(sp => Configuration.GetSection("DataSettings").Get<DataSettings>());
+
             services.AddDbContext<DiaryDBContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString(CONNECTION_STRING),
-                    b => b.MigrationsAssembly(typeof(TT.Diary.DataAccessLogic.DiaryDBContext).Assembly.FullName)));
+                    b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName)));
 
             var mappingConfig = new MapperConfiguration(mc =>
             {

@@ -13,7 +13,7 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
 {
     public class HabitController: ApiControllerBase
     {
-        public HabitController(ILogger<WishListController> logger, IMediator mediator) : base(logger, mediator)
+        public HabitController(ILogger<HabitController> logger, IMediator mediator) : base(logger, mediator)
         {
         }
 
