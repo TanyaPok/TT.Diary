@@ -81,6 +81,7 @@ namespace TT.Diary.DataAccessLogic
         private void ConfigurePublicUtilities(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(new { Id = _dataSettings.PublicUtilitiesCategoryId, Description = "Public Utilities" });
+            modelBuilder.Entity<Category>().HasData(new { Id = _dataSettings.MeterReadingCategoryId, Description = "Meter reading" });
         }
 
         private void ConfigureUTC(ModelBuilder modelBuilder)
