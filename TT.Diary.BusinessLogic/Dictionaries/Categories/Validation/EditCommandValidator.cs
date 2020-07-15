@@ -12,6 +12,7 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Validation
         public EditCommandValidator(DiaryDBContext dbContext)
         {
             RuleFor(r => r.Description).NotEmpty().WithMessage(ValidationMessages.DescriptionEmpty.GetDescription());
+            RuleFor(r => r.Id).GreaterThan(0).WithMessage(ValidationMessages.InvalidId.GetDescription());
 
             RuleFor(r => r).Custom((command, context) =>
             {

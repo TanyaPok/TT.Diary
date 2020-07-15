@@ -11,7 +11,7 @@ namespace TT.Diary.BusinessLogic.Dictionaries.BaseValidation
         public AbstractCommandValidator()
         {
             RuleFor(r => r.Description).NotEmpty().WithMessage(ValidationMessages.DescriptionEmpty.GetDescription());
-            RuleFor(r => r.CategoryId).NotEmpty().WithMessage(ValidationMessages.CategoryEmpty.GetDescription());
+            RuleFor(r => r.CategoryId).GreaterThan(0).WithMessage(ValidationMessages.InvalidCategoryId.GetDescription());
         }
     }
 }

@@ -11,7 +11,9 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Has nested items. Please remove them in the beginning.")]
         HasNestedItems,
         [Description("Please set category.")]
-        CategoryEmpty,
+        InvalidCategoryId,
+        [Description("Invalid identifier format.")]
+        InvalidId,
         [Description("Wish is on schedule.")]
         WishOnSchedule,
         [Description("Habit is on schedule.")]
