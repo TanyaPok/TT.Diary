@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace TT.Diary.DataAccessLogic.Model.Framework
 {
@@ -9,6 +8,5 @@ namespace TT.Diary.DataAccessLogic.Model.Framework
         public DateTime? StartDateUtc { set; get; }
         public DateTime? ScheduledCompletionDateUtc { set; get; }
         public DateTime? CompletionDateUtc { set; get; }
-        public IList<Tracker> Trackers { set; get; }
     }
 }

@@ -16,6 +16,9 @@ namespace TT.Diary.BusinessLogic.Dictionaries.BaseValidation
             RuleFor(r => r.Id).GreaterThan(0).WithMessage(ValidationMessages.InvalidId.GetDescription());
             RuleFor(r => r).Custom((command, context) =>
                 {
+                    if (command.Id == 0)
+                        return;
+
                     var item = dbContext.Get<TModel, AbstractEntity>(command.Id, c => c.Schedule);
                     var isForbidden = item.Schedule != null && item.Schedule.CompletionDateUtc == null;
                     if (isForbidden)

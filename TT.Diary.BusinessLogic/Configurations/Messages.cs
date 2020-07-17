@@ -2,6 +2,7 @@ using System.ComponentModel;
 
 namespace TT.Diary.BusinessLogic.Configurations
 {
+    //TODO: review messages. make usable
     public enum ValidationMessages
     {
         [Description("Please set description.")]
@@ -14,12 +15,18 @@ namespace TT.Diary.BusinessLogic.Configurations
         InvalidCategoryId,
         [Description("Invalid identifier format.")]
         InvalidId,
+        [Description("Please set owner of schedule settings.")]
+        InvalidOwnerScheduleSettingsId,
         [Description("Wish is on schedule.")]
         WishOnSchedule,
         [Description("Habit is on schedule.")]
         HabitOnSchedule,
         [Description("ToDo is on schedule.")]
-        ToDoOnSchedule
+        ToDoOnSchedule,
+        [Description("Schedule mode is not set.")]
+        NotSetRepeat,
+        [Description("Custom schedule mode is incorrect.")]
+        IncorrectCustomRepeatMode
     }
 
     public enum ErrorMessages
@@ -57,6 +64,10 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Incorrect category of meter reading")]
         IncorrectMeterReadingCategoryId,
         [Description("Meter reading cannot be saved")]
-        SaveMeterReading
+        SaveMeterReading,
+        [Description("Settings cannot be saved")]
+        SaveSettings,
+        [Description("Settings cannot be recieved")]
+        GetSettings
     }
 }

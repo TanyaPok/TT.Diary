@@ -16,6 +16,9 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Validation
 
             RuleFor(r => r).Custom((command, context) =>
             {
+                if (command.Id == 0)
+                    return;
+
                 var category = dbContext.GetRecursively<Category>(
                     command.Id,
                     c => c.Subcategories);

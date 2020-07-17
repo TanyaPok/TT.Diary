@@ -1,15 +1,7 @@
+using TT.Diary.DataAccessLogic.Model;
+
 namespace TT.Diary.BusinessLogic.ViewModel
 {
-    public enum Rating
-    {
-        Empty,
-        Trash,
-        NotSoBad,
-        Normal,
-        Good,
-        Fire
-    }
-
     public class Wish : AbstractComponent
     {
         public string Author { set; get; }

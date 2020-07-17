@@ -4,6 +4,5 @@ namespace TT.Diary.DataAccessLogic.Model
 {
     public class ToDo : AbstractItem
     {
-        public string Title { get; set; }
     }
 }

@@ -4,6 +4,5 @@ namespace TT.Diary.BusinessLogic.Dictionaries.ToDoList.Commands
 {
     public class AddCommand : AbstractCommand
     {
-        public string Title { get; set; }
     }
 }

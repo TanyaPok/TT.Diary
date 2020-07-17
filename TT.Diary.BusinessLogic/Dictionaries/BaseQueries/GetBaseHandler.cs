@@ -8,7 +8,7 @@ using TT.Diary.DataAccessLogic.Model.Framework;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.BaseQueries
 {
-    public class GetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
+    public abstract class GetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
         where TComponent : ViewModel.AbstractComponent
         where TModel : AbstractComponent
         where TQuery : AbstractGetBaseQuery<TComponent>

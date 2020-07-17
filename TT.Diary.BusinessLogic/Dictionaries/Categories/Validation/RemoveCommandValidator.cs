@@ -17,8 +17,12 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Validation
         public RemoveCommandValidator(DiaryDBContext dbContext)
         {
             RuleFor(r => r.Id).GreaterThan(0).WithMessage(ValidationMessages.InvalidId.GetDescription());
+
             RuleFor(r => r).Custom((command, context) =>
             {
+                if (command.Id == 0)
+                    return;
+
                 var category = dbContext.GetRecursively<Category, AbstractItem>(command.Id,
                                 c => c.Subcategories,
                                 new Expression<Func<Category, IEnumerable<AbstractItem>>>[]{

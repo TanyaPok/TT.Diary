@@ -12,12 +12,6 @@ namespace TT.Diary.DataAccessLogic
     public class DiaryDBContext : DbContext
     {
         private readonly IDataSettings _dataSettings;
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Wish> WishList { get; set; }
-        public DbSet<ToDo> ToDoList { get; set; }
-        public DbSet<Habit> Habits { get; set; }
-        public DbSet<Schedule> Schedules { get; set; }
-        public DbSet<Tracker> Trackers { get; set; }
 
         public DiaryDBContext(DbContextOptions<DiaryDBContext> options, IDataSettings dataSettings) : base(options)
         {
@@ -63,6 +57,22 @@ namespace TT.Diary.DataAccessLogic
                 where T : AbstractEntity
                 where P : AbstractEntity
         {
+            return GetRecursively<T, P>((int?)id, expression, expressions).Single();
+        }
+
+        public List<T> GetRecursively<T, P>(Expression<Func<T, IEnumerable<T>>> expression,
+            Expression<Func<T, IEnumerable<P>>>[] expressions = null)
+                where T : AbstractEntity
+                where P : AbstractEntity
+        {
+            return GetRecursively<T, P>(null, expression, expressions).ToList();
+        }
+
+        private IEnumerable<T> GetRecursively<T, P>(int? id, Expression<Func<T, IEnumerable<T>>> expression,
+            Expression<Func<T, IEnumerable<P>>>[] expressions = null)
+                where T : AbstractEntity
+                where P : AbstractEntity
+        {
             if (expressions != null && expressions.Count() > 0)
             {
                 var query = Set<T>().Include(expressions[0]);
@@ -72,10 +82,16 @@ namespace TT.Diary.DataAccessLogic
                     query = query.Include(expressions[i]);
                 }
 
-                return query.Include(expression).AsEnumerable().Single(c => c.Id == id);
+                if (id == null)
+                    return query.Include(expression).AsEnumerable();
+                else
+                    return query.Include(expression).AsEnumerable().Where(c => c.Id == id.Value);
             }
 
-            return Set<T>().Include(expression).AsEnumerable().Single(c => c.Id == id);
+            if (id == null)
+                return Set<T>().Include(expression).AsEnumerable();
+            else
+                return Set<T>().Include(expression).AsEnumerable().Where(c => c.Id == id.Value);
         }
 
         private void ConfigurePublicUtilities(ModelBuilder modelBuilder)
@@ -101,6 +117,5 @@ namespace TT.Diary.DataAccessLogic
                 }
             }
         }
-
     }
 }

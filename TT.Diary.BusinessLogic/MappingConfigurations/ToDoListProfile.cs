@@ -16,14 +16,12 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);
-                    src.Title = WebUtility.HtmlEncode(src.Title ?? string.Empty);
                 });
 
             CreateMap<EditCommand, DataAccessLogic.Model.ToDo>()
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);
-                    src.Title = WebUtility.HtmlEncode(src.Title ?? string.Empty);
                 })
                 .ForMember(d => d.Schedule, o => o.Ignore());
         }

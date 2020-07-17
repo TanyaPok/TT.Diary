@@ -2,6 +2,5 @@
 {
     public class ToDo : AbstractComponent
     {
-        public string Title { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using TT.Diary.DataAccessLogic.Model.Framework;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.BaseCommands
 {
-    public class AbstractEditHandler<TCommand, TModel, TContainer> : IRequestHandler<TCommand, int>
+    public abstract class AbstractEditHandler<TCommand, TModel, TContainer> : IRequestHandler<TCommand, int>
         where TCommand : AbstractEditCommand
         where TModel : AbstractItem
         where TContainer : Category

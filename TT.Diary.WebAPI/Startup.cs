@@ -50,6 +50,7 @@ namespace TT.Diary.WebAPI
                 mc.AddProfile(new HabitProfile());
                 mc.AddProfile(new WishProfile());
                 mc.AddProfile(new CategoryProfile());
+                mc.AddProfile(new ScheduleSettingsProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
