@@ -12,10 +12,8 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
 {
     public class PublicUtilitiesController : ApiControllerBase
     {
-        private readonly IDataSettings _dataSettings;
-        public PublicUtilitiesController(ILogger<PublicUtilitiesController> logger, IMediator mediator, IDataSettings dataSettings) : base(logger, mediator)
+        public PublicUtilitiesController(ILogger<PublicUtilitiesController> logger, IMediator mediator) : base(logger, mediator)
         {
-            _dataSettings = dataSettings ?? throw new ArgumentNullException(nameof(dataSettings));
         }
 
         [HttpPut]
@@ -25,11 +23,6 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
         {
             try
             {
-                if (query.CategoryId != _dataSettings.PublicUtilitiesCategoryId)
-                {
-                    throw new ArgumentException(ErrorMessages.IncorrectPublicUtilitiesCategoryId.GetDescription());
-                }
-
                 return Ok(await CommandAsync<int>(query));
             }
             catch (Exception ex)
@@ -45,11 +38,6 @@ namespace TT.Diary.WebAPI.Controllers.Dictionaries
         {
             try
             {
-                if (query.CategoryId != _dataSettings.PublicUtilitiesCategoryId)
-                {
-                    throw new ArgumentException(ErrorMessages.IncorrectPublicUtilitiesCategoryId.GetDescription());
-                }
-
                 return Created(nameof(AddAsync), await CommandAsync<int>(query));
             }
             catch (Exception ex)

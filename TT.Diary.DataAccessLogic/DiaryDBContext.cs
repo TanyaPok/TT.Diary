@@ -9,21 +9,35 @@ using TT.Diary.DataAccessLogic.Model.Framework;
 
 namespace TT.Diary.DataAccessLogic
 {
+    //TODO: review all operations
     public class DiaryDBContext : DbContext
     {
-        private readonly IDataSettings _dataSettings;
+        private DbSet<User> Users { get; set; }
 
-        public DiaryDBContext(DbContextOptions<DiaryDBContext> options, IDataSettings dataSettings) : base(options)
+        public DiaryDBContext(DbContextOptions<DiaryDBContext> options) : base(options)
         {
-            _dataSettings = dataSettings ?? throw new ArgumentNullException(nameof(dataSettings));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ConfigureUTC(modelBuilder);
-            ConfigurePublicUtilities(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public T TryGet<T>(Expression<Func<T, bool>> expression) where T : AbstractEntity
+        {
+            return Set<T>().FirstOrDefault(expression);
+        }
+
+        public void ConfigureUserWorkspaceAsync(User user)
+        {
+            user.Categories.Add(new Category { Description = "To-do list" });
+            user.Categories.Add(new Category { Description = "Wish list" });
+            user.Categories.Add(new Category { Description = "Habits" });
+            user.Categories.Add(new Category { Description = "Notes" });
+            user.Categories.Add(new Category { Description = "Public Utilities" });
+            user.Categories.Add(new Category { Description = "Meter reading" });
         }
 
         public T Get<T>(int id) where T : AbstractEntity
@@ -92,12 +106,6 @@ namespace TT.Diary.DataAccessLogic
                 return Set<T>().Include(expression).AsEnumerable();
             else
                 return Set<T>().Include(expression).AsEnumerable().Where(c => c.Id == id.Value);
-        }
-
-        private void ConfigurePublicUtilities(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Category>().HasData(new { Id = _dataSettings.PublicUtilitiesCategoryId, Description = "Public Utilities" });
-            modelBuilder.Entity<Category>().HasData(new { Id = _dataSettings.MeterReadingCategoryId, Description = "Meter reading" });
         }
 
         private void ConfigureUTC(ModelBuilder modelBuilder)

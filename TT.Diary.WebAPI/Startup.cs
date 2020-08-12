@@ -37,8 +37,6 @@ namespace TT.Diary.WebAPI
             services.AddValidatorsFromAssembly(businessLogicAssembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-            services.AddSingleton<IDataSettings>(sp => Configuration.GetSection("DataSettings").Get<DataSettings>());
-
             services.AddDbContext<DiaryDBContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString(CONNECTION_STRING),
                     b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName)));
@@ -46,6 +44,7 @@ namespace TT.Diary.WebAPI
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AllowNullCollections = true;
+                mc.AddProfile(new UserProfile());
                 mc.AddProfile(new ToDoListProfile());
                 mc.AddProfile(new HabitProfile());
                 mc.AddProfile(new WishProfile());

@@ -5,6 +5,8 @@ namespace TT.Diary.BusinessLogic.Configurations
     //TODO: review messages. make usable
     public enum ValidationMessages
     {
+        [Description("User's identificator cannot be empty.")]
+        SubEmpty,
         [Description("Please set description.")]
         DescriptionEmpty,
         [Description("Cannot be nested within itself.")]
@@ -31,6 +33,8 @@ namespace TT.Diary.BusinessLogic.Configurations
 
     public enum ErrorMessages
     {
+        [Description("User cannot be set")]
+        SetUserUp,
         [Description("Category cannot be recieved")]
         GetCategory,
         [Description("Category cannot be saved")]
