@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using TT.Diary.DataAccessLogic;
-using TT.Diary.DataAccessLogic.Model.Framework;
+using TT.Diary.DataAccessLogic.Model;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.BaseQueries
 {
     public abstract class GetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
-        where TComponent : ViewModel.AbstractComponent
+        where TComponent : DTO.AbstractComponent
         where TModel : AbstractComponent
         where TQuery : AbstractGetBaseQuery<TComponent>
     {

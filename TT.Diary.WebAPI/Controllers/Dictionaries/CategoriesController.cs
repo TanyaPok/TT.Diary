@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.Dictionaries.Categories.Queries;
-using TT.Diary.BusinessLogic.ViewModel;
+using TT.Diary.BusinessLogic.DTO;
 
 namespace TT.Diary.WebAPI.Controllers.Dictionaries
 {

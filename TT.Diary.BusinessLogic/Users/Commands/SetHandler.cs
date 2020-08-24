@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TT.Diary.BusinessLogic.Dictionaries.Categories.Queries;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 

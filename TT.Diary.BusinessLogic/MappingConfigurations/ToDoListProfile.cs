@@ -8,17 +8,17 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
     {
         public ToDoListProfile()
         {
-            CreateMap<DataAccessLogic.Model.ToDo, ViewModel.ToDo>();
+            CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.ToDo>();
 
-            CreateMap<DataAccessLogic.Model.ToDo, ViewModel.AbstractComponent>().As<ViewModel.ToDo>();
+            CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.AbstractComponent>().As<DTO.ToDo>();
 
-            CreateMap<AddCommand, DataAccessLogic.Model.ToDo>()
+            CreateMap<AddCommand, DataAccessLogic.Model.TypeList.ToDo>()
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);
                 });
 
-            CreateMap<EditCommand, DataAccessLogic.Model.ToDo>()
+            CreateMap<EditCommand, DataAccessLogic.Model.TypeList.ToDo>()
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);

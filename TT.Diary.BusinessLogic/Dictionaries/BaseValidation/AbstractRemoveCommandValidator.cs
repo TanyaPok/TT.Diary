@@ -3,7 +3,7 @@ using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.Dictionaries.BaseCommands;
 using TT.Diary.DataAccessLogic;
-using TT.Diary.DataAccessLogic.Model.Framework;
+using TT.Diary.DataAccessLogic.Model;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.BaseValidation
 {

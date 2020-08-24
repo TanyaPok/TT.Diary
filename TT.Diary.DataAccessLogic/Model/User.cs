@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TT.Diary.DataAccessLogic.Model.Framework;
+using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.DataAccessLogic.Model
 {
@@ -7,11 +7,6 @@ namespace TT.Diary.DataAccessLogic.Model
     {
         public string Name { get; set; }
         public string Sub { get; set; }
-        public IList<Category> Categories { get; set; }
-
-        public User()
-        {
-            Categories = new List<Category>();
-        }
+        public IList<Category> Categories { get; } = new List<Category>();
     }
 }

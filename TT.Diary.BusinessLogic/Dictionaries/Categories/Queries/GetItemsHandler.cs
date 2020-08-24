@@ -7,11 +7,11 @@ using AutoMapper;
 using MediatR;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
-using TT.Diary.DataAccessLogic.Model.Framework;
+using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Queries
 {
-    public class GetItemsHandler : IRequestHandler<GetItemsQuery, ViewModel.Category>
+    public class GetItemsHandler : IRequestHandler<GetItemsQuery, DTO.Category>
     {
         private readonly IMapper _mapper;
         private readonly DiaryDBContext _context;
@@ -22,7 +22,7 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Queries
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Task<ViewModel.Category> Handle(GetItemsQuery request, CancellationToken cancellationToken)
+        public Task<DTO.Category> Handle(GetItemsQuery request, CancellationToken cancellationToken)
         {
             var category = _context.GetRecursively<Category, AbstractItem>(request.Id,
                                 c => c.Subcategories,
@@ -30,7 +30,7 @@ namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Queries
                                     c => c.WishList,
                                     c => c.Habits,
                                     c => c.ToDoList});
-            var result = _mapper.Map<Category, ViewModel.Category>(category);
+            var result = _mapper.Map<Category, DTO.Category>(category);
             return Task.FromResult(result);
         }
     }

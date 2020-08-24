@@ -7,7 +7,7 @@ using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.Dictionaries.WishList.Commands;
 using TT.Diary.BusinessLogic.Dictionaries.WishList.Queries;
-using TT.Diary.BusinessLogic.ViewModel;
+using TT.Diary.BusinessLogic.DTO;
 
 namespace TT.Diary.WebAPI.Controllers.Dictionaries
 {

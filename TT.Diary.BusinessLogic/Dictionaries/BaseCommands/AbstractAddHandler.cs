@@ -7,7 +7,7 @@ using AutoMapper;
 using MediatR;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
-using TT.Diary.DataAccessLogic.Model.Framework;
+using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.BaseCommands
 {

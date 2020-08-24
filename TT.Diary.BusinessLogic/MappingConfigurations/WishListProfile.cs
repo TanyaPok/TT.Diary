@@ -8,18 +8,18 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
     {
         public WishProfile()
         {
-            CreateMap<DataAccessLogic.Model.Wish, ViewModel.Wish>();
+            CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.Wish>();
 
-            CreateMap<DataAccessLogic.Model.Wish, ViewModel.AbstractComponent>().As<ViewModel.Wish>();
+            CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.AbstractComponent>().As<DTO.Wish>();
 
-            CreateMap<AddCommand, DataAccessLogic.Model.Wish>()
+            CreateMap<AddCommand, DataAccessLogic.Model.TypeList.Wish>()
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);
                     src.Author = WebUtility.HtmlEncode(src.Author);
                 });
 
-            CreateMap<EditCommand, DataAccessLogic.Model.Wish>()
+            CreateMap<EditCommand, DataAccessLogic.Model.TypeList.Wish>()
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);

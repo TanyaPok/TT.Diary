@@ -7,7 +7,7 @@ using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.Dictionaries.Habits.Commands;
 using TT.Diary.BusinessLogic.Dictionaries.Habits.Queries;
-using TT.Diary.BusinessLogic.ViewModel;
+using TT.Diary.BusinessLogic.DTO;
 
 namespace TT.Diary.WebAPI.Controllers.Dictionaries
 {

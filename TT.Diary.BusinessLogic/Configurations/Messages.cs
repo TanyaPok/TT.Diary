@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace TT.Diary.BusinessLogic.Configurations
 {
-    //TODO: review messages. make usable
+    //TODO: review messages. make usable and seperate at least an empty row
     public enum ValidationMessages
     {
         [Description("User's identificator cannot be empty.")]
@@ -72,6 +72,8 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Settings cannot be saved")]
         SaveSettings,
         [Description("Settings cannot be recieved")]
-        GetSettings
+        GetSettings,
+        [Description("Scheduler cannot be recieved")]
+        GetScheduler,
     }
 }

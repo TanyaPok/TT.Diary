@@ -1,5 +1,5 @@
 using TT.Diary.BusinessLogic.Dictionaries.BaseQueries;
-using TT.Diary.BusinessLogic.ViewModel;
+using TT.Diary.BusinessLogic.DTO;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Queries
 {

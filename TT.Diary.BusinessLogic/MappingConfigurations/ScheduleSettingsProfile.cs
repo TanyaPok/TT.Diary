@@ -7,11 +7,11 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
     {
         public ScheduleSettingsProfile()
         {
-            CreateMap<SetCommand, DataAccessLogic.Model.ScheduleSettings>()
+            CreateMap<SetCommand, DataAccessLogic.Model.TimeManagement.ScheduleSettings>()
                 .ForMember(d => d.StartDateUtc, o => o.MapFrom(s => s.StartDate))
                 .ForMember(d => d.FinishDateUtc, o => o.MapFrom(s => s.FinishDate));
 
-            CreateMap<DataAccessLogic.Model.ScheduleSettings, ViewModel.ScheduleSettings>();
+            CreateMap<DataAccessLogic.Model.TimeManagement.ScheduleSettings, DTO.TimeManagement.ScheduleSettings>();
         }
     }
 }

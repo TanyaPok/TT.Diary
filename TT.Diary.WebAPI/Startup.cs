@@ -17,6 +17,7 @@ namespace TT.Diary.WebAPI
     public class Startup
     {
         public const string CONNECTION_STRING = "DefaultConnection";
+        public const string CATEGORY_LIST = "CategoryTitleList";
 
         public Startup(IConfiguration configuration)
         {
@@ -30,16 +31,21 @@ namespace TT.Diary.WebAPI
         {
             services.AddControllers();
 
-            var businessLogicAssembly = typeof(BusinessLogic.ViewModel.AbstractComponent).Assembly;
+            var businessLogicAssembly = typeof(BusinessLogic.DTO.AbstractComponent).Assembly;
 
             services.AddMediatR(businessLogicAssembly);
 
             services.AddValidatorsFromAssembly(businessLogicAssembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+            services.AddSingleton<ICategoryTitleList>(sp => Configuration.GetSection(CATEGORY_LIST).Get<CategoryTitleList>());
+
             services.AddDbContext<DiaryDBContext>(options =>
+            {
                 options.UseSqlite(Configuration.GetConnectionString(CONNECTION_STRING),
-                    b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName)));
+                    b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName));
+                options.EnableSensitiveDataLogging();
+            });
 
             var mappingConfig = new MapperConfiguration(mc =>
             {

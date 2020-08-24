@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using TT.Diary.DataAccessLogic;
-using TT.Diary.DataAccessLogic.Model;
+using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.Categories.Commands
 {

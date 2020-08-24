@@ -8,17 +8,17 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
     {
         public CategoryProfile()
         {
-            CreateMap<AddCommand, DataAccessLogic.Model.Category>()
+            CreateMap<AddCommand, DataAccessLogic.Model.TypeList.Category>()
                 .BeforeMap((src, dest) => src.Description = WebUtility.HtmlEncode(src.Description));
 
-            CreateMap<EditCommand, DataAccessLogic.Model.Category>()
+            CreateMap<EditCommand, DataAccessLogic.Model.TypeList.Category>()
                 .BeforeMap((src, dest) => src.Description = WebUtility.HtmlEncode(src.Description));
 
-            CreateMap<DataAccessLogic.Model.Category, ViewModel.AbstractComponent>().As<ViewModel.Category>();
+            CreateMap<DataAccessLogic.Model.TypeList.Category, DTO.AbstractComponent>().As<DTO.Category>();
 
-            CreateMap<DataAccessLogic.Model.Framework.AbstractComponent, ViewModel.AbstractComponent>().As<ViewModel.Category>();
+            CreateMap<DataAccessLogic.Model.AbstractComponent, DTO.AbstractComponent>().As<DTO.Category>();
 
-            CreateMap<DataAccessLogic.Model.Category, ViewModel.Category>();
+            CreateMap<DataAccessLogic.Model.TypeList.Category, DTO.Category>();
         }
     }
 }

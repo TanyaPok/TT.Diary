@@ -4,7 +4,7 @@ using TT.Diary.DataAccessLogic;
 
 namespace TT.Diary.BusinessLogic.Dictionaries.WishList.Queries
 {
-    public class GetHandler : GetBaseHandler<ViewModel.Wish, DataAccessLogic.Model.Wish, GetQuery>
+    public class GetHandler : GetBaseHandler<DTO.Wish, DataAccessLogic.Model.TypeList.Wish, GetQuery>
     {
         public GetHandler(DiaryDBContext context, IMapper mapper) : base(context, mapper)
         {

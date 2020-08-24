@@ -8,17 +8,17 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
     {
         public HabitProfile()
         {
-            CreateMap<DataAccessLogic.Model.Habit, ViewModel.Habit>();
+            CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.Habit>();
 
-            CreateMap<DataAccessLogic.Model.Habit, ViewModel.AbstractComponent>().As<ViewModel.Habit>();
+            CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.AbstractComponent>().As<DTO.Habit>();
 
-            CreateMap<AddCommand, DataAccessLogic.Model.Habit>()
+            CreateMap<AddCommand, DataAccessLogic.Model.TypeList.Habit>()
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);
                 });
 
-            CreateMap<EditCommand, DataAccessLogic.Model.Habit>()
+            CreateMap<EditCommand, DataAccessLogic.Model.TypeList.Habit>()
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);
