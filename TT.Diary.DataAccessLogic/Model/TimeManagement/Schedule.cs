@@ -9,9 +9,13 @@ namespace TT.Diary.DataAccessLogic.Model.TimeManagement
         [NotMapped]
         public AbstractItem Owner { set; get; }
         #endregion
+
         public DateTime ScheduledStartDateUtc { set; get; }
+
         public DateTime? StartDateUtc { set; get; }
+
         public DateTime? ScheduledCompletionDateUtc { set; get; }
+
         public DateTime? CompletionDateUtc { set; get; }
     }
 }

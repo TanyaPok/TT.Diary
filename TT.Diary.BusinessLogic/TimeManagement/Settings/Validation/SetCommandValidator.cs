@@ -11,6 +11,7 @@ namespace TT.Diary.BusinessLogic.Schedule.Settings.Validation
         public SetCommandValidator()
         {
             RuleFor(r => r.OwnerScheduleSettingsId).GreaterThan(0).WithMessage(ValidationMessages.InvalidOwnerScheduleSettingsId.GetDescription());
+            
             RuleFor(r => r.Repeat).NotEqual((int)Repeat.None).WithMessage(ValidationMessages.NotSetRepeat.GetDescription());
 
             RuleFor(r => r).Custom((command, context) =>

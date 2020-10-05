@@ -12,6 +12,7 @@ namespace TT.Diary.BusinessLogic.Schedule.Settings.Commands
     public class SetHandler : IRequestHandler<SetCommand, int>
     {
         private readonly IMapper _mapper;
+
         private readonly DiaryDBContext _context;
 
         public SetHandler(DiaryDBContext context, IMapper mapper)

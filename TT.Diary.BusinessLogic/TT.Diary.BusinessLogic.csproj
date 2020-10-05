@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTO\Category.cs" />
+    <Compile Remove="DTO\Habit.cs" />
+    <Compile Remove="DTO\Note.cs" />
+    <Compile Remove="DTO\ToDo.cs" />
+    <Compile Remove="DTO\Wish.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="FluentValidation" Version="8.6.2" />
     <PackageReference Include="MediatR" Version="8.0.1" />

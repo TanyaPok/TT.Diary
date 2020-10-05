@@ -13,6 +13,7 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
     public class Wish : AbstractItem
     {
         public string Author { set; get; }
+
         public Rating Rating { set; get; }
     }
 }

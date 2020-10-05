@@ -12,22 +12,32 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.DataAccessLogic
 {
-    //TODO: review all operations
     public class DiaryDBContext : DbContext
     {
         private readonly ICategoryTitleList _categoryTitleList;
 
         public DbSet<User> Users { get; set; }
+
         public DbSet<Category> Categories { get; set; }
+
         public DbSet<ToDo> ToDoList { get; set; }
+
         public DbSet<Habit> Habits { get; set; }
+
         public DbSet<Appointment> Appointments { get; set; }
+
         public DbSet<PublicUtility> PublicUtilities { get; set; }
+
         public DbSet<PublicUtilityTracker> PublicUtilityTrackers { get; set; }
+
         public DbSet<Wish> WishList { get; set; }
+
         public DbSet<Note> Notes { get; set; }
+
         public DbSet<Schedule> Schedules { get; set; }
+
         public DbSet<ScheduleSettings> ScheduleSettingsList { get; set; }
+
         public DbSet<Tracker> Trackers { get; set; }
 
         public DiaryDBContext(DbContextOptions<DiaryDBContext> options, ICategoryTitleList categoryTitleList) : base(options)
@@ -43,45 +53,6 @@ namespace TT.Diary.DataAccessLogic
             base.OnModelCreating(modelBuilder);
         }
 
-        private void ConfigureRelationships(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Category>().HasOne(c => c.User).WithMany(u => u.Categories).HasForeignKey(c => c.UserId);
-            modelBuilder.Entity<Category>().Property(c => c.UserId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-            modelBuilder.Entity<Category>().HasOne(c => c.Parent).WithMany(c => c.Subcategories).HasForeignKey(c => c.ParentId);
-            modelBuilder.Entity<Category>().Property(c => c.ParentId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-
-            modelBuilder.Entity<ToDo>().HasOne(t => t.Category).WithMany(c => c.ToDoList).HasForeignKey(t => t.CategoryId);
-            modelBuilder.Entity<ToDo>().Property(t => t.CategoryId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-            modelBuilder.Entity<ToDo>().HasOne(t => t.Schedule).WithOne(s => s.Owner as ToDo).HasForeignKey<ToDo>(t => t.ScheduleId);
-            modelBuilder.Entity<ToDo>().Property(c => c.ScheduleId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-
-            modelBuilder.Entity<Appointment>().HasOne(t => t.Category).WithMany(c => c.Appointments).HasForeignKey(t => t.CategoryId);
-            modelBuilder.Entity<Appointment>().Property(t => t.CategoryId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-            modelBuilder.Entity<Appointment>().HasOne(t => t.Schedule).WithOne(s => s.Owner as Appointment).HasForeignKey<Appointment>(t => t.ScheduleId);
-            modelBuilder.Entity<Appointment>().Property(c => c.ScheduleId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-
-            modelBuilder.Entity<Habit>().HasOne(t => t.Category).WithMany(c => c.Habits).HasForeignKey(t => t.CategoryId);
-            modelBuilder.Entity<Habit>().Property(t => t.CategoryId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-            modelBuilder.Entity<Habit>().HasOne(t => t.Schedule).WithOne(s => s.Owner as Habit).HasForeignKey<Habit>(t => t.ScheduleId);
-            modelBuilder.Entity<Habit>().Property(c => c.ScheduleId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-        }
-
-        #region public methods
-
-        public T TryGet<T>(Expression<Func<T, bool>> expression) where T : AbstractEntity
-        {
-            return Set<T>().FirstOrDefault(expression);
-        }
-
-        public IEnumerable<T> GetRecursively<T, P>(Expression<Func<T, bool>> mainExpression,
-           Expression<Func<T, IEnumerable<T>>> recursiveExpression,
-           Expression<Func<T, IEnumerable<P>>> expression)
-               where T : AbstractEntity
-               where P : AbstractEntity
-        {
-            return Set<T>().Include(expression).Include(recursiveExpression).AsEnumerable().Where(e => e.Id == 2);
-        }
-
         public void ConfigureUserWorkspaceAsync(User user)
         {
             user.Categories.Add(new Category { Description = _categoryTitleList.ToDoList });
@@ -92,74 +63,82 @@ namespace TT.Diary.DataAccessLogic
             user.Categories.Add(new Category { Description = _categoryTitleList.Notes });
         }
 
-        public T Get<T>(int id) where T : AbstractEntity
+        public T TryGet<T>(Expression<Func<T, bool>> expression) where T : AbstractEntity
         {
-            return Set<T>().Single(e => e.Id == id);
+            return Set<T>().FirstOrDefault(expression);
+        }
+
+        public Category GetWishList(int userId)
+        {
+            return GetRecursively<Category, Wish>(userId, _categoryTitleList.WishList, c => c.Subcategories, c => c.WishList);
+        }
+
+        public Category GetToDoList(int userId)
+        {
+            return GetRecursively<Category, ToDo>(userId, _categoryTitleList.ToDoList, c => c.Subcategories, c => c.ToDoList);
+        }
+
+        public Category GetHabits(int userId)
+        {
+            return GetRecursively<Category, Habit>(userId, _categoryTitleList.Habits, c => c.Subcategories, c => c.Habits);
+        }
+
+        public Category GetNotes(int userId)
+        {
+            return Set<Category>().Include(c => c.Notes).AsEnumerable().SingleOrDefault(e => e.UserId == userId && e.Description == _categoryTitleList.Notes && e.ParentId == null);
+        }
+
+        public T Get<T, P>(int id, Expression<Func<T, P>> expression)
+           where T : AbstractEntity
+           where P : AbstractEntity
+        {
+            return Set<T>().Include(expression).Single(e => e.Id == id);
         }
 
         public T Get<T, P>(int id, Expression<Func<T, IEnumerable<P>>> expression)
             where T : AbstractEntity
             where P : AbstractEntity
         {
-            return Set<T>().Include(expression).Single(e => e.Id == id);
+            return Set<T>().Include(expression).AsEnumerable().Single(e => e.Id == id);
         }
 
-        public T Get<T, P>(int id, Expression<Func<T, P>> expression)
-            where T : AbstractEntity
-            where P : AbstractEntity
+        public bool IsRootCategory(int id)
         {
-            return Set<T>().Include(expression).Single(e => e.Id == id);
+            var category = TryGet<Category>(e => e.Id == id);
+            return (category.Description == _categoryTitleList.WishList
+                || category.Description == _categoryTitleList.ToDoList
+                || category.Description == _categoryTitleList.Habits
+                || category.Description == _categoryTitleList.Appointments
+                || category.Description == _categoryTitleList.PublicUtilities
+                || category.Description == _categoryTitleList.Notes)
+                && category.ParentId == null;
         }
 
-        public T GetRecursively<T>(int id, Expression<Func<T, IEnumerable<T>>> expression)
-            where T : AbstractEntity
+        private T GetRecursively<T, P>(int userId, string categoryDescription, Expression<Func<T, IEnumerable<T>>> recursiveExpression, Expression<Func<T, IEnumerable<P>>> expression)
+            where T : Category
+            where P : AbstractItem
         {
-            return GetRecursively<T, T>(id, expression);
+            return Set<T>().Include(expression).ThenInclude(c => c.Schedule).Include(recursiveExpression).AsEnumerable().SingleOrDefault(e => e.UserId == userId && e.Description == categoryDescription && e.ParentId == null);
         }
 
-        public T GetRecursively<T, P>(int id,
-            Expression<Func<T, IEnumerable<T>>> expression,
-            Expression<Func<T, IEnumerable<P>>>[] expressions = null)
-                where T : AbstractEntity
-                where P : AbstractEntity
+        private void ConfigureRelationships(ModelBuilder modelBuilder)
         {
-            return GetRecursively<T, P>((int?)id, expression, expressions).Single();
+            modelBuilder.Entity<Category>().HasOne(c => c.User).WithMany(u => u.Categories).HasForeignKey(c => c.UserId);
+            //forbid to change user for category
+            modelBuilder.Entity<Category>().Property(c => c.UserId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+            modelBuilder.Entity<Category>().HasOne(c => c.Parent).WithMany(c => c.Subcategories).HasForeignKey(c => c.ParentId);
+
+            modelBuilder.Entity<ToDo>().HasOne(t => t.Category).WithMany(c => c.ToDoList).HasForeignKey(t => t.CategoryId);
+            modelBuilder.Entity<ToDo>().HasOne(t => t.Schedule).WithOne(s => s.Owner as ToDo).HasForeignKey<ToDo>(t => t.ScheduleId);
+
+            modelBuilder.Entity<Appointment>().HasOne(t => t.Category).WithMany(c => c.Appointments).HasForeignKey(t => t.CategoryId);
+            modelBuilder.Entity<Appointment>().HasOne(t => t.Schedule).WithOne(s => s.Owner as Appointment).HasForeignKey<Appointment>(t => t.ScheduleId);
+
+            modelBuilder.Entity<Habit>().HasOne(t => t.Category).WithMany(c => c.Habits).HasForeignKey(t => t.CategoryId);
+            modelBuilder.Entity<Habit>().HasOne(t => t.Schedule).WithOne(s => s.Owner as Habit).HasForeignKey<Habit>(t => t.ScheduleId);
+
+            modelBuilder.Entity<Note>().HasOne(t => t.Category).WithMany(c => c.Notes).HasForeignKey(t => t.CategoryId);
         }
-
-        public List<T> GetRecursively<T, P>(Expression<Func<T, IEnumerable<T>>> expression,
-            Expression<Func<T, IEnumerable<P>>>[] expressions = null)
-                where T : AbstractEntity
-                where P : AbstractEntity
-        {
-            return GetRecursively<T, P>(null, expression, expressions).ToList();
-        }
-
-        private IEnumerable<T> GetRecursively<T, P>(int? id, Expression<Func<T, IEnumerable<T>>> expression,
-            Expression<Func<T, IEnumerable<P>>>[] expressions = null)
-                where T : AbstractEntity
-                where P : AbstractEntity
-        {
-            if (expressions != null && expressions.Count() > 0)
-            {
-                var query = Set<T>().Include(expressions[0]);
-
-                for (var i = 1; i < expressions.Count(); i++)
-                {
-                    query = query.Include(expressions[i]);
-                }
-
-                if (id == null)
-                    return query.Include(expression).AsEnumerable();
-                else
-                    return query.Include(expression).AsEnumerable().Where(c => c.Id == id.Value);
-            }
-
-            if (id == null)
-                return Set<T>().Include(expression).AsEnumerable();
-            else
-                return Set<T>().Include(expression).AsEnumerable().Where(c => c.Id == id.Value);
-        }
-        #endregion
 
         private void ConfigureUTC(ModelBuilder modelBuilder)
         {

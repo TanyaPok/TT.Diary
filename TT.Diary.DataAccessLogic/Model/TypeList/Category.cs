@@ -1,30 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using TT.Diary.DataAccessLogic.Model.PublicUtilities;
 
 namespace TT.Diary.DataAccessLogic.Model.TypeList
 {
     public class Category : AbstractComponent
     {
-        //TODO: remove
-        [NotMapped]
-        public IEnumerable<AbstractComponent> Children
-        {
-            get
-            {
-                return Subcategories
-                    .Union<AbstractComponent>(WishList)
-                    .Union<AbstractComponent>(Habits)
-                    .Union<AbstractComponent>(ToDoList);
-            }
-        }
+        private readonly string ARGUMENT_EXCEPTION = "Unexpected type {0}.";
 
         #region DB settings
         public int UserId { set; get; }
+
         public User User { set; get; }
+
         public int? ParentId { set; get; }
+
         public Category Parent { set; get; }
         #endregion
 
@@ -78,6 +68,9 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
                     break;
                 case ToDo toDo:
                     ToDoList.Add(toDo);
+                    break;
+                case Note note:
+                    Notes.Add(note);
                     break;
                 default:
                     throw new ArgumentException(string.Format(ARGUMENT_EXCEPTION, component));

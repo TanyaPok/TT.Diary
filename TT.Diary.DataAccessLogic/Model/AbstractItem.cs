@@ -7,9 +7,12 @@ namespace TT.Diary.DataAccessLogic.Model
     {
         #region DB settings
         public int CategoryId { set; get; }
+
         public Category Category { set; get; }
+
         public int? ScheduleId { get; set; }
         #endregion
+
         public Schedule Schedule { get; set; }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TT.Diary.BusinessLogic.Dictionaries.Categories.Queries;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 
@@ -13,6 +11,7 @@ namespace TT.Diary.BusinessLogic.Users.Commands
     public class SetHandler : IRequestHandler<SetCommand, int>
     {
         private readonly IMapper _mapper;
+
         private readonly DiaryDBContext _context;
 
         public SetHandler(DiaryDBContext context, IMapper mapper)

@@ -17,6 +17,7 @@ namespace TT.Diary.WebAPI
     public class Startup
     {
         public const string CONNECTION_STRING = "DefaultConnection";
+
         public const string CATEGORY_LIST = "CategoryTitleList";
 
         public Startup(IConfiguration configuration)
@@ -31,7 +32,7 @@ namespace TT.Diary.WebAPI
         {
             services.AddControllers();
 
-            var businessLogicAssembly = typeof(BusinessLogic.DTO.AbstractComponent).Assembly;
+            var businessLogicAssembly = typeof(BusinessLogic.DTO.Lists.AbstractItem).Assembly;
 
             services.AddMediatR(businessLogicAssembly);
 
@@ -54,6 +55,7 @@ namespace TT.Diary.WebAPI
                 mc.AddProfile(new ToDoListProfile());
                 mc.AddProfile(new HabitProfile());
                 mc.AddProfile(new WishProfile());
+                mc.AddProfile(new NoteProfile());
                 mc.AddProfile(new CategoryProfile());
                 mc.AddProfile(new ScheduleSettingsProfile());
             });

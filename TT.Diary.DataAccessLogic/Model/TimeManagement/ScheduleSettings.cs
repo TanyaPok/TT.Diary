@@ -37,10 +37,15 @@ namespace TT.Diary.DataAccessLogic.Model.TimeManagement
     public class ScheduleSettings : AbstractEntity
     {
         public Repeat Repeat { get; set; }
+
         public int Gap { get; set; }
+
         public RepeatEvery RepeatEvery { get; set; }
+
         public Weekdays Weekdays { get; set; }
+
         public DateTime? StartDateUtc { get; set; }
+
         public DateTime? FinishDateUtc { get; set; }
     }
 }

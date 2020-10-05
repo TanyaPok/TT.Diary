@@ -9,11 +9,14 @@ namespace TT.Diary.WebAPI
     public class Program
     {
         public const string APP_SETTINGS = "appsettings.json";
+
         public const string LOG_FILE = "Logging:FilePath";
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }
+
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             var builtConfig = new ConfigurationBuilder()
@@ -21,6 +24,7 @@ namespace TT.Diary.WebAPI
                 .AddCommandLine(args)
                 .Build();
 
+            //TODO: after developing, change to .MinimumLevel.Error
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo

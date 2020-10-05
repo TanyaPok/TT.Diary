@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Dictionaries.Categories.Queries;
+using TT.Diary.BusinessLogic.Schedule.Settings.Queries;
 
 namespace TT.Diary.BusinessLogic.Schedule.Settings.Validation
 {
