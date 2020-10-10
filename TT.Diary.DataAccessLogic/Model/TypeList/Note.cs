@@ -10,6 +10,6 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
         public Category Category { set; get; }
         #endregion
 
-        public DateTime CreationDate { get; set; }
+        public DateTime ScheduleDateUtc { get; set; }
     }
 }

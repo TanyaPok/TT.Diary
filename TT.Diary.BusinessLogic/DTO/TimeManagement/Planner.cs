@@ -12,6 +12,6 @@ namespace TT.Diary.BusinessLogic.DTO.TimeManagement
 
         public IList<HabitSchedule> Habits { get; set; }
 
-        public IList<Note> Notes { get; set; }
+        public IList<Lists.Note> Notes { get; set; }
     }
 }

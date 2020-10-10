@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TT.Diary.BusinessLogic.DTO.Lists;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.DataAccessLogic;
 
@@ -28,7 +29,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
                                 into result
                                 from r in result.DefaultIfEmpty()
                                 where u.Id == request.UserId && (r.ScheduledStartDateUtc.Date >= request.StartDate.Date && r.ScheduledStartDateUtc.Date <= request.FinishDate.Date)
-                                select new ToDo
+                                select new DTO.TimeManagement.ToDo
                                 {
                                     Id = t.Id,
                                     Description = t.Description,
@@ -43,6 +44,19 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
                                         CompletionDateUtc = r.CompletionDateUtc
                                     }
                                 }).ToList();
+
+            planner.Notes = (from u in _context.Users
+                             join c in _context.Categories on u.Id equals c.UserId
+                             join n in _context.Notes on c.Id equals n.CategoryId
+                             into result
+                             from r in result.DefaultIfEmpty()
+                             where u.Id == request.UserId && (r.ScheduleDateUtc.Date >= request.StartDate.Date && r.ScheduleDateUtc.Date <= request.FinishDate.Date)
+                             select new Note 
+                             {
+                                 Id = r.Id,
+                                 Description = r.Description,
+                                 ScheduledStartDate = r.ScheduleDateUtc
+                             }).ToList();
 
             return Task.FromResult(planner);
         }

@@ -9,6 +9,6 @@ namespace TT.Diary.BusinessLogic.Lists.Notes.Commands
 
         public string Description { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime ScheduleDate { get; set; }
     }
 }

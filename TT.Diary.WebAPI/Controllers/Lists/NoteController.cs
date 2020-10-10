@@ -44,5 +44,20 @@ namespace TT.Diary.WebAPI.Controllers.Lists
                 return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveNote.GetDescription(), ex.Message));
             }
         }
+
+        [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<int>> EditAsync([FromBody] EditCommand query)
+        {
+            try
+            {
+                return Ok(await CommandAsync<int>(query));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveNote.GetDescription(), ex.Message));
+            }
+        }
     }
 }

@@ -12,11 +12,20 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 .BeforeMap((src, dest) =>
                 {
                     src.Description = WebUtility.HtmlEncode(src.Description);
-                });
+                })
+                .ForMember(dest => dest.ScheduleDateUtc, opt => opt.MapFrom((src, dest) => { return src.ScheduleDate; }));
 
-            CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.Note>();
+            CreateMap<EditCommand, DataAccessLogic.Model.TypeList.Note>()
+                .BeforeMap((src, dest) =>
+                {
+                    src.Description = WebUtility.HtmlEncode(src.Description);
+                })
+                .ForMember(dest => dest.ScheduleDateUtc, opt => opt.MapFrom((src, dest) => { return src.ScheduleDate; }));
 
-            CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.Note>().As<DTO.Lists.Note>();
+            CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.Note>()
+                .ForMember(dest => dest.ScheduledStartDate, opt => opt.MapFrom((src, dest) => { return src.ScheduleDateUtc; }));
+
+            CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.AbstractItem>().As<DTO.Lists.Note>();
         }
     }
 }
