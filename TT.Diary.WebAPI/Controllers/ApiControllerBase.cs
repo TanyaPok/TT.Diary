@@ -40,19 +40,6 @@ namespace TT.Diary.WebAPI.Controllers
             }
         }
 
-        protected TResult Query<TResult>(IRequest<TResult> query)
-        {
-            try
-            {
-                return _mediator.Send(query).Result;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ERROR_GET_REQUEST, nameof(TResult), nameof(_mediator));
-                throw;
-            }
-        }
-
         protected async Task<TResult> CommandAsync<TResult>(IRequest<TResult> command)
         {
             try

@@ -6,6 +6,7 @@ using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.TimeManagement.Queries;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
+using System.Threading.Tasks;
 
 namespace TT.Diary.WebAPI.Controllers.TimeManagement
 {
@@ -19,11 +20,11 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public ActionResult<Planner> Get(int userId, DateTime startDate, DateTime finishDate)
+        public async Task<ActionResult<Planner>> Get(int userId, DateTime startDate, DateTime finishDate)
         {
             try
             {
-                return Query<Planner>(new GetPlannerQuery() { UserId = userId, StartDate = startDate, FinishDate = finishDate });
+                return await QueryAsync<Planner>(new GetPlannerQuery() { UserId = userId, StartDate = startDate, FinishDate = finishDate });
             }
             catch (Exception ex)
             {

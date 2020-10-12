@@ -21,13 +21,15 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public ActionResult<Habit> Get(int id)
+        public async Task<ActionResult<Habit>> Get(int id)
         {
             try
             {
-                var data = Query<Habit>(new GetQuery() { Id = id });
+                var data = await QueryAsync<Habit>(new GetQuery() { Id = id });
+
                 if (data == null)
                     return NotFound();
+
                 return data;
             }
             catch (Exception ex)

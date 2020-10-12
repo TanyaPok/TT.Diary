@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,11 +20,11 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public ActionResult<Category<Wish>> Get(int userId)
+        public async Task<ActionResult<Category<Wish>>> Get(int userId)
         {
             try
             {
-                var data = Query<Category<Wish>>(new GetItemsQuery() { UserId = userId });
+                var data = await QueryAsync<Category<Wish>>(new GetItemsQuery() { UserId = userId });
 
                 if (data == null)
                     return NotFound();

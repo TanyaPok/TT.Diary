@@ -21,13 +21,15 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public ActionResult<ScheduleSettings> Get(int id)
+        public async Task<ActionResult<ScheduleSettings>> Get(int id)
         {
             try
             {
-                var data = Query<ScheduleSettings>(new GetQuery() { Id = id });
+                var data = await QueryAsync<ScheduleSettings>(new GetQuery() { Id = id });
+
                 if (data == null)
                     return NotFound();
+
                 return data;
             }
             catch (Exception ex)

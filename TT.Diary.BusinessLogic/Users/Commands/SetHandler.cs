@@ -28,13 +28,9 @@ namespace TT.Diary.BusinessLogic.Users.Commands
                 user = _mapper.Map<User>(request);
                 await _context.AddAsync(user, cancellationToken);
                 _context.ConfigureUserWorkspaceAsync(user);
-            }
-            else
-            {
-                _mapper.Map<SetCommand, User>(request, user);
+                await _context.SaveChangesAsync(cancellationToken);
             }
 
-            await _context.SaveChangesAsync(cancellationToken);
             return user.Id;
         }
     }
