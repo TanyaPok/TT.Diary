@@ -29,7 +29,6 @@ namespace TT.Diary.BusinessLogic.Lists.Categories.Validation
                     dbContext.ToDoList.AsQueryable().Any(w => w.CategoryId == command.Id) ||
                     dbContext.Habits.AsQueryable().Any(w => w.CategoryId == command.Id) ||
                     dbContext.Appointments.AsQueryable().Any(w => w.CategoryId == command.Id) ||
-                    dbContext.PublicUtilities.AsQueryable().Any(w => w.CategoryId == command.Id) ||
                     dbContext.Notes.AsQueryable().Any(w => w.CategoryId == command.Id))
                 {
                     context.AddFailure(ValidationMessages.HasNestedItems.GetDescription());

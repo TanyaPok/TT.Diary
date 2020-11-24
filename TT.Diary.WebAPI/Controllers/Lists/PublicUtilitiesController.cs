@@ -11,6 +11,7 @@ namespace TT.Diary.WebAPI.Controllers.Lists
 {
     public class PublicUtilitiesController : ApiControllerBase
     {
+        //TODO: alter
         public PublicUtilitiesController(ILogger<PublicUtilitiesController> logger, IMediator mediator) : base(logger, mediator)
         {
         }

@@ -5,7 +5,7 @@ using MediatR;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 
-namespace TT.Diary.BusinessLogic.Lists.BaseCommands
+namespace TT.Diary.BusinessLogic.BaseCommands
 {
     public abstract class AbstractRemoveHandler<TCommand, TModel> : AsyncRequestHandler<TCommand>
         where TCommand : AbstractRemoveCommand

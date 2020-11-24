@@ -1,5 +1,5 @@
 using AutoMapper;
-using TT.Diary.BusinessLogic.Lists.BaseQueries;
+using TT.Diary.BusinessLogic.BaseQueries;
 using TT.Diary.DataAccessLogic;
 
 namespace TT.Diary.BusinessLogic.Lists.WishList.Queries

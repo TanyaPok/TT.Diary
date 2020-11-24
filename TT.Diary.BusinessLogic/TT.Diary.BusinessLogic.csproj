@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="TimeManagement\Settings\**" />
+    <EmbeddedResource Remove="TimeManagement\Settings\**" />
+    <None Remove="TimeManagement\Settings\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="DTO\Category.cs" />
     <Compile Remove="DTO\Habit.cs" />
     <Compile Remove="DTO\Note.cs" />

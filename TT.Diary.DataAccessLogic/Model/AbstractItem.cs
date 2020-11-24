@@ -13,6 +13,6 @@ namespace TT.Diary.DataAccessLogic.Model
         public int? ScheduleId { get; set; }
         #endregion
 
-        public Schedule Schedule { get; set; }
+        public ScheduleSettings Schedule { get; set; }
     }
 }

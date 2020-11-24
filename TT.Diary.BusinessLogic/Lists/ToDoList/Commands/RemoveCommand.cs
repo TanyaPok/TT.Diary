@@ -1,4 +1,4 @@
-﻿using TT.Diary.BusinessLogic.Lists.BaseCommands;
+﻿using TT.Diary.BusinessLogic.BaseCommands;
 
 namespace TT.Diary.BusinessLogic.Lists.ToDoList.Commands
 {

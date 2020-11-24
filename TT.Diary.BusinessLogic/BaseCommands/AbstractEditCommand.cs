@@ -1,4 +1,4 @@
-namespace TT.Diary.BusinessLogic.Lists.BaseCommands
+namespace TT.Diary.BusinessLogic.BaseCommands
 {
     public abstract class AbstractEditCommand : AbstractCommand
     {

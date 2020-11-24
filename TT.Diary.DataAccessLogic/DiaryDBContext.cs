@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TT.Diary.DataAccessLogic.Model;
-using TT.Diary.DataAccessLogic.Model.PublicUtilities;
 using TT.Diary.DataAccessLogic.Model.TimeManagement;
 using TT.Diary.DataAccessLogic.Model.TypeList;
 
@@ -26,17 +25,11 @@ namespace TT.Diary.DataAccessLogic
 
         public DbSet<Appointment> Appointments { get; set; }
 
-        public DbSet<PublicUtility> PublicUtilities { get; set; }
-
-        public DbSet<PublicUtilityTracker> PublicUtilityTrackers { get; set; }
-
         public DbSet<Wish> WishList { get; set; }
 
         public DbSet<Note> Notes { get; set; }
 
-        public DbSet<Schedule> Schedules { get; set; }
-
-        public DbSet<ScheduleSettings> ScheduleSettingsList { get; set; }
+        public DbSet<ScheduleSettings> Schedules { get; set; }
 
         public DbSet<Tracker> Trackers { get; set; }
 
@@ -53,7 +46,7 @@ namespace TT.Diary.DataAccessLogic
             base.OnModelCreating(modelBuilder);
         }
 
-        public void ConfigureUserWorkspaceAsync(User user)
+        public void ConfigureUserWorkspace(User user)
         {
             user.Categories.Add(new Category { Description = _categoryTitleList.ToDoList });
             user.Categories.Add(new Category { Description = _categoryTitleList.Appointments });
@@ -73,6 +66,11 @@ namespace TT.Diary.DataAccessLogic
             return GetRecursively<Category, Wish>(userId, _categoryTitleList.WishList, c => c.Subcategories, c => c.WishList);
         }
 
+        public Category GetRootToDoList(int userId)
+        {
+            return Set<Category>().AsEnumerable().SingleOrDefault(e => e.UserId == userId && e.Description == _categoryTitleList.ToDoList && e.ParentId == null);
+        }
+
         public Category GetToDoList(int userId)
         {
             return GetRecursively<Category, ToDo>(userId, _categoryTitleList.ToDoList, c => c.Subcategories, c => c.ToDoList);
@@ -86,6 +84,12 @@ namespace TT.Diary.DataAccessLogic
         public Category GetNotes(int userId)
         {
             return Set<Category>().Include(c => c.Notes).AsEnumerable().SingleOrDefault(e => e.UserId == userId && e.Description == _categoryTitleList.Notes && e.ParentId == null);
+        }
+
+        public T GetTrackedItem<T>(int ownerId)
+            where T : TrackedAbstractItem
+        {
+            return Set<T>().Include(t => t.Schedule).Include(t => t.Trackers).Single(t => t.Id == ownerId);
         }
 
         public T Get<T, P>(int id, Expression<Func<T, P>> expression)
@@ -138,6 +142,10 @@ namespace TT.Diary.DataAccessLogic
             modelBuilder.Entity<Habit>().HasOne(t => t.Schedule).WithOne(s => s.Owner as Habit).HasForeignKey<Habit>(t => t.ScheduleId);
 
             modelBuilder.Entity<Note>().HasOne(t => t.Category).WithMany(c => c.Notes).HasForeignKey(t => t.CategoryId);
+
+            modelBuilder.Entity<Tracker>().HasOne(t => t.Owner as ToDo).WithMany(o => o.Trackers).HasForeignKey(t => t.ToDoId);
+            modelBuilder.Entity<Tracker>().HasOne(t => t.Owner as Habit).WithMany(o => o.Trackers).HasForeignKey(t => t.HabitId);
+            modelBuilder.Entity<Tracker>().HasOne(t => t.Owner as Appointment).WithMany(o => o.Trackers).HasForeignKey(t => t.AppointmentId);
         }
 
         private void ConfigureUTC(ModelBuilder modelBuilder)

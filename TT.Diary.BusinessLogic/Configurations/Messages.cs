@@ -20,14 +20,16 @@ namespace TT.Diary.BusinessLogic.Configurations
         InvalidUserId,
         [Description("Please set owner of schedule settings.")]
         InvalidOwnerScheduleSettingsId,
+        [Description("Gap between periods must be greater 0.")]
+        InvalidPeriodsGap,
         [Description("Item is scheduled.")]
         IsScheduled,
-        [Description("Schedule mode is not set.")]
-        NotSetRepeat,
-        [Description("Custom schedule mode is incorrect.")]
-        IncorrectCustomRepeatMode,
         [Description("Root category cannot be removed.")]
-        IsRootCategory
+        IsRootCategory,
+        [Description("Date not specified.")]
+        NotSetDateTime,
+        [Description("{0} has a range of values which does not include {1}.")]
+        EnumOutOfRange
     }
 
     public enum ErrorMessages
@@ -76,6 +78,16 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Note list cannot be recieved")]
         GetNoteList,
 
+        [Description("Schedule cannot be recieved")]
+        GetPlanner,
+        [Description("Annual productivity cannot be recieved")]
+        GetAnnualProductivity,
+
+        [Description("Schedule settings cannot be saved")]
+        SaveScheduleSettings,
+        [Description("Schedule settings cannot be removed")]
+        RemoveScheduleSettings,
+
         //TODO: review messages. make usable and seperate at least an empty row
         [Description("Public Utilities cannot be saved")]
         SavePublicUtilities,
@@ -84,12 +96,6 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Incorrect category of meter reading")]
         IncorrectMeterReadingCategoryId,
         [Description("Meter reading cannot be saved")]
-        SaveMeterReading,
-        [Description("Settings cannot be saved")]
-        SaveSettings,
-        [Description("Settings cannot be recieved")]
-        GetSettings,
-        [Description("Scheduler cannot be recieved")]
-        GetScheduler
+        SaveMeterReading
     }
 }

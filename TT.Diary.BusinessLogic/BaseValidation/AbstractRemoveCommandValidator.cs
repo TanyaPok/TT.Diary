@@ -1,11 +1,11 @@
 using FluentValidation;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Lists.BaseCommands;
+using TT.Diary.BusinessLogic.BaseCommands;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 
-namespace TT.Diary.BusinessLogic.Lists.BaseValidation
+namespace TT.Diary.BusinessLogic.BaseValidation
 {
     public abstract class AbstractRemoveCommandValidator<TCommand, TModel> : AbstractValidator<TCommand>
         where TCommand : AbstractRemoveCommand

@@ -43,9 +43,9 @@ namespace TT.Diary.WebAPI
 
             services.AddDbContext<DiaryDBContext>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString(CONNECTION_STRING),
-                    b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName));
+                options.UseSqlite(Configuration.GetConnectionString(CONNECTION_STRING), b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName));
                 options.EnableSensitiveDataLogging();
+                options.AddInterceptors(new BaseDbCommandInterceptor());
             });
 
             var mappingConfig = new MapperConfiguration(mc =>

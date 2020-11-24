@@ -2,9 +2,9 @@
 
 namespace TT.Diary.BusinessLogic.DTO.TimeManagement
 {
-    public class Appointment : AbstractComponent
+    public class Appointment : AbstractItem
     {
-        public Schedule Shedule { get; set; }
+        public ScheduleSettings Shedule { get; set; }
 
         public ScheduleSettings ScheduleSettings { get; set; }
 

@@ -9,6 +9,7 @@ using TT.Diary.BusinessLogic.Lists.Habits.Commands;
 
 namespace TT.Diary.WebAPI.Controllers.Lists
 {
+    //TODO: alter
     public class MeterReadingController : ApiControllerBase
     {
         public MeterReadingController(ILogger<MeterReadingController> logger, IMediator mediator) : base(logger, mediator)

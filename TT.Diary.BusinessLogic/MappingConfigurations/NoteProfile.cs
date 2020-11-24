@@ -23,7 +23,7 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 .ForMember(dest => dest.ScheduleDateUtc, opt => opt.MapFrom((src, dest) => { return src.ScheduleDate; }));
 
             CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.Note>()
-                .ForMember(dest => dest.ScheduledStartDate, opt => opt.MapFrom((src, dest) => { return src.ScheduleDateUtc; }));
+                .ForMember(dest => dest.ScheduleDate, opt => opt.MapFrom((src, dest) => { return src.ScheduleDateUtc; }));
 
             CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.AbstractItem>().As<DTO.Lists.Note>();
         }

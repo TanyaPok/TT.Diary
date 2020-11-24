@@ -1,6 +1,6 @@
 ﻿using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Lists.BaseValidation;
+using TT.Diary.BusinessLogic.BaseValidation;
 using TT.Diary.BusinessLogic.Lists.ToDoList.Commands;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model.TypeList;

@@ -25,7 +25,7 @@ namespace TT.Diary.BusinessLogic.Schedule.Settings.Commands
         {
             var habit = _context.Get<Habit, ScheduleSettings>(request.OwnerScheduleSettingsId, h => h.ScheduleSettings);
 
-            if (habit.ScheduleSettings == null)
+            if (habit.Schedule == null)
             {
                 habit.ScheduleSettings = _mapper.Map<ScheduleSettings>(request);
             }

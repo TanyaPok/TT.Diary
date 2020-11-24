@@ -1,6 +1,6 @@
 ﻿namespace TT.Diary.DataAccessLogic.Model.TypeList
 {
-    public class ToDo : AbstractItem
+    public class ToDo : TrackedAbstractItem
     {
     }
 }

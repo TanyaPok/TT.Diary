@@ -6,7 +6,7 @@ using MediatR;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
 
-namespace TT.Diary.BusinessLogic.Lists.BaseQueries
+namespace TT.Diary.BusinessLogic.BaseQueries
 {
     public abstract class GetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
         where TComponent : DTO.Lists.AbstractItem

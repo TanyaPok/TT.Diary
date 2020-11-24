@@ -1,9 +1,9 @@
 using FluentValidation;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Lists.BaseCommands;
+using TT.Diary.BusinessLogic.BaseCommands;
 
-namespace TT.Diary.BusinessLogic.Lists.BaseValidation
+namespace TT.Diary.BusinessLogic.BaseValidation
 {
     public abstract class AbstractCommandValidator<TCommand> : AbstractValidator<TCommand>
         where TCommand : AbstractCommand

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using TT.Diary.DataAccessLogic.Model.PublicUtilities;
 
 namespace TT.Diary.DataAccessLogic.Model.TypeList
 {
@@ -29,8 +28,6 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
         public IList<Note> Notes { get; } = new List<Note>();
 
         public IList<Appointment> Appointments { get; } = new List<Appointment>();
-
-        public IList<PublicUtility> PublicUtilities { get; } = new List<PublicUtility>();
 
         public bool Has(Func<Category, bool> func)
         {

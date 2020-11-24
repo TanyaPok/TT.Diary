@@ -6,12 +6,8 @@ namespace TT.Diary.BusinessLogic.DTO.TimeManagement
     {
         public IList<ToDo> ToDoList { get; set; }
 
-        public IList<Appointment> Appointments { get; set; }
-
-        public IList<Household> HouseholdList { get; set; }
-
-        public IList<HabitSchedule> Habits { get; set; }
-
         public IList<Lists.Note> Notes { get; set; }
+
+        public int ToDoRootCategoryId { get; set; }
     }
 }

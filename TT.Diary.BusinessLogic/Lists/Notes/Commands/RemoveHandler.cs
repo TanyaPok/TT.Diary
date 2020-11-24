@@ -1,4 +1,4 @@
-using TT.Diary.BusinessLogic.Lists.BaseCommands;
+using TT.Diary.BusinessLogic.BaseCommands;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model.TypeList;
 

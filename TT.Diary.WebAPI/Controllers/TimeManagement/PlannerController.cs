@@ -28,7 +28,7 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetScheduler.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetPlanner.GetDescription(), ex.Message));
             }
         }
     }

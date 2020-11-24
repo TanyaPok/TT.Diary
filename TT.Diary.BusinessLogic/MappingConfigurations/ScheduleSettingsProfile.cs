@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using TT.Diary.BusinessLogic.Schedule.Settings.Commands;
 
 namespace TT.Diary.BusinessLogic.MappingConfigurations
 {
@@ -7,11 +6,9 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
     {
         public ScheduleSettingsProfile()
         {
-            CreateMap<SetCommand, DataAccessLogic.Model.TimeManagement.ScheduleSettings>()
-                .ForMember(d => d.StartDateUtc, o => o.MapFrom(s => s.StartDate))
-                .ForMember(d => d.FinishDateUtc, o => o.MapFrom(s => s.FinishDate));
-
-            CreateMap<DataAccessLogic.Model.TimeManagement.ScheduleSettings, DTO.TimeManagement.ScheduleSettings>();
+            CreateMap<TimeManagement.ScheduledToDo.Commands.SetCommand, DataAccessLogic.Model.TimeManagement.ScheduleSettings>()
+                .ForMember(d => d.ScheduledStartDateTimeUtc, o => o.MapFrom(s => s.ScheduledStartDateTime))
+                .ForMember(d => d.ScheduledCompletionDateUtc, o => o.MapFrom(s => s.ScheduledCompletionDate));
         }
     }
 }

@@ -1,7 +1,7 @@
 using FluentValidation;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Lists.BaseValidation;
+using TT.Diary.BusinessLogic.BaseValidation;
 using TT.Diary.BusinessLogic.Lists.WishList.Commands;
 
 namespace TT.Diary.BusinessLogic.Lists.WishList.Validation
