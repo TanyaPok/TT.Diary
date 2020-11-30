@@ -24,7 +24,7 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
             CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.Lists.ToDo>()
                 .ForMember(dest => dest.CompletionDate, opt => opt.MapFrom((src, dest) => { return src.Schedule?.CompletionDateUtc; }));
 
-            CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.Lists.AbstractItem>().As<DTO.Lists.ToDo>();
+            CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.Lists.IItem>().As<DTO.Lists.ToDo>();
         }
     }
 }

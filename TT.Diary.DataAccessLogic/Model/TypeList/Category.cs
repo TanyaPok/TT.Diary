@@ -17,7 +17,7 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
         public Category Parent { set; get; }
         #endregion
 
-        public IList<Category> Subcategories { get;} = new List<Category>();
+        public IList<Category> Subcategories { get; } = new List<Category>();
 
         public IList<Wish> WishList { get; } =  new List<Wish>();
 

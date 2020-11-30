@@ -16,7 +16,7 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         {
         }
 
-        [HttpGet("{userid}")]
+        [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]

@@ -2,10 +2,12 @@
 
 namespace TT.Diary.BusinessLogic.DTO.Lists
 {
-    public class Habit : AbstractItem
+    public class Habit : AbstractScheduledItem, IItem
     {
         public uint? Amount { get; set; }
 
-        public DateTime? CompletionDate { set; get; }
+        public int Id { get; set; }
+
+        public string Description { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
             CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.Note>()
                 .ForMember(dest => dest.ScheduleDate, opt => opt.MapFrom((src, dest) => { return src.ScheduleDateUtc; }));
 
-            CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.AbstractItem>().As<DTO.Lists.Note>();
+            CreateMap<DataAccessLogic.Model.TypeList.Note, DTO.Lists.IItem>().As<DTO.Lists.Note>();
         }
     }
 }

@@ -16,15 +16,15 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         {
         }
 
-        [HttpGet("{userid}")]
+        [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<Category<Habit>>> Get(int userId)
+        public async Task<ActionResult<Category<Habit>>> Get(int userId, bool onlyUnscheduled)
         {
             try
             {
-                var data = await QueryAsync<Category<Habit>>(new GetItemsQuery() { UserId = userId });
+                var data = await QueryAsync<Category<Habit>>(new GetItemsQuery() { UserId = userId, OnlyUnscheduled = onlyUnscheduled });
 
                 if (data == null)
                     return NotFound();

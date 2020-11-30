@@ -9,7 +9,7 @@ using TT.Diary.DataAccessLogic.Model;
 namespace TT.Diary.BusinessLogic.BaseQueries
 {
     public abstract class GetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
-        where TComponent : DTO.Lists.AbstractItem
+        where TComponent : DTO.Lists.IItem
         where TModel : AbstractComponent
         where TQuery : AbstractGetBaseQuery<TComponent>
     {

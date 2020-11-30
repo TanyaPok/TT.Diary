@@ -22,9 +22,11 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 .ForMember(d => d.Schedule, o => o.Ignore());
 
             CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.Lists.Habit>()
+                .ForMember(dest => dest.ScheduledStartDateTime, opt => opt.MapFrom((src, dest) => { return src.Schedule?.ScheduledStartDateTimeUtc; }))
+                .ForMember(dest => dest.ScheduledCompletionDate, opt => opt.MapFrom((src, dest) => { return src.Schedule?.ScheduledCompletionDateUtc; }))
                 .ForMember(dest => dest.CompletionDate, opt => opt.MapFrom((src, dest) => { return src.Schedule?.CompletionDateUtc; }));
 
-            CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.Lists.AbstractItem>().As<DTO.Lists.Habit>();
+            CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.Lists.IItem>().As<DTO.Lists.Habit>();
         }
     }
 }

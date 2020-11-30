@@ -1,9 +1,9 @@
-﻿using System;
-
-namespace TT.Diary.BusinessLogic.DTO.Lists
+﻿namespace TT.Diary.BusinessLogic.DTO.Lists
 {
-    public class ToDo : AbstractItem
+    public class ToDo : AbstractScheduledItem, IItem
     {
-        public DateTime? CompletionDate { set; get; }
+        public int Id { get; set; }
+
+        public string Description { get; set; }
     }
 }

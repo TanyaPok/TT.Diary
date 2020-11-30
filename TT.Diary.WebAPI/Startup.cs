@@ -32,7 +32,7 @@ namespace TT.Diary.WebAPI
         {
             services.AddControllers();
 
-            var businessLogicAssembly = typeof(BusinessLogic.DTO.Lists.AbstractItem).Assembly;
+            var businessLogicAssembly = typeof(BusinessLogic.DTO.Lists.IItem).Assembly;
 
             services.AddMediatR(businessLogicAssembly);
 

@@ -11,7 +11,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
         private readonly double WITH_DELAY = 0.5;
         private readonly double IN_TIME = 1.0;
 
-        internal List<ToDo> GetToDoList(DiaryDBContext context, int userId, DateTime startDate, DateTime finishDate)
+        internal IList<ToDo> GetToDoList(DiaryDBContext context, int userId, DateTime startDate, DateTime finishDate)
         {
             var toDoList = (from u in context.Users
                             join c in context.Categories on u.Id equals c.UserId
@@ -57,12 +57,75 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
             return toDoList;
         }
 
-        internal List<Appointment> GetAppointments(DiaryDBContext context, int userId, DateTime startDate, DateTime finishDate)
+        internal IList<Habit> GetHabits(DiaryDBContext context, int userId, DateTime startDate, DateTime finishDate)
+        {
+            var habits = (from u in context.Users
+                          join c in context.Categories on u.Id equals c.UserId
+                          join h in context.Habits on c.Id equals h.CategoryId
+                          join s in context.Schedules on h.ScheduleId equals s.Id
+                          into result
+                          from r in result.DefaultIfEmpty()
+                          where u.Id == userId
+                              && ((r.ScheduledStartDateTimeUtc.Date >= startDate && r.ScheduledStartDateTimeUtc.Date <= finishDate)
+                                  || (r.ScheduledCompletionDateUtc.HasValue && r.ScheduledCompletionDateUtc.Value.Date >= startDate && r.ScheduledCompletionDateUtc.Value.Date <= finishDate)
+                                  || (r.CompletionDateUtc.HasValue && r.CompletionDateUtc.Value.Date >= startDate && r.CompletionDateUtc.Value.Date <= finishDate)
+                                  || (r.ScheduledStartDateTimeUtc.Date < startDate
+                                      && (!r.ScheduledCompletionDateUtc.HasValue || r.ScheduledCompletionDateUtc.Value.Date >= finishDate || r.CompletionDateUtc.HasValue && r.CompletionDateUtc.Value.Date >= finishDate)))
+                          select new Habit
+                          {
+                              Id = h.Id,
+                              Description = h.Description,
+                              Amount = h.Amount,
+                              Schedule = new ScheduleSettings()
+                              {
+                                  ScheduledStartDateTime = r.ScheduledStartDateTimeUtc,
+                                  ScheduledCompletionDate = r.ScheduledCompletionDateUtc,
+                                  CompletionDate = r.CompletionDateUtc,
+                                  Repeat = r.Repeat,
+                                  Every = r.Every,
+                                  Months = r.Months,
+                                  Weekdays = r.Weekdays,
+                                  DaysAmount = r.DaysAmount
+                              },
+                              Trackers = (
+                                  from tr in context.Trackers
+                                  where h.Id == tr.ToDoId
+                                      && (tr.ScheduledDateUtc.Date >= startDate && tr.ScheduledDateUtc.Date <= finishDate
+                                          || tr.DateTimeUtc.Date >= startDate && tr.DateTimeUtc.Date <= finishDate)
+                                  select new Tracker()
+                                  {
+                                      ScheduledDate = tr.ScheduledDateUtc,
+                                      DateTime = tr.DateTimeUtc,
+                                      Progress = tr.Progress,
+                                      Value = tr.Value,
+                                      Significance = (tr.ScheduledDateUtc.Date < tr.DateTimeUtc.Date) ? WITH_DELAY : IN_TIME
+                                  }).ToList()
+                          }).ToList();
+            return habits;
+        }
+
+        internal IList<DTO.Lists.Note> GetNotes(DiaryDBContext context, int userId, DateTime startDate, DateTime finishDate)
+        {
+            return (from u in context.Users
+                    join c in context.Categories on u.Id equals c.UserId
+                    join n in context.Notes on c.Id equals n.CategoryId
+                    into result
+                    from r in result.DefaultIfEmpty()
+                    where u.Id == userId && (r.ScheduleDateUtc.Date >= startDate && r.ScheduleDateUtc.Date <= finishDate)
+                    select new DTO.Lists.Note
+                    {
+                        Id = r.Id,
+                        Description = r.Description,
+                        ScheduleDate = r.ScheduleDateUtc
+                    }).ToList();
+        }
+
+        internal IList<Appointment> GetAppointments(DiaryDBContext context, int userId, DateTime startDate, DateTime finishDate)
         {
             var appointments = (from u in context.Users
                                 join c in context.Categories on u.Id equals c.UserId
-                                join t in context.Appointments on c.Id equals t.CategoryId
-                                join s in context.Schedules on t.ScheduleId equals s.Id
+                                join a in context.Appointments on c.Id equals a.CategoryId
+                                join s in context.Schedules on a.ScheduleId equals s.Id
                                 into result
                                 from r in result.DefaultIfEmpty()
                                 where u.Id == userId
@@ -73,8 +136,8 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
                                             && (!r.ScheduledCompletionDateUtc.HasValue || r.ScheduledCompletionDateUtc.Value.Date >= finishDate || r.CompletionDateUtc.HasValue && r.CompletionDateUtc.Value.Date >= finishDate)))
                                 select new Appointment
                                 {
-                                    Id = t.Id,
-                                    Description = t.Description,
+                                    Id = a.Id,
+                                    Description = a.Description,
                                     Schedule = new ScheduleSettings()
                                     {
                                         ScheduledStartDateTime = r.ScheduledStartDateTimeUtc,
@@ -88,7 +151,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
                                     },
                                     Trackers = (
                                         from tr in context.Trackers
-                                        where t.Id == tr.AppointmentId
+                                        where a.Id == tr.AppointmentId
                                             && (tr.ScheduledDateUtc.Date >= startDate && tr.ScheduledDateUtc.Date <= finishDate
                                                 || tr.DateTimeUtc.Date >= startDate && tr.DateTimeUtc.Date <= finishDate)
                                         select new Tracker()

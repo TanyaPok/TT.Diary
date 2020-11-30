@@ -66,11 +66,6 @@ namespace TT.Diary.DataAccessLogic
             return GetRecursively<Category, Wish>(userId, _categoryTitleList.WishList, c => c.Subcategories, c => c.WishList);
         }
 
-        public Category GetRootToDoList(int userId)
-        {
-            return Set<Category>().AsEnumerable().SingleOrDefault(e => e.UserId == userId && e.Description == _categoryTitleList.ToDoList && e.ParentId == null);
-        }
-
         public Category GetToDoList(int userId)
         {
             return GetRecursively<Category, ToDo>(userId, _categoryTitleList.ToDoList, c => c.Subcategories, c => c.ToDoList);

@@ -2,9 +2,9 @@
 using MediatR;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model.TypeList;
+using System.Threading.Tasks;
 
 namespace TT.Diary.BusinessLogic.Lists.Habits.Queries
 {
@@ -24,6 +24,12 @@ namespace TT.Diary.BusinessLogic.Lists.Habits.Queries
         {
             var category = _context.GetHabits(request.UserId);
             var result = _mapper.Map<Category, DTO.Lists.Category<DTO.Lists.Habit>>(category);
+            
+            if (request.OnlyUnscheduled)
+            {
+                result.RemoveScheduledItems<DTO.Lists.Habit>();
+            }
+
             return Task.FromResult(result);
         }
     }
