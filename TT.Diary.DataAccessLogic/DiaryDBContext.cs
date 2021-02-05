@@ -68,23 +68,17 @@ namespace TT.Diary.DataAccessLogic
 
         public Category GetToDoList(int userId)
         {
-            return GetRecursively<Category, ToDo>(userId, _categoryTitleList.ToDoList, c => c.Subcategories, c => c.ToDoList);
+            return GetRecursivelyTracked<Category, ToDo>(userId, _categoryTitleList.ToDoList, c => c.Subcategories, c => c.ToDoList);
         }
 
         public Category GetHabits(int userId)
         {
-            return GetRecursively<Category, Habit>(userId, _categoryTitleList.Habits, c => c.Subcategories, c => c.Habits);
+            return GetRecursivelyTracked<Category, Habit>(userId, _categoryTitleList.Habits, c => c.Subcategories, c => c.Habits);
         }
 
         public Category GetNotes(int userId)
         {
             return Set<Category>().Include(c => c.Notes).AsEnumerable().SingleOrDefault(e => e.UserId == userId && e.Description == _categoryTitleList.Notes && e.ParentId == null);
-        }
-
-        public T GetTrackedItem<T>(int ownerId)
-            where T : TrackedAbstractItem
-        {
-            return Set<T>().Include(t => t.Schedule).Include(t => t.Trackers).Single(t => t.Id == ownerId);
         }
 
         public T Get<T, P>(int id, Expression<Func<T, P>> expression)
@@ -99,6 +93,11 @@ namespace TT.Diary.DataAccessLogic
             where P : AbstractEntity
         {
             return Set<T>().Include(expression).AsEnumerable().Single(e => e.Id == id);
+        }
+
+        public ScheduleSettings GetSchedule(int scheduleId)
+        {
+            return Set<ScheduleSettings>().Include(s => s.Owner).Single(e => e.Id == scheduleId);
         }
 
         public bool IsRootCategory(int id)
@@ -118,6 +117,13 @@ namespace TT.Diary.DataAccessLogic
             where P : AbstractItem
         {
             return Set<T>().Include(expression).ThenInclude(c => c.Schedule).Include(recursiveExpression).AsEnumerable().SingleOrDefault(e => e.UserId == userId && e.Description == categoryDescription && e.ParentId == null);
+        }
+
+        private T GetRecursivelyTracked<T, P>(int userId, string categoryDescription, Expression<Func<T, IEnumerable<T>>> recursiveExpression, Expression<Func<T, IEnumerable<P>>> expression)
+            where T : Category
+            where P : TrackedAbstractItem
+        {
+            return Set<T>().Include(expression).ThenInclude(c => c.Schedule).Include(expression).ThenInclude(c => c.Trackers).Include(recursiveExpression).AsEnumerable().SingleOrDefault(e => e.UserId == userId && e.Description == categoryDescription && e.ParentId == null);
         }
 
         private void ConfigureRelationships(ModelBuilder modelBuilder)

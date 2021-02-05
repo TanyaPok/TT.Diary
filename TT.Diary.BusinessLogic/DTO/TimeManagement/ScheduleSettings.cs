@@ -1,17 +1,19 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using TT.Diary.BusinessLogic.TimeManagement.CRST;
 using TT.Diary.DataAccessLogic.Model.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.DTO.TimeManagement
 {
-    public class ScheduleSettings
+    public enum Strategy
     {
-        public int Id { set; get; }
+        AnnualProductivity,
+        Planner
+    }
 
-        public DateTime ScheduledStartDateTime { set; get; }
-
-        public DateTime? ScheduledCompletionDate { set; get; }
-
-        public DateTime? CompletionDate { set; get; }
+    public class ScheduleSettings : AbstractScheduleSettings
+    {
+        private CRSTStrategy _strategy;
 
         public Repeat Repeat { get; set; }
 
@@ -22,5 +24,46 @@ namespace TT.Diary.BusinessLogic.DTO.TimeManagement
         public Weekdays Weekdays { get; set; }
 
         public uint DaysAmount { set; get; }
+
+        public IList<Tracker> Trackers { set; get; }
+
+        internal void SetTrackerStrategy(Strategy strategy = Strategy.Planner)
+        {
+            switch (Repeat)
+            {
+                case Repeat.None:
+                    if (strategy == Strategy.AnnualProductivity)
+                    {
+                        _strategy = new SimpleAnnualProductivityStrategy();
+                        break;
+                    }
+
+                    _strategy = new SimplePlannerStrategy();
+                    break;
+                case Repeat.Daily:
+                    _strategy = new DailyStrategy();
+                    break;
+                case Repeat.Weekly:
+                    _strategy = new WeeklyStrategy();
+                    break;
+                case Repeat.Monthly:
+                    _strategy = new MonthlyStrategy();
+                    break;
+                case Repeat.Yearly:
+                    _strategy = new YearlyStrategy();
+                    break;
+                default: throw new ArgumentException(nameof(Repeat));
+            }
+        }
+
+        internal bool TryGenerateTrackers(DateTime startDate, DateTime finishDate)
+        {
+            if (_strategy == null)
+            {
+                return false;
+            }
+
+            return _strategy.TryGenerateTrackers(startDate, finishDate, this);
+        }
     }
 }

@@ -15,11 +15,11 @@ namespace TT.Diary.WebAPI.Controllers
 
         private readonly ILogger<ApiControllerBase> _logger;
 
+        private readonly string ERROR_GET_REQUEST = "Error trying to get {0} via {1}.";
+
+        private readonly string ERROR_POST_REQUEST = "Error trying to post {0} via {1}.";
+
         public readonly string CLIENT_ERROR_MESSAGE = "{0}: {1}";
-
-        public readonly string ERROR_GET_REQUEST = "Error trying to get {0} via {1}.";
-
-        public readonly string ERROR_POST_REQUEST = "Error trying to post {0} via {1}.";
 
         public ApiControllerBase(ILogger<ApiControllerBase> logger, IMediator mediator)
         {

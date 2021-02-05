@@ -1,15 +1,11 @@
-﻿using System;
+﻿using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.DTO.Lists
 {
-    public abstract class AbstractScheduledItem
+    public abstract class AbstractScheduledItem<T> : AbstractCategoryItem where T : AbstractScheduleSettings
     {
-        public DateTime? ScheduledStartDateTime { set; get; }
+        public bool IsTracked { get; set; }
 
-        public DateTime? ScheduledCompletionDate { set; get; }
-
-        public DateTime? CompletionDate { set; get; }
-
-        public bool HasSchedule => ScheduledStartDateTime.HasValue;
+        public T Schedule { get; set; }
     }
 }

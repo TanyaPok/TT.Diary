@@ -1,5 +1,6 @@
 using System.Net;
 using AutoMapper;
+using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Lists.WishList.Commands;
 
 namespace TT.Diary.BusinessLogic.MappingConfigurations
@@ -23,10 +24,10 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 })
                 .ForMember(d => d.Schedule, o => o.Ignore());
 
-            CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.Lists.Wish>()
-                .ForMember(dest => dest.CompletionDate, opt => opt.MapFrom((src, dest) => { return src.Schedule?.CompletionDateUtc; }));
+            CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.Lists.Wish<ScheduleSettingsSummary>>()
+                .ForMember(dest => dest.Schedule, opt => opt.MapFrom((src, dest) => { return src.Schedule; }));
 
-            CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.Lists.IItem>().As<DTO.Lists.Wish>();
+            CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.Lists.AbstractScheduledItem<ScheduleSettingsSummary>>().As<DTO.Lists.Wish<ScheduleSettingsSummary>>();
         }
     }
 }

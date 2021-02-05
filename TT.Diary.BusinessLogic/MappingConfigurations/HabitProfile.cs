@@ -1,5 +1,6 @@
 using System.Net;
 using AutoMapper;
+using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Lists.Habits.Commands;
 
 namespace TT.Diary.BusinessLogic.MappingConfigurations
@@ -21,12 +22,11 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 })
                 .ForMember(d => d.Schedule, o => o.Ignore());
 
-            CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.Lists.Habit>()
-                .ForMember(dest => dest.ScheduledStartDateTime, opt => opt.MapFrom((src, dest) => { return src.Schedule?.ScheduledStartDateTimeUtc; }))
-                .ForMember(dest => dest.ScheduledCompletionDate, opt => opt.MapFrom((src, dest) => { return src.Schedule?.ScheduledCompletionDateUtc; }))
-                .ForMember(dest => dest.CompletionDate, opt => opt.MapFrom((src, dest) => { return src.Schedule?.CompletionDateUtc; }));
+            CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.Lists.Habit<ScheduleSettingsSummary>>()
+                .ForMember(dest => dest.Schedule, opt => opt.MapFrom((src, dest) => { return src.Schedule; }))
+                .ForMember(dest => dest.IsTracked, opt => opt.MapFrom((src, dest) => { return src.Trackers.Count > 0; }));
 
-            CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.Lists.IItem>().As<DTO.Lists.Habit>();
+            CreateMap<DataAccessLogic.Model.TypeList.Habit, DTO.Lists.AbstractScheduledItem<ScheduleSettingsSummary>>().As<DTO.Lists.Habit<ScheduleSettingsSummary>>();
         }
     }
 }

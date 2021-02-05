@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System.Net;
+using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Lists.ToDoList.Commands;
 
 namespace TT.Diary.BusinessLogic.MappingConfigurations
@@ -21,10 +22,11 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 })
                 .ForMember(d => d.Schedule, o => o.Ignore());
 
-            CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.Lists.ToDo>()
-                .ForMember(dest => dest.CompletionDate, opt => opt.MapFrom((src, dest) => { return src.Schedule?.CompletionDateUtc; }));
+            CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.Lists.ToDo<ScheduleSettingsSummary>>()
+                .ForMember(dest => dest.Schedule, opt => opt.MapFrom((src, dest) => { return src.Schedule; }))
+                .ForMember(dest => dest.IsTracked, opt => opt.MapFrom((src, dest) => { return src.Trackers.Count > 0; }));
 
-            CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.Lists.IItem>().As<DTO.Lists.ToDo>();
+            CreateMap<DataAccessLogic.Model.TypeList.ToDo, DTO.Lists.AbstractScheduledItem<ScheduleSettingsSummary>>().As<DTO.Lists.ToDo<ScheduleSettingsSummary>>();
         }
     }
 }

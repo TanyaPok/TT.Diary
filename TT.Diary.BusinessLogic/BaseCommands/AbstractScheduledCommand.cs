@@ -12,6 +12,8 @@ namespace TT.Diary.BusinessLogic.BaseCommands
 
         public DateTime? ScheduledCompletionDate { set; get; }
 
+        public DateTime? CompletionDate { set; get; }
+
         public Repeat Repeat { get; set; }
 
         public uint Every { get; set; }

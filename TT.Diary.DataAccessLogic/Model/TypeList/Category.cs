@@ -19,7 +19,7 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
 
         public IList<Category> Subcategories { get; } = new List<Category>();
 
-        public IList<Wish> WishList { get; } =  new List<Wish>();
+        public IList<Wish> WishList { get; } = new List<Wish>();
 
         public IList<Habit> Habits { get; } = new List<Habit>();
 

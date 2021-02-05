@@ -31,9 +31,9 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
             // filter by repeated options
             for (int i = appointments.Count - 1; i >= 0; i--)
             {
-                appointments[i].SetTrackerStrategy();
+                appointments[i].Schedule.SetTrackerStrategy();
 
-                if (!appointments[i].TryGenerateTrackers(request.StartDate.Date, request.FinishDate.Date))
+                if (!appointments[i].Schedule.TryGenerateTrackers(request.StartDate.Date, request.FinishDate.Date))
                 {
                     appointments.Remove(appointments[i]);
                 }
@@ -41,7 +41,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
 
             foreach (var appointment in appointments)
             {
-                foreach (var tracker in appointment.Trackers)
+                foreach (var tracker in appointment.Schedule.Trackers)
                 {
                     var item = dailyAppointments.FirstOrDefault(a => a.Date == tracker.ScheduledDate.Date);
 

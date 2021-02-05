@@ -32,7 +32,7 @@ namespace TT.Diary.WebAPI
         {
             services.AddControllers();
 
-            var businessLogicAssembly = typeof(BusinessLogic.DTO.Lists.IItem).Assembly;
+            var businessLogicAssembly = typeof(BusinessLogic.DTO.Lists.AbstractCategoryItem).Assembly;
 
             services.AddMediatR(businessLogicAssembly);
 
@@ -58,6 +58,7 @@ namespace TT.Diary.WebAPI
                 mc.AddProfile(new NoteProfile());
                 mc.AddProfile(new CategoryProfile());
                 mc.AddProfile(new ScheduleSettingsProfile());
+                mc.AddProfile(new TrackerProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

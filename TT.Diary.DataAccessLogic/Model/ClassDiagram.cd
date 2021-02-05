@@ -1,42 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="TT.Diary.DataAccessLogic.Model.TimeManagement.ScheduleSettings">
-    <Position X="18.75" Y="1.75" Width="2.5" />
+    <Position X="21" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAACAYAAAAAgAABAAAAAAAAEAAACAAAIAAAAAQAA=</HashCode>
+      <HashCode>AAAIAgCAAAAAAAgAAAAAAAAAAAEAAACEEAIAAAAAAAA=</HashCode>
       <FileName>Model\TimeManagement\ScheduleSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.TimeManagement.Tracker">
-    <Position X="5.25" Y="4.75" Width="1.5" />
+    <Position X="3" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABCIAAAAAAAAAAAAAAAAIAAAAAAAAAAgAACAAAA=</HashCode>
+      <HashCode>AAAAABCAAAAAAAAAAAAAAAAAIAAAQAAAAAAgAACgAQA=</HashCode>
       <FileName>Model\TimeManagement\Tracker.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.TypeList.Appointment">
-    <Position X="9.75" Y="9" Width="1.5" />
+    <Position X="12" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\TypeList\Appointment.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.TypeList.Category">
-    <Position X="15.75" Y="10" Width="1.5" />
-    <InheritanceLine Type="TT.Diary.DataAccessLogic.Model.AbstractComponent" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="10.25" Y="2.5" />
-        <Point X="16.25" Y="2.5" />
-        <Point X="16.25" Y="10" />
-      </Path>
-    </InheritanceLine>
-    <AssociationLine Name="ToDoList" Type="TT.Diary.DataAccessLogic.Model.TypeList.ToDo" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="15.75" Y="12.188" />
-        <Point X="6" Y="12.188" />
-        <Point X="6" Y="10.063" />
-      </Path>
-    </AssociationLine>
+    <Position X="16.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABIhAAAAAAACAAgAAAAARAgAQCAAAAACAgAQAAAAAAA=</HashCode>
       <FileName>Model\TypeList\Category.cs</FileName>
@@ -54,66 +40,49 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.TypeList.Habit">
-    <Position X="7.5" Y="9" Width="1.5" />
+    <Position X="9.75" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\TypeList\Habit.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.TypeList.Note" Collapsed="true">
-    <Position X="3" Y="4" Width="1.5" />
-    <InheritanceLine Type="TT.Diary.DataAccessLogic.Model.AbstractComponent" FixedFromPoint="true">
-      <Path>
-        <Point X="8.75" Y="2.25" />
-        <Point X="8.375" Y="2.25" />
-        <Point X="8.375" Y="4.369" />
-        <Point X="6.083" Y="4.369" Type="JumpStart" />
-        <Point X="5.917" Y="4.369" Type="JumpEnd" />
-        <Point X="4.5" Y="4.369" />
-      </Path>
-    </InheritanceLine>
+    <Position X="5.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Model\TypeList\Note.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.TypeList.ToDo">
-    <Position X="5.25" Y="9" Width="1.5" />
+    <Position X="7.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\TypeList\ToDo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.TypeList.Wish">
-    <Position X="12" Y="9" Width="1.5" />
-    <InheritanceLine Type="TT.Diary.DataAccessLogic.Model.AbstractItem" FixedFromPoint="true">
-      <Path>
-        <Point X="10.25" Y="4.875" />
-        <Point X="12.469" Y="4.875" />
-        <Point X="12.469" Y="9" />
-      </Path>
-    </InheritanceLine>
+    <Position X="14.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>Model\TypeList\Wish.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.AbstractComponent">
-    <Position X="8.75" Y="1.75" Width="1.5" />
+    <Position X="11" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\AbstractComponent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.AbstractEntity" Collapsed="true">
-    <Position X="12" Y="0.5" Width="1.5" />
+    <Position X="12.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\AbstractEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.AbstractItem">
-    <Position X="8.75" Y="4" Width="1.5" />
+    <Position X="11" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgBAAAAAAAAAAEAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Model\AbstractItem.cs</FileName>
@@ -123,14 +92,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.User">
-    <Position X="16.5" Y="1.75" Width="1.5" />
+    <Position X="18.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAEAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Model\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.DataAccessLogic.Model.TrackedAbstractItem" Collapsed="true">
-    <Position X="7.5" Y="7.5" Width="1.5" />
+    <Position X="9.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\TrackedAbstractItem.cs</FileName>
@@ -139,31 +108,31 @@
       <Property Name="Trackers" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Enum Name="TT.Diary.DataAccessLogic.Model.TimeManagement.Weekdays">
-    <Position X="19.75" Y="6" Width="1.5" />
+  <Enum Name="TT.Diary.DataAccessLogic.Model.TimeManagement.Weekdays" Collapsed="true">
+    <Position X="26.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAIAACAAAAAAAAAAACAAIACAIAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAIAACAAAAAAAAAAACAAIACAIAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\TimeManagement\ScheduleSettings.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="TT.Diary.DataAccessLogic.Model.TimeManagement.Repeat">
-    <Position X="18" Y="6" Width="1.5" />
+  <Enum Name="TT.Diary.DataAccessLogic.Model.TimeManagement.Repeat" Collapsed="true">
+    <Position X="24.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAAgAAAAAAAAAAAAAAQAAAAAAAAAAAgAAAEAAgA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAgAAAEAAgA=</HashCode>
       <FileName>Model\TimeManagement\ScheduleSettings.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="TT.Diary.DataAccessLogic.Model.TypeList.Rating">
-    <Position X="13" Y="6.75" Width="1.5" />
+  <Enum Name="TT.Diary.DataAccessLogic.Model.TypeList.Rating" Collapsed="true">
+    <Position X="26.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAMAABAAAAAAAAAAAE=</HashCode>
       <FileName>Model\TypeList\Wish.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="TT.Diary.DataAccessLogic.Model.TimeManagement.Months">
-    <Position X="21.5" Y="6" Width="1.5" />
+  <Enum Name="TT.Diary.DataAccessLogic.Model.TimeManagement.Months" Collapsed="true">
+    <Position X="24.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAEgAAABRAAAAAAQAwgAAAAAAQAAAAAIAAAAAEAAA=</HashCode>
+      <HashCode>AQAAEgAAABRAAAAAAQAwgAAAAAAQAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Model\TimeManagement\ScheduleSettings.cs</FileName>
     </TypeIdentifier>
   </Enum>

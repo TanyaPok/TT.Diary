@@ -21,8 +21,8 @@ namespace TT.Diary.DataAccessLogic.Model.TimeManagement
 
         public DateTime DateTimeUtc { set; get; }
 
-        [Range(0, 1, ErrorMessage = "Range of progress must be from 0 to 1.")]
-        public byte Progress { set; get; }
+        [Range(0.0, 1.0, ErrorMessage = "Range of progress must be from 0 to 1.")]
+        public double Progress { set; get; }
 
         public double? Value { set; get; }
     }

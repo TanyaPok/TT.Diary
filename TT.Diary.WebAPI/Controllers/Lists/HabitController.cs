@@ -8,10 +8,11 @@ using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.Lists.Habits.Commands;
 using TT.Diary.BusinessLogic.Lists.Habits.Queries;
 using TT.Diary.BusinessLogic.DTO.Lists;
+using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
 namespace TT.Diary.WebAPI.Controllers.Lists
 {
-    public class HabitController: ApiControllerBase
+    public class HabitController : ApiControllerBase
     {
         public HabitController(ILogger<HabitController> logger, IMediator mediator) : base(logger, mediator)
         {
@@ -21,11 +22,11 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<Habit>> Get(int id)
+        public async Task<ActionResult<Habit<ScheduleSettingsSummary>>> Get(int id)
         {
             try
             {
-                var data = await QueryAsync<Habit>(new GetQuery() { Id = id });
+                var data = await QueryAsync<Habit<ScheduleSettingsSummary>>(new GetQuery() { Id = id });
 
                 if (data == null)
                     return NotFound();

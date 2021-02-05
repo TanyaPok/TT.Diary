@@ -9,7 +9,7 @@ namespace TT.Diary.BusinessLogic.BaseCommands
 {
     public abstract class AbstractRemoveHandler<TCommand, TModel> : AsyncRequestHandler<TCommand>
         where TCommand : AbstractRemoveCommand
-        where TModel : AbstractComponent
+        where TModel : AbstractEntity
     {
         private readonly DiaryDBContext _context;
 

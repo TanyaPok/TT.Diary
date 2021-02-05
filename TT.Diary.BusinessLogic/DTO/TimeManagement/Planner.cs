@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
+using TT.Diary.BusinessLogic.DTO.Lists;
 
 namespace TT.Diary.BusinessLogic.DTO.TimeManagement
 {
     public class Planner
     {
-        public IList<ToDo> ToDoList { get; set; }
+        public IList<ToDo<ScheduleSettings>> ToDoList { get; set; }
 
-        public IList<Habit> Habits { get; set; }
+        public IList<Habit<ScheduleSettings>> Habits { get; set; }
 
-        public IList<Lists.Note> Notes { get; set; }
+        public IList<ToDo<ScheduleSettings>> Appointments { get; set; }
 
-        public int ToDoRootCategoryId { get; set; }
+        public IList<Wish<ScheduleSettings>> Wishes { get; set; }
+
+        public IList<Note> Notes { get; set; }
     }
 }

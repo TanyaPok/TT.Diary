@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.TimeManagement.CRST
 {
     internal class DailyStrategy : CRSTStrategy
     {
-        internal override bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule, IList<Tracker> trackers)
+        internal override bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule)
         {
             var finish = GetFinishDate(finishDate, schedule.ScheduledCompletionDate, schedule.CompletionDate);
             var coefficient = Math.Ceiling((startDate.Date - schedule.ScheduledStartDateTime.Date).TotalDays / schedule.Every);
@@ -21,7 +20,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.CRST
 
             do
             {
-                SetTracker(trackers, date);
+                SetTracker(schedule.Trackers, date);
                 date = date.AddDays(schedule.Every);
             } while (date <= finish);
 

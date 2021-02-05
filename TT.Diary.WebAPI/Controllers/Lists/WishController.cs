@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.DTO.Lists;
+using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Lists.WishList.Commands;
 using TT.Diary.BusinessLogic.Lists.WishList.Queries;
 
@@ -21,11 +22,11 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<Wish>> Get(int id)
+        public async Task<ActionResult<Wish<ScheduleSettingsSummary>>> Get(int id)
         {
             try
             {
-                var data = await QueryAsync<Wish>(new GetQuery() { Id = id });
+                var data = await QueryAsync<Wish<ScheduleSettingsSummary>>(new GetQuery() { Id = id });
 
                 if (data == null)
                     return NotFound();

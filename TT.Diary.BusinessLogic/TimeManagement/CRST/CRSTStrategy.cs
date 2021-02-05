@@ -7,7 +7,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.CRST
 {
     internal abstract class CRSTStrategy
     {
-        internal abstract bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule, IList<Tracker> trackers);
+        internal abstract bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule);
 
         protected DateTime GetFinishDate(DateTime finishDate, DateTime? scheduledCompletionDate, DateTime? completionDate)
         {

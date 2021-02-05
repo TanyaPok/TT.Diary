@@ -22,7 +22,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.CRST
             };
         }
 
-        internal override bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule, IList<Tracker> trackers)
+        internal override bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule)
         {
             var date = schedule.ScheduledStartDateTime;
             var finish = GetFinishDate(finishDate, schedule.ScheduledCompletionDate, schedule.CompletionDate);
@@ -39,7 +39,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.CRST
 
             do
             {
-                SetTracker(trackers, date);
+                SetTracker(schedule.Trackers, date);
                 date = GetNextDate(schedule.Weekdays, schedule.Every, date);
             } while (date <= finish);
 

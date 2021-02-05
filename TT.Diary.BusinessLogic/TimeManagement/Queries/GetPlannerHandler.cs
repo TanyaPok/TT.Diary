@@ -26,15 +26,16 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
             // filter by repeated options
             for (int i = planner.Habits.Count - 1; i >= 0; i--)
             {
-                planner.Habits[i].SetTrackerStrategy();
+                planner.Habits[i].Schedule.SetTrackerStrategy();
 
-                if (!planner.Habits[i].TryGenerateTrackers(request.StartDate.Date, request.FinishDate.Date))
+                if (!planner.Habits[i].Schedule.TryGenerateTrackers(request.StartDate.Date, request.FinishDate.Date))
                 {
                     planner.Habits.Remove(planner.Habits[i]);
                 }
             }
 
             planner.Notes = _dataReceiver.GetNotes(_context, request.UserId, request.StartDate.Date, request.FinishDate.Date);
+
             return Task.FromResult(planner);
         }
     }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.DTO.Lists;
+using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Lists.Habits.Queries;
 
 namespace TT.Diary.WebAPI.Controllers.Lists
@@ -20,11 +21,11 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<Category<Habit>>> Get(int userId, bool onlyUnscheduled)
+        public async Task<ActionResult<Category<Habit<ScheduleSettingsSummary>>>> Get(int userId, bool onlyUnscheduled)
         {
             try
             {
-                var data = await QueryAsync<Category<Habit>>(new GetItemsQuery() { UserId = userId, OnlyUnscheduled = onlyUnscheduled });
+                var data = await QueryAsync<Category<Habit<ScheduleSettingsSummary>>>(new GetItemsQuery() { UserId = userId, OnlyUnscheduled = onlyUnscheduled });
 
                 if (data == null)
                     return NotFound();

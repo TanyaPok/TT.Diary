@@ -29,7 +29,9 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Date not specified.")]
         NotSetDateTime,
         [Description("{0} has a range of values which does not include {1}.")]
-        EnumOutOfRange
+        EnumOutOfRange,
+        [Description("Please set owner of tracker.")]
+        InvalidOwnerTrackerId
     }
 
     public enum ErrorMessages
@@ -88,14 +90,9 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Schedule settings cannot be removed")]
         RemoveScheduleSettings,
 
-        //TODO: review messages. make usable and seperate at least an empty row
-        [Description("Public Utilities cannot be saved")]
-        SavePublicUtilities,
-        [Description("Incorrect category of public utilities")]
-        IncorrectPublicUtilitiesCategoryId,
-        [Description("Incorrect category of meter reading")]
-        IncorrectMeterReadingCategoryId,
-        [Description("Meter reading cannot be saved")]
-        SaveMeterReading
+        [Description("Tracker cannot be saved")]
+        SaveTracker,
+        [Description("Tracker cannot be removed")]
+        RemoveTracker
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace TT.Diary.BusinessLogic.DTO.Lists
-{
-    public class ToDo : AbstractScheduledItem, IItem
-    {
-        public int Id { get; set; }
+﻿using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
-        public string Description { get; set; }
+namespace TT.Diary.BusinessLogic.DTO.Lists
+{
+    public class ToDo<T> : AbstractScheduledItem<T> where T : AbstractScheduleSettings
+    {
     }
 }

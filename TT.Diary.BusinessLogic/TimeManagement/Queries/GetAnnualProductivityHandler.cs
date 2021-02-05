@@ -30,15 +30,15 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
             // filter by repeated options
             for (int i = toDoList.Count - 1; i >= 0; i--)
             {
-                toDoList[i].SetTrackerStrategy(Strategy.AnnualProductivity);
+                toDoList[i].Schedule.SetTrackerStrategy(Strategy.AnnualProductivity);
 
-                if (!toDoList[i].TryGenerateTrackers(request.StartDate.Date, request.FinishDate.Date))
+                if (!toDoList[i].Schedule.TryGenerateTrackers(request.StartDate.Date, request.FinishDate.Date))
                 {
                     toDoList.Remove(toDoList[i]);
                 }
             }
 
-            var groups = toDoList.SelectMany(t => t.Trackers).GroupBy(t => t.ScheduledDate.Date).OrderBy(t => t.Key);
+            var groups = toDoList.SelectMany(t => t.Schedule.Trackers).GroupBy(t => t.ScheduledDate.Date).OrderBy(t => t.Key);
 
             foreach (var key in groups)
             {
