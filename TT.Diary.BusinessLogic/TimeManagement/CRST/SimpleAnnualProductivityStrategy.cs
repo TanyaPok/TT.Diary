@@ -3,7 +3,7 @@ using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.TimeManagement.CRST
 {
-    internal class SimpleAnnualProductivityStrategy : CRSTStrategy
+    internal class SimpleAnnualProductivityStrategy : AbstractCRSTStrategy
     {
         internal override bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule)
         {

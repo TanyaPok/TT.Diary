@@ -11,7 +11,8 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
 {
     public class HabitTrackerController : ApiControllerBase
     {
-        public HabitTrackerController(ILogger<HabitTrackerController> logger, IMediator mediator) : base(logger, mediator)
+        public HabitTrackerController(ILogger<HabitTrackerController> logger, IMediator mediator) : base(logger,
+            mediator)
         {
         }
 
@@ -26,7 +27,8 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveTracker.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveTracker.GetDescription(),
+                    ex.Message));
             }
         }
 
@@ -41,7 +43,8 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveTracker.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveTracker.GetDescription(),
+                    ex.Message));
             }
         }
     }

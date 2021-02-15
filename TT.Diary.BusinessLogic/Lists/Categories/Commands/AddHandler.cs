@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories;
 using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.Categories.Commands
@@ -11,13 +11,12 @@ namespace TT.Diary.BusinessLogic.Lists.Categories.Commands
     public class AddHandler : IRequestHandler<AddCommand, int>
     {
         private readonly IMapper _mapper;
+        private readonly CategoriesContainerRepository _repository;
 
-        private readonly DiaryDBContext _context;
-
-        public AddHandler(DiaryDBContext context, IMapper mapper)
+        public AddHandler(CategoriesContainerRepository repository, IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         public async Task<int> Handle(AddCommand request, CancellationToken cancellationToken)
@@ -26,17 +25,16 @@ namespace TT.Diary.BusinessLogic.Lists.Categories.Commands
 
             if (request.CategoryId == 0)
             {
-                await _context.AddAsync(newCategory, cancellationToken);
+                await _repository.AddAsync(newCategory, cancellationToken);
             }
             else
             {
-                var parent = _context.Get<Category, Category>(
+                var parent = _repository.GetFirstLevel(
                     request.CategoryId,
                     c => c.Subcategories);
-                parent.Add(newCategory);
+                await _repository.AddToAsync(parent, newCategory, cancellationToken);
             }
 
-            await _context.SaveChangesAsync(cancellationToken);
             return newCategory.Id;
         }
     }

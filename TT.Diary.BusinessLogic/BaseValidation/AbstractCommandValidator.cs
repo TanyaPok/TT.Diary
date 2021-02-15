@@ -8,11 +8,12 @@ namespace TT.Diary.BusinessLogic.BaseValidation
     public abstract class AbstractCommandValidator<TCommand> : AbstractValidator<TCommand>
         where TCommand : AbstractCommand
     {
-        public AbstractCommandValidator()
+        protected AbstractCommandValidator()
         {
             RuleFor(r => r.Description).NotEmpty().WithMessage(ValidationMessages.DescriptionEmpty.GetDescription());
 
-            RuleFor(r => r.CategoryId).GreaterThan(0).WithMessage(ValidationMessages.InvalidCategoryId.GetDescription());
+            RuleFor(r => r.CategoryId).GreaterThan(0)
+                .WithMessage(ValidationMessages.InvalidCategoryId.GetDescription());
         }
     }
 }

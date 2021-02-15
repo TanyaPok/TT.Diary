@@ -44,8 +44,9 @@ namespace TT.Diary.DataAccessLogic.Model.TimeManagement
     public class ScheduleSettings : AbstractEntity
     {
         #region DB settings
-        [NotMapped]
-        public AbstractItem Owner { set; get; }
+
+        [NotMapped] public AbstractItem Owner { set; get; }
+
         #endregion
 
         public DateTime ScheduledStartDateTimeUtc { set; get; }

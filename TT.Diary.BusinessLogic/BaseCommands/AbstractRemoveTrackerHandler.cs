@@ -2,28 +2,26 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories.Common;
 using TT.Diary.DataAccessLogic.Model;
-using TT.Diary.DataAccessLogic.Model.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public abstract class AbstractRemoveTrackerHandler<TOwner, TCommand> : AsyncRequestHandler<TCommand>
-        where TOwner : TrackedAbstractItem
+    public abstract class AbstractRemoveTrackerHandler<TContainer, TCommand> : AsyncRequestHandler<TCommand>
+        where TContainer : TrackedAbstractItem
         where TCommand : AbstractRemoveTrackerCommand
     {
-        private readonly DiaryDBContext _context;
+        private readonly AbstractBaseTrackedContainerRepository<TContainer> _repository;
 
-        protected AbstractRemoveTrackerHandler(DiaryDBContext context)
+        protected AbstractRemoveTrackerHandler(AbstractBaseTrackedContainerRepository<TContainer> repository)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         protected override async Task Handle(TCommand request, CancellationToken cancellationToken)
         {
-            var owner = _context.Get<TOwner, Tracker>(request.OwnerId, o => o.Trackers);
-            _context.RemoveRange(owner.Trackers);
-            await _context.SaveChangesAsync(cancellationToken);
+            var owner = _repository.GetFirstLevel(request.OwnerId, o => o.Trackers);
+            await _repository.RemoveFromAsync(owner, owner.Trackers, cancellationToken);
         }
     }
 }

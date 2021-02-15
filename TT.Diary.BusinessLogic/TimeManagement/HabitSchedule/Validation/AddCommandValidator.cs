@@ -5,6 +5,5 @@ namespace TT.Diary.BusinessLogic.TimeManagement.HabitSchedule.Validation
 {
     public class AddCommandValidator : AbstractScheduledCommandValidator<SetCommand>
     {
-
     }
 }

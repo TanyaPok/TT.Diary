@@ -3,7 +3,7 @@ using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.TimeManagement.CRST
 {
-    internal class MonthlyStrategy : CRSTStrategy
+    internal class MonthlyStrategy : AbstractCRSTStrategy
     {
         internal override bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule)
         {
@@ -33,7 +33,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.CRST
         private DateTime GetNextDate(DateTime date, uint every, int startDay)
         {
             date = date.AddDays(DateTime.DaysInMonth(date.Year, date.Month) - date.Day + 1);
-            date = date.AddMonths((int)every - 1);
+            date = date.AddMonths((int) every - 1);
             date = date.AddDays(startDay);
             return date;
         }

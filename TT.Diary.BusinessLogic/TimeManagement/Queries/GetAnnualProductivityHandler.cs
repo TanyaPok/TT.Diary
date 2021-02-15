@@ -5,30 +5,27 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories;
 
 namespace TT.Diary.BusinessLogic.TimeManagement.Queries
 {
     public class GetAnnualProductivityHandler : IRequestHandler<GetAnnualProductivityQuery, List<DailyProductivity>>
     {
-        private readonly DiaryDBContext _context;
-        private readonly DataReceiver _dataReceiver;
+        private readonly TrackedToDoListContainerRepository _repository;
 
-        public GetAnnualProductivityHandler(DiaryDBContext context)
+        public GetAnnualProductivityHandler(TrackedToDoListContainerRepository repository)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _dataReceiver = new DataReceiver();
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public Task<List<DailyProductivity>> Handle(GetAnnualProductivityQuery request, CancellationToken cancellationToken)
+        public Task<List<DailyProductivity>> Handle(GetAnnualProductivityQuery request,
+            CancellationToken cancellationToken)
         {
-            var annualProductivities = new List<DailyProductivity>();
-
             // initial data selection
-            var toDoList = _dataReceiver.GetToDoList(_context, request.UserId, request.StartDate.Date, request.FinishDate.Date);
+            var toDoList = _repository.GetTrackedList(request.UserId, request.StartDate.Date, request.FinishDate.Date);
 
             // filter by repeated options
-            for (int i = toDoList.Count - 1; i >= 0; i--)
+            for (var i = toDoList.Count - 1; i >= 0; i--)
             {
                 toDoList[i].Schedule.SetTrackerStrategy(Strategy.AnnualProductivity);
 
@@ -38,19 +35,13 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
                 }
             }
 
-            var groups = toDoList.SelectMany(t => t.Schedule.Trackers).GroupBy(t => t.ScheduledDate.Date).OrderBy(t => t.Key);
+            var groups = toDoList.SelectMany(t => t.Schedule.Trackers).GroupBy(t => t.ScheduledDate.Date)
+                .OrderBy(t => t.Key);
 
-            foreach (var key in groups)
-            {
-                annualProductivities.Add(
-                    new DailyProductivity()
-                    {
-                        Date = key.Key,
-                        Productivity = key.Average(t => t.Significance)
-                    });
-            }
+            var annualProductivity = groups.Select(key => new DailyProductivity()
+                {Date = key.Key, Productivity = key.Average(t => t.Significance)}).ToList();
 
-            return Task.FromResult(annualProductivities);
+            return Task.FromResult(annualProductivity);
         }
     }
 }

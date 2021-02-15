@@ -25,7 +25,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         {
             try
             {
-                var data = await QueryAsync<Category<Habit<ScheduleSettingsSummary>>>(new GetItemsQuery() { UserId = userId, OnlyUnscheduled = onlyUnscheduled });
+                var data = await QueryAsync<Category<Habit<ScheduleSettingsSummary>>>(new GetItemsQuery()
+                    {UserId = userId, OnlyUnscheduled = onlyUnscheduled});
 
                 if (data == null)
                     return NotFound();
@@ -34,7 +35,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetHabits.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetHabits.GetDescription(),
+                    ex.Message));
             }
         }
     }

@@ -3,32 +3,31 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories.Common;
 using TT.Diary.DataAccessLogic.Model;
 using TT.Diary.DataAccessLogic.Model.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public class AbstractAddTrackerHandler<TCommand, TContainer> : IRequestHandler<TCommand, int>
+    public abstract class AbstractAddTrackerHandler<TCommand, TContainer> : IRequestHandler<TCommand, int>
         where TCommand : AbstractAddTrackerCommand
         where TContainer : TrackedAbstractItem
     {
         private readonly IMapper _mapper;
+        private readonly AbstractBaseTrackedContainerRepository<TContainer> _repository;
 
-        private readonly DiaryDBContext _context;
-
-        protected AbstractAddTrackerHandler(DiaryDBContext context, IMapper mapper)
+        protected AbstractAddTrackerHandler(AbstractBaseTrackedContainerRepository<TContainer> repository,
+            IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         public async Task<int> Handle(TCommand request, CancellationToken cancellationToken)
         {
-            var owner = _context.Get<TContainer, Tracker>(request.OwnerId, o => o.Trackers);
+            var owner = _repository.GetFirstLevel(request.OwnerId, o => o.Trackers);
             var item = _mapper.Map<Tracker>(request);
-            owner.Trackers.Add(item);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _repository.AddToAsync(owner, item, cancellationToken);
             return item.Id;
         }
     }

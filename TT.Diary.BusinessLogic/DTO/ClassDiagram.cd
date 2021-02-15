@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="TT.Diary.BusinessLogic.DTO.Lists.Category&lt;T&gt;" Collapsed="true">
-    <Position X="4" Y="1" Width="1.5" />
+    <Position X="13.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABACAAAAAAAgCAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DTO\Lists\Category.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.Lists.Habit&lt;T&gt;" Collapsed="true">
-    <Position X="6.25" Y="5.25" Width="1.5" />
+    <Position X="6.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DTO\Lists\Habit.cs</FileName>
@@ -29,35 +29,35 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.Lists.Wish&lt;T&gt;" Collapsed="true">
-    <Position X="4" Y="5.25" Width="1.5" />
+    <Position X="4" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>DTO\Lists\Wish.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.TimeManagement.AbstractScheduleSettings">
-    <Position X="4.25" Y="7" Width="2.25" />
+    <Position X="5.25" Y="7" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BAACAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DTO\TimeManagement\AbstractScheduleSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.Lists.AbstractScheduledItem&lt;T&gt;">
     <Position X="5.75" Y="3.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAAA=</HashCode>
       <FileName>DTO\Lists\AbstractScheduledItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.Lists.ToDo&lt;T&gt;" Collapsed="true">
-    <Position X="8.5" Y="5.25" Width="1.5" />
+    <Position X="8.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DTO\Lists\ToDo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.TimeManagement.ScheduleSettings">
-    <Position X="3.75" Y="9.25" Width="1.75" />
+    <Position X="3.75" Y="9.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAgBAAAABCAgACAAAAAAAAAAAAAAEEAIAAAAAAAA=</HashCode>
       <FileName>DTO\TimeManagement\ScheduleSettings.cs</FileName>
@@ -67,14 +67,14 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.TimeManagement.Tracker">
-    <Position X="0.75" Y="9" Width="1.5" />
+    <Position X="0.75" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAQAAQAAAAgAACAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAQAAAAAAAAAAAAAQAAQAAAAgAACAAAA=</HashCode>
       <FileName>DTO\TimeManagement\Tracker.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.TimeManagement.Planner">
-    <Position X="7.5" Y="7.25" Width="1.5" />
+    <Position X="8.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAgAAQAAAAAACAAAQAAAAAAA=</HashCode>
       <FileName>DTO\TimeManagement\Planner.cs</FileName>
@@ -88,14 +88,14 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.TimeManagement.ScheduleSettingsSummary" Collapsed="true">
-    <Position X="6.5" Y="9.25" Width="2.5" />
+    <Position X="6.25" Y="9.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DTO\TimeManagement\ScheduleSettingsSummary.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="TT.Diary.BusinessLogic.DTO.TimeManagement.Strategy">
-    <Position X="0.75" Y="12.25" Width="1.5" />
+  <Enum Name="TT.Diary.BusinessLogic.DTO.TimeManagement.Strategy" Collapsed="true">
+    <Position X="13.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>DTO\TimeManagement\ScheduleSettings.cs</FileName>

@@ -13,7 +13,8 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
 {
     public class ScheduledAppointmentsController : ApiControllerBase
     {
-        public ScheduledAppointmentsController(ILogger<ScheduledAppointmentsController> logger, IMediator mediator) : base(logger, mediator)
+        public ScheduledAppointmentsController(ILogger<ScheduledAppointmentsController> logger, IMediator mediator) :
+            base(logger, mediator)
         {
         }
 
@@ -21,15 +22,18 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<List<DailyScheduledAppointments>>> Get(int userId, DateTime startDate, DateTime finishDate)
+        public async Task<ActionResult<List<DailyScheduledAppointments>>> Get(int userId, DateTime startDate,
+            DateTime finishDate)
         {
             try
             {
-                return await QueryAsync<List<DailyScheduledAppointments>>(new GetScheduledAppointmentsQuery() { UserId = userId, StartDate = startDate, FinishDate = finishDate });
+                return await QueryAsync<List<DailyScheduledAppointments>>(new GetScheduledAppointmentsQuery()
+                    {UserId = userId, StartDate = startDate, FinishDate = finishDate});
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetPlanner.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetPlanner.GetDescription(),
+                    ex.Message));
             }
         }
     }

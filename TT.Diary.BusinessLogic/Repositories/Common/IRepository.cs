@@ -1,0 +1,17 @@
+﻿using System;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
+using TT.Diary.DataAccessLogic.Model;
+
+namespace TT.Diary.BusinessLogic.Repositories.Common
+{
+    public interface IRepository<T> where T : AbstractEntity
+    {
+        T TryGet(Expression<Func<T, bool>> expression);
+        T Get<TProperty>(int id, Expression<Func<T, TProperty>> expression) where TProperty : AbstractEntity;
+        Task AddAsync(T item, CancellationToken cancellationToken);
+        Task RemoveAsync(T item, CancellationToken cancellationToken);
+        Task<int> SaveAsync(CancellationToken cancellationToken);
+    }
+}

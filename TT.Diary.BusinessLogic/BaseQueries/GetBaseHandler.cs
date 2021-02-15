@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories.Common;
 using TT.Diary.DataAccessLogic.Model;
 
 namespace TT.Diary.BusinessLogic.BaseQueries
@@ -14,18 +14,17 @@ namespace TT.Diary.BusinessLogic.BaseQueries
         where TQuery : AbstractGetBaseQuery<TComponent>
     {
         private readonly IMapper _mapper;
+        private readonly AbstractBaseRepository<TModel> _repository;
 
-        private readonly DiaryDBContext _context;
-
-        protected GetBaseHandler(DiaryDBContext context, IMapper mapper)
+        protected GetBaseHandler(AbstractBaseRepository<TModel> repository, IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         public Task<TComponent> Handle(TQuery request, CancellationToken cancellationToken)
         {
-            var entity = _context.TryGet<TModel>(e => e.Id == request.Id);
+            var entity = _repository.TryGet(e => e.Id == request.Id);
             return Task.FromResult(_mapper.Map<TComponent>(entity));
         }
     }

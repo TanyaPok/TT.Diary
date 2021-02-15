@@ -2,29 +2,28 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using TT.Diary.DataAccessLogic;
-using TT.Diary.DataAccessLogic.Model;
+using TT.Diary.BusinessLogic.Repositories.Common;
+using TT.Diary.DataAccessLogic.Model.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public abstract class AbstractRemoveScheduleHandler<TCommand, TOwner> : AsyncRequestHandler<TCommand>
+    public abstract class AbstractRemoveScheduleHandler<TCommand, TSchedule> : AsyncRequestHandler<TCommand>
         where TCommand : AbstractRemoveCommand
-        where TOwner : AbstractItem
+        where TSchedule : ScheduleSettings
     {
-        private readonly DiaryDBContext _context;
+        private readonly AbstractBaseRepository<TSchedule> _repository;
 
-        protected AbstractRemoveScheduleHandler(DiaryDBContext context)
+        protected AbstractRemoveScheduleHandler(AbstractBaseRepository<TSchedule> repository)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         protected override async Task Handle(TCommand request, CancellationToken cancellationToken)
         {
-            var schedule = _context.GetSchedule(request.Id);
+            var schedule = _repository.Get(request.Id, s => s.Owner);
             var owner = schedule.Owner;
             owner.Schedule = null;
-            _context.Remove(schedule);
-            await _context.SaveChangesAsync(cancellationToken);
+            await _repository.RemoveAsync(schedule, cancellationToken);
         }
     }
 }

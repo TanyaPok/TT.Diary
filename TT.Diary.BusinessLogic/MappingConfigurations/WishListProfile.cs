@@ -25,9 +25,10 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 .ForMember(d => d.Schedule, o => o.Ignore());
 
             CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.Lists.Wish<ScheduleSettingsSummary>>()
-                .ForMember(dest => dest.Schedule, opt => opt.MapFrom((src, dest) => { return src.Schedule; }));
+                .ForMember(dest => dest.Schedule, opt => opt.MapFrom((src, dest) => src.Schedule));
 
-            CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.Lists.AbstractScheduledItem<ScheduleSettingsSummary>>().As<DTO.Lists.Wish<ScheduleSettingsSummary>>();
+            CreateMap<DataAccessLogic.Model.TypeList.Wish, DTO.Lists.AbstractScheduledItem<ScheduleSettingsSummary>>()
+                .As<DTO.Lists.Wish<ScheduleSettingsSummary>>();
         }
     }
 }

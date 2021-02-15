@@ -3,7 +3,7 @@ using System;
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public class AbstractTrackerCommand : IRequest<int>
+    public abstract class AbstractTrackerCommand : IRequest<int>
     {
         public DateTime? DateTime { set; get; }
 

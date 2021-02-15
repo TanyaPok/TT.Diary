@@ -25,7 +25,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         {
             try
             {
-                var data = await QueryAsync<Category<Wish<ScheduleSettingsSummary>>>(new GetItemsQuery() { UserId = userId });
+                var data = await QueryAsync<Category<Wish<ScheduleSettingsSummary>>>(new GetItemsQuery()
+                    {UserId = userId});
 
                 if (data == null)
                     return NotFound();
@@ -34,7 +35,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetWishList.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetWishList.GetDescription(),
+                    ex.Message));
             }
         }
     }

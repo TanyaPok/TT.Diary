@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories;
 using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.Categories.Commands
@@ -12,37 +12,39 @@ namespace TT.Diary.BusinessLogic.Lists.Categories.Commands
     {
         private readonly IMapper _mapper;
 
-        private readonly DiaryDBContext _context;
+        private readonly CategoriesContainerRepository _repository;
 
-        public EditHandler(DiaryDBContext context, IMapper mapper)
+        public EditHandler(CategoriesContainerRepository repository, IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         public async Task<int> Handle(EditCommand request, CancellationToken cancellationToken)
         {
-            var category = _context.TryGet<Category>(e => e.Id == request.Id);
+            var category = _repository.TryGet(e => e.Id == request.Id);
 
             _mapper.Map<EditCommand, Category>(request, category);
 
+            var changesCount = 0;
+
             if (request.OldCategoryId != 0)
             {
-                var oldParent = _context.Get<Category, Category>(
+                var oldParent = _repository.GetFirstLevel(
                     request.OldCategoryId,
                     c => c.Subcategories);
-                oldParent.Remove(category);
+                changesCount = await _repository.RemoveFromAsync(oldParent, category, cancellationToken);
             }
 
             if (request.CategoryId != 0)
             {
-                var parent = _context.Get<Category, Category>(
+                var parent = _repository.GetFirstLevel(
                     request.CategoryId,
                     c => c.Subcategories);
-                parent.Add(category);
+                changesCount += await _repository.AddToAsync(parent, category, cancellationToken);
             }
 
-            return await _context.SaveChangesAsync(cancellationToken);
+            return changesCount;
         }
     }
 }

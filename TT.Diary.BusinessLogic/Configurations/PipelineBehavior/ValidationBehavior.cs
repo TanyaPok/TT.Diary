@@ -12,14 +12,16 @@ namespace TT.Diary.BusinessLogic.Configurations.PipelineBehavior
         where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
+
         public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
         {
             _validators = validators ?? throw new ArgumentNullException(nameof(validators));
         }
 
-        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+            RequestHandlerDelegate<TResponse> next)
         {
-            var context = new ValidationContext(request);
+            var context = new ValidationContext<TRequest>(request);
             var failures = _validators.Select(v => v.Validate(context))
                 .SelectMany(v => v.Errors)
                 .Where(e => e != null)

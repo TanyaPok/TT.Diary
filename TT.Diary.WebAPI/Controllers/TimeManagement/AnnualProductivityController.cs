@@ -13,7 +13,8 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
 {
     public class AnnualProductivityController : ApiControllerBase
     {
-        public AnnualProductivityController(ILogger<AnnualProductivityController> logger, IMediator mediator) : base(logger, mediator)
+        public AnnualProductivityController(ILogger<AnnualProductivityController> logger, IMediator mediator) : base(
+            logger, mediator)
         {
         }
 
@@ -21,15 +22,18 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<List<DailyProductivity>>> Get(int userId, DateTime startDate, DateTime finishDate)
+        public async Task<ActionResult<List<DailyProductivity>>> Get(int userId, DateTime startDate,
+            DateTime finishDate)
         {
             try
             {
-                return await QueryAsync<List<DailyProductivity>>(new GetAnnualProductivityQuery() { UserId = userId, StartDate = startDate, FinishDate = finishDate });
+                return await QueryAsync<List<DailyProductivity>>(new GetAnnualProductivityQuery()
+                    {UserId = userId, StartDate = startDate, FinishDate = finishDate});
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetAnnualProductivity.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE,
+                    ErrorMessages.GetAnnualProductivity.GetDescription(), ex.Message));
             }
         }
     }

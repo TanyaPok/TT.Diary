@@ -5,10 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MediatR;
 using Serilog;
-using Microsoft.EntityFrameworkCore;
-using TT.Diary.BusinessLogic.MappingConfigurations;
 using TT.Diary.DataAccessLogic;
-using AutoMapper;
 using FluentValidation;
 using TT.Diary.BusinessLogic.Configurations.PipelineBehavior;
 
@@ -16,9 +13,8 @@ namespace TT.Diary.WebAPI
 {
     public class Startup
     {
-        public const string CONNECTION_STRING = "DefaultConnection";
-
-        public const string CATEGORY_LIST = "CategoryTitleList";
+        private readonly string CONNECTION_STRING = "DefaultConnection";
+        private readonly string CATEGORY_LIST = "CategoryTitleList";
 
         public Startup(IConfiguration configuration)
         {
@@ -39,30 +35,13 @@ namespace TT.Diary.WebAPI
             services.AddValidatorsFromAssembly(businessLogicAssembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-            services.AddSingleton<ICategoryTitleList>(sp => Configuration.GetSection(CATEGORY_LIST).Get<CategoryTitleList>());
+            services.AddSingleton<ICategoryTitleList>(sp =>
+                Configuration.GetSection(CATEGORY_LIST).Get<CategoryTitleList>());
 
-            services.AddDbContext<DiaryDBContext>(options =>
-            {
-                options.UseSqlite(Configuration.GetConnectionString(CONNECTION_STRING), b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName));
-                options.EnableSensitiveDataLogging();
-                options.AddInterceptors(new BaseDbCommandInterceptor());
-            });
-
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AllowNullCollections = true;
-                mc.AddProfile(new UserProfile());
-                mc.AddProfile(new ToDoListProfile());
-                mc.AddProfile(new HabitProfile());
-                mc.AddProfile(new WishProfile());
-                mc.AddProfile(new NoteProfile());
-                mc.AddProfile(new CategoryProfile());
-                mc.AddProfile(new ScheduleSettingsProfile());
-                mc.AddProfile(new TrackerProfile());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddScoped(d =>
+                new DiaryDBContext(Configuration.GetConnectionString(CONNECTION_STRING), true));
+            services.ConfigureDiaryRepositories();
+            services.ConfigureDiaryAutomapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,10 +60,7 @@ namespace TT.Diary.WebAPI
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

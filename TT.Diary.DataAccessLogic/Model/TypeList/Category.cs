@@ -8,6 +8,7 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
         private readonly string ARGUMENT_EXCEPTION = "Unexpected type {0}.";
 
         #region DB settings
+
         public int UserId { set; get; }
 
         public User User { set; get; }
@@ -15,6 +16,7 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
         public int? ParentId { set; get; }
 
         public Category Parent { set; get; }
+
         #endregion
 
         public IList<Category> Subcategories { get; } = new List<Category>();
@@ -50,7 +52,7 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
             return has;
         }
 
-        public void Add(AbstractComponent component)
+        public void Add(AbstractEntity component)
         {
             switch (component)
             {
@@ -74,7 +76,7 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
             }
         }
 
-        public void Remove(AbstractComponent component)
+        public void Remove(AbstractEntity component)
         {
             switch (component)
             {

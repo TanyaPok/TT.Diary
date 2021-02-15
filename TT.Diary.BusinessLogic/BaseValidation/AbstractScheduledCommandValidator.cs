@@ -10,7 +10,7 @@ namespace TT.Diary.BusinessLogic.BaseValidation
     public abstract class AbstractScheduledCommandValidator<TCommand> : AbstractValidator<TCommand>
         where TCommand : AbstractScheduledCommand
     {
-        public AbstractScheduledCommandValidator()
+        protected AbstractScheduledCommandValidator()
         {
             RuleFor(r => r).Custom((command, context) =>
             {
@@ -26,41 +26,45 @@ namespace TT.Diary.BusinessLogic.BaseValidation
 
                 if (!Enum.IsDefined(typeof(Repeat), command.Repeat))
                 {
-                    context.AddFailure(string.Format(ValidationMessages.EnumOutOfRange.GetDescription(), nameof(Repeat), command.Repeat));
+                    context.AddFailure(string.Format(ValidationMessages.EnumOutOfRange.GetDescription(), nameof(Repeat),
+                        command.Repeat));
                 }
 
                 if (command.Repeat == Repeat.Yearly && !Enum.IsDefined(typeof(Months), command.Months))
                 {
-                    var checkSum = (int)command.Months;
+                    var checkSum = (int) command.Months;
 
                     foreach (Months item in Enum.GetValues(command.Months.GetType()))
                     {
                         if (command.Months.HasFlag(item))
                         {
-                            checkSum -= (int)item;
+                            checkSum -= (int) item;
                         }
                     }
 
                     if (checkSum != 0)
                     {
-                        context.AddFailure(string.Format(ValidationMessages.EnumOutOfRange.GetDescription(), nameof(Months), command.Months));
+                        context.AddFailure(string.Format(ValidationMessages.EnumOutOfRange.GetDescription(),
+                            nameof(Months), command.Months));
                     }
                 }
 
                 if (command.Repeat == Repeat.Weekly)
                 {
-                    var checkSum = (int)command.Weekdays;
+                    var checkSum = (int) command.Weekdays;
 
-                    foreach(Weekdays item in Enum.GetValues(command.Weekdays.GetType()))
+                    foreach (Weekdays item in Enum.GetValues(command.Weekdays.GetType()))
                     {
                         if (command.Weekdays.HasFlag(item))
                         {
-                            checkSum -= (int)item;
+                            checkSum -= (int) item;
                         }
                     }
-                    
-                    if (checkSum != 0) { 
-                        context.AddFailure(string.Format(ValidationMessages.EnumOutOfRange.GetDescription(), nameof(Weekdays), command.Weekdays));
+
+                    if (checkSum != 0)
+                    {
+                        context.AddFailure(string.Format(ValidationMessages.EnumOutOfRange.GetDescription(),
+                            nameof(Weekdays), command.Weekdays));
                     }
                 }
 

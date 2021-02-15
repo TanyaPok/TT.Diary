@@ -2,53 +2,34 @@
 using MediatR;
 using System;
 using System.Threading;
-using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model.TypeList;
 using System.Threading.Tasks;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.DTO.Lists;
+using TT.Diary.BusinessLogic.Repositories;
 
 namespace TT.Diary.BusinessLogic.Lists.Habits.Queries
 {
     public class GetItemsHandler : IRequestHandler<GetItemsQuery, Category<Habit<ScheduleSettingsSummary>>>
     {
         private readonly IMapper _mapper;
+        private readonly HabitsContainerRepository _repository;
 
-        private readonly DiaryDBContext _context;
-
-        public GetItemsHandler(DiaryDBContext context, IMapper mapper)
+        public GetItemsHandler(HabitsContainerRepository repository, IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public Task<Category<Habit<ScheduleSettingsSummary>>> Handle(GetItemsQuery request, CancellationToken cancellationToken)
+        public Task<Category<Habit<ScheduleSettingsSummary>>> Handle(GetItemsQuery request,
+            CancellationToken cancellationToken)
         {
-            var category = _context.GetHabits(request.UserId);
+            var category = (request.OnlyUnscheduled)
+                ? _repository.GetAllUnscheduledLevels(request.UserId)
+                : _repository.GetAllLevels(request.UserId, c => c.Habits);
+
             var result = _mapper.Map<Category, Category<Habit<ScheduleSettingsSummary>>>(category);
-            
-            if (request.OnlyUnscheduled)
-            {
-                RemoveScheduledItems(result);
-            }
-
             return Task.FromResult(result);
-        }
-
-        internal void RemoveScheduledItems(Category<Habit<ScheduleSettingsSummary>> category)
-        {
-            for (var i = category.Items.Count - 1; i >= 0; i--)
-            {
-                if (category.Items[i].Schedule != null)
-                {
-                    category.Items.Remove(category.Items[i]);
-                }
-            }
-
-            foreach (var child in category.Subcategories)
-            {
-                RemoveScheduledItems(child);
-            }
         }
     }
 }

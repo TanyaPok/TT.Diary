@@ -1,15 +1,14 @@
 using FluentValidation;
-using System.Linq;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.Lists.Categories.Commands;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories;
 
 namespace TT.Diary.BusinessLogic.Lists.Categories.Validation
 {
     public class RemoveCommandValidator : AbstractValidator<RemoveCommand>
     {
-        public RemoveCommandValidator(DiaryDBContext dbContext)
+        public RemoveCommandValidator(CategoriesContainerRepository repository)
         {
             RuleFor(r => r.Id).GreaterThan(0).WithMessage(ValidationMessages.InvalidId.GetDescription());
 
@@ -18,21 +17,15 @@ namespace TT.Diary.BusinessLogic.Lists.Categories.Validation
                 if (command.Id == 0)
                     return;
 
-                if (dbContext.IsRootCategory(command.Id))
+                if (repository.IsRootCategory(command.Id))
                 {
                     context.AddFailure(ValidationMessages.IsRootCategory.GetDescription());
                     return;
                 }
 
-                if (dbContext.Categories.AsQueryable().Any(c => c.ParentId == command.Id) ||
-                    dbContext.WishList.AsQueryable().Any(w => w.CategoryId == command.Id) ||
-                    dbContext.ToDoList.AsQueryable().Any(w => w.CategoryId == command.Id) ||
-                    dbContext.Habits.AsQueryable().Any(w => w.CategoryId == command.Id) ||
-                    dbContext.Appointments.AsQueryable().Any(w => w.CategoryId == command.Id) ||
-                    dbContext.Notes.AsQueryable().Any(w => w.CategoryId == command.Id))
+                if (repository.HasChildren(command.Id))
                 {
                     context.AddFailure(ValidationMessages.HasNestedItems.GetDescription());
-                    return;
                 }
             });
         }

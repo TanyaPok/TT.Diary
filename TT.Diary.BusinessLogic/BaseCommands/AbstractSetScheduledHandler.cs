@@ -3,29 +3,31 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories.Common;
 using TT.Diary.DataAccessLogic.Model;
 using TT.Diary.DataAccessLogic.Model.TimeManagement;
+using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public abstract class AbstractSetScheduledHandler<TCommand, TOwner> : IRequestHandler<TCommand, int>
+    public abstract class AbstractSetScheduledHandler<TCommand, TOwner, TContainer> : IRequestHandler<TCommand, int>
         where TCommand : AbstractScheduledCommand
         where TOwner : AbstractItem
+        where TContainer : Category
     {
         private readonly IMapper _mapper;
+        private readonly AbstractBaseContainerRepository<TContainer, TOwner> _repository;
 
-        private readonly DiaryDBContext _context;
-
-        protected AbstractSetScheduledHandler(DiaryDBContext context, IMapper mapper)
+        protected AbstractSetScheduledHandler(AbstractBaseContainerRepository<TContainer, TOwner> repository,
+            IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         public async Task<int> Handle(TCommand request, CancellationToken cancellationToken)
         {
-            var owner = _context.Get<TOwner, ScheduleSettings>(request.OwnerId, e => e.Schedule);
+            var owner = _repository.Get<ScheduleSettings>(request.OwnerId, e => e.Schedule);
 
             if (owner.Schedule != null)
             {
@@ -37,7 +39,7 @@ namespace TT.Diary.BusinessLogic.BaseCommands
                 owner.Schedule = schedule;
             }
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _repository.SaveAsync(cancellationToken);
             return owner.Schedule.Id;
         }
     }

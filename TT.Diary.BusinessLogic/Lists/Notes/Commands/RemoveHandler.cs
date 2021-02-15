@@ -1,12 +1,12 @@
 using TT.Diary.BusinessLogic.BaseCommands;
-using TT.Diary.DataAccessLogic;
+using TT.Diary.BusinessLogic.Repositories;
 using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.Notes.Commands
 {
-    public class RemoveHandler : AbstractRemoveHandler<RemoveCommand, Note>
+    public class RemoveHandler : AbstractRemoveHandler<RemoveCommand, Note, Category>
     {
-        public RemoveHandler(DiaryDBContext context) : base(context)
+        public RemoveHandler(NotesContainerRepository repository) : base(repository)
         {
         }
     }

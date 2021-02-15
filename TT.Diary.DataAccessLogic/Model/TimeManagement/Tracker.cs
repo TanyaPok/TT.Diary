@@ -7,14 +7,15 @@ namespace TT.Diary.DataAccessLogic.Model.TimeManagement
     public class Tracker : AbstractEntity
     {
         #region DB settings
-        [NotMapped]
-        public TrackedAbstractItem Owner { get; set; }
+
+        [NotMapped] public TrackedAbstractItem Owner { get; set; }
 
         public int? ToDoId { set; get; }
 
         public int? HabitId { set; get; }
 
         public int? AppointmentId { set; get; }
+
         #endregion
 
         public DateTime ScheduledDateUtc { set; get; }

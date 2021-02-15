@@ -13,7 +13,7 @@ namespace TT.Diary.BusinessLogic.DTO.TimeManagement
 
     public class ScheduleSettings : AbstractScheduleSettings
     {
-        private CRSTStrategy _strategy;
+        private AbstractCRSTStrategy _strategy;
 
         public Repeat Repeat { get; set; }
 
@@ -58,12 +58,7 @@ namespace TT.Diary.BusinessLogic.DTO.TimeManagement
 
         internal bool TryGenerateTrackers(DateTime startDate, DateTime finishDate)
         {
-            if (_strategy == null)
-            {
-                return false;
-            }
-
-            return _strategy.TryGenerateTrackers(startDate, finishDate, this);
+            return _strategy != null && _strategy.TryGenerateTrackers(startDate, finishDate, this);
         }
     }
 }

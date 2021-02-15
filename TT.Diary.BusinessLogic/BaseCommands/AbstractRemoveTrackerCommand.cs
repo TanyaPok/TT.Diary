@@ -2,7 +2,7 @@
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public class AbstractRemoveTrackerCommand : IRequest
+    public abstract class AbstractRemoveTrackerCommand : IRequest
     {
         public int OwnerId { get; set; }
     }

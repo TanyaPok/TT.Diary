@@ -22,11 +22,12 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         {
             try
             {
-                return Ok(await CommandAsync(new RemoveCommand() { Id = id }));
+                return Ok(await CommandAsync(new RemoveCommand() {Id = id}));
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveNote.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveNote.GetDescription(),
+                    ex.Message));
             }
         }
 
@@ -41,7 +42,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveNote.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveNote.GetDescription(),
+                    ex.Message));
             }
         }
 
@@ -56,7 +58,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveNote.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveNote.GetDescription(),
+                    ex.Message));
             }
         }
     }

@@ -26,7 +26,7 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         {
             try
             {
-                var data = await QueryAsync<ToDo<ScheduleSettingsSummary>>(new GetQuery() { Id = id });
+                var data = await QueryAsync<ToDo<ScheduleSettingsSummary>>(new GetQuery() {Id = id});
 
                 if (data == null)
                     return NotFound();
@@ -35,7 +35,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetToDo.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetToDo.GetDescription(),
+                    ex.Message));
             }
         }
 
@@ -46,11 +47,12 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         {
             try
             {
-                return Ok(await CommandAsync(new RemoveCommand() { Id = id }));
+                return Ok(await CommandAsync(new RemoveCommand() {Id = id}));
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveToDo.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveToDo.GetDescription(),
+                    ex.Message));
             }
         }
 
@@ -65,7 +67,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveToDo.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveToDo.GetDescription(),
+                    ex.Message));
             }
         }
 
@@ -80,7 +83,8 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveToDo.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveToDo.GetDescription(),
+                    ex.Message));
             }
         }
     }

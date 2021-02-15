@@ -5,11 +5,12 @@ using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.TimeManagement.CRST
 {
-    internal abstract class CRSTStrategy
+    internal abstract class AbstractCRSTStrategy
     {
         internal abstract bool TryGenerateTrackers(DateTime startDate, DateTime finishDate, ScheduleSettings schedule);
 
-        protected DateTime GetFinishDate(DateTime finishDate, DateTime? scheduledCompletionDate, DateTime? completionDate)
+        protected DateTime GetFinishDate(DateTime finishDate, DateTime? scheduledCompletionDate,
+            DateTime? completionDate)
         {
             if (completionDate.HasValue && completionDate.Value < finishDate)
             {

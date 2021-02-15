@@ -8,9 +8,10 @@ namespace TT.Diary.BusinessLogic.BaseValidation
     public abstract class AbstractTrackerCommandValidator<TCommand> : AbstractValidator<TCommand>
         where TCommand : AbstractAddTrackerCommand
     {
-        public AbstractTrackerCommandValidator()
+        protected AbstractTrackerCommandValidator()
         {
-            RuleFor(r => r.OwnerId).GreaterThan(0).WithMessage(ValidationMessages.InvalidOwnerTrackerId.GetDescription());
+            RuleFor(r => r.OwnerId).GreaterThan(0)
+                .WithMessage(ValidationMessages.InvalidOwnerTrackerId.GetDescription());
         }
     }
 }

@@ -11,7 +11,8 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
 {
     public class HabitScheduleController : ApiControllerBase
     {
-        public HabitScheduleController(ILogger<HabitScheduleController> logger, IMediator mediator) : base(logger, mediator)
+        public HabitScheduleController(ILogger<HabitScheduleController> logger, IMediator mediator) : base(logger,
+            mediator)
         {
         }
 
@@ -26,7 +27,8 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveScheduleSettings.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE,
+                    ErrorMessages.SaveScheduleSettings.GetDescription(), ex.Message));
             }
         }
 
@@ -37,11 +39,12 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
         {
             try
             {
-                return Ok(await CommandAsync(new RemoveCommand() { Id = id }));
+                return Ok(await CommandAsync(new RemoveCommand() {Id = id}));
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveScheduleSettings.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE,
+                    ErrorMessages.RemoveScheduleSettings.GetDescription(), ex.Message));
             }
         }
     }

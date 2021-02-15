@@ -24,11 +24,13 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement
         {
             try
             {
-                return await QueryAsync<Planner>(new GetPlannerQuery() { UserId = userId, StartDate = startDate, FinishDate = finishDate });
+                return await QueryAsync<Planner>(new GetPlannerQuery()
+                    {UserId = userId, StartDate = startDate, FinishDate = finishDate});
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetPlanner.GetDescription(), ex.Message));
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetPlanner.GetDescription(),
+                    ex.Message));
             }
         }
     }

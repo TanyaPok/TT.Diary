@@ -11,7 +11,8 @@ namespace TT.Diary.BusinessLogic.TimeManagement.HabitTracker.Validation
     {
         public AddCommandValidator() : base()
         {
-            RuleFor(r => r.ScheduledDate).GreaterThan(DateTime.MinValue).WithMessage(ValidationMessages.NotSetDateTime.GetDescription());
+            RuleFor(r => r.ScheduledDate).GreaterThan(DateTime.MinValue)
+                .WithMessage(ValidationMessages.NotSetDateTime.GetDescription());
         }
     }
 }
