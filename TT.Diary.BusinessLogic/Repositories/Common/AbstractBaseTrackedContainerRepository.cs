@@ -30,11 +30,6 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
             return _dbContext.Set<T>().Include(expression).AsEnumerable().Single(e => e.Id == id);
         }
 
-        public T GetAllLevels(int userId, Expression<Func<T, IEnumerable<Tracker>>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
         public virtual async Task<int> AddToAsync(T parent, Tracker child, CancellationToken cancellationToken)
         {
             parent.Trackers.Add(child);

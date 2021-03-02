@@ -8,7 +8,7 @@ using TT.Diary.DataAccessLogic.Model;
 
 namespace TT.Diary.BusinessLogic.BaseQueries
 {
-    public abstract class GetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
+    public abstract class AbstractGetBaseHandler<TComponent, TModel, TQuery> : IRequestHandler<TQuery, TComponent>
         where TComponent : DTO.Lists.AbstractCategoryItem
         where TModel : AbstractComponent
         where TQuery : AbstractGetBaseQuery<TComponent>
@@ -16,7 +16,7 @@ namespace TT.Diary.BusinessLogic.BaseQueries
         private readonly IMapper _mapper;
         private readonly AbstractBaseRepository<TModel> _repository;
 
-        protected GetBaseHandler(AbstractBaseRepository<TModel> repository, IMapper mapper)
+        protected AbstractGetBaseHandler(AbstractBaseRepository<TModel> repository, IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));

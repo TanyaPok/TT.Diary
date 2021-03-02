@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 using TT.Diary.BusinessLogic.Repositories.Common;
 using TT.Diary.DataAccessLogic.Model;
 using TT.Diary.DataAccessLogic.Model.TimeManagement;
-using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public abstract class AbstractSetScheduledHandler<TCommand, TOwner, TContainer> : IRequestHandler<TCommand, int>
+    public abstract class AbstractSetScheduledHandler<TCommand, TOwner> : IRequestHandler<TCommand, int>
         where TCommand : AbstractScheduledCommand
         where TOwner : AbstractItem
-        where TContainer : Category
     {
         private readonly IMapper _mapper;
-        private readonly AbstractBaseContainerRepository<TContainer, TOwner> _repository;
+        private readonly AbstractBaseContainerRepository<TOwner> _repository;
 
-        protected AbstractSetScheduledHandler(AbstractBaseContainerRepository<TContainer, TOwner> repository,
+        protected AbstractSetScheduledHandler(AbstractBaseContainerRepository<TOwner> repository,
             IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -27,7 +25,7 @@ namespace TT.Diary.BusinessLogic.BaseCommands
 
         public async Task<int> Handle(TCommand request, CancellationToken cancellationToken)
         {
-            var owner = _repository.Get<ScheduleSettings>(request.OwnerId, e => e.Schedule);
+            var owner = _repository.Get<ScheduleSettings>(e => e.Id == request.OwnerId, e => e.Schedule);
 
             if (owner.Schedule != null)
             {

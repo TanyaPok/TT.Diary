@@ -9,7 +9,7 @@ using TT.Diary.BusinessLogic.DTO.Lists;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Lists.ToDoList.Queries;
 
-namespace TT.Diary.WebAPI.Controllers.Lists
+namespace TT.Diary.WebAPI.Controllers.Lists.ToDoList
 {
     public class ToDoListController : ApiControllerBase
     {
@@ -26,7 +26,7 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             try
             {
                 var data = await QueryAsync<Category<ToDo<ScheduleSettingsSummary>>>(new GetItemsQuery()
-                    {UserId = userId});
+                    {UserId = userId, OnlyUnscheduled = false});
 
                 if (data == null)
                     return NotFound();

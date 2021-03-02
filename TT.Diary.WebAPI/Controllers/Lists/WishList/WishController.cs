@@ -10,7 +10,7 @@ using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Lists.WishList.Commands;
 using TT.Diary.BusinessLogic.Lists.WishList.Queries;
 
-namespace TT.Diary.WebAPI.Controllers.Lists
+namespace TT.Diary.WebAPI.Controllers.Lists.WishList
 {
     public class WishController : ApiControllerBase
     {

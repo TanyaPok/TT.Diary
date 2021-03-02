@@ -34,7 +34,7 @@ namespace TT.Diary.WebAPI
             services.AddScoped<ToDoListContainerRepository>();
             services.AddScoped<WishListContainerRepository>();
             services.AddScoped<NotesContainerRepository>();
-            services.AddScoped<ScheduleRepository>();
+            services.AddScoped<ScheduleSettingsRepository>();
             services.AddScoped<TrackedHabitsContainerRepository>();
             services.AddScoped<TrackedToDoListContainerRepository>();
             services.AddScoped<TrackedAppointmentsContainerRepository>();

@@ -5,7 +5,7 @@ using TT.Diary.BusinessLogic.Repositories;
 
 namespace TT.Diary.BusinessLogic.Lists.ToDoList.Queries
 {
-    public class GetHandler : GetBaseHandler<DTO.Lists.ToDo<ScheduleSettingsSummary>,
+    public class GetHandler : AbstractGetBaseHandler<DTO.Lists.ToDo<ScheduleSettingsSummary>,
         DataAccessLogic.Model.TypeList.ToDo, GetQuery>
     {
         public GetHandler(ToDoListContainerRepository repository, IMapper mapper) : base(repository, mapper)

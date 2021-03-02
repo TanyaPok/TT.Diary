@@ -21,7 +21,7 @@ namespace TT.Diary.BusinessLogic.BaseValidation
                 if (command.Id == 0)
                     return;
 
-                var item = repository.Get(command.Id, c => c.Schedule);
+                var item = repository.Get(c => c.Id == command.Id, c => c.Schedule);
                 if (item.Schedule != null)
                 {
                     context.AddFailure(errorMessage);

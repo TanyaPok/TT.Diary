@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TT.Diary.BusinessLogic.Repositories.Common.AbstractBaseContainerRepository&lt;TChild&gt;">
+    <Position X="6.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABBAAAIAAAAACAAAAIAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Repositories\Common\AbstractBaseContainerRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.Common.AbstractBaseRepository&lt;T&gt;">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAABAAAgAAAEAAIAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Repositories\Common\AbstractBaseRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.Common.AbstractBaseTrackedContainerRepository&lt;T&gt;">
+    <Position X="15.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAIAAAAACAAAAIAAAAACAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Common\AbstractBaseTrackedContainerRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.CategoriesContainerRepository">
+    <Position X="1.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAgAAAAAAAAgAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\CategoriesContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.HabitsContainerRepository">
+    <Position X="6.25" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\HabitsContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.NotesContainerRepository">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\NotesContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.ToDoListContainerRepository">
+    <Position X="8.5" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ToDoListContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.TrackedAppointmentsContainerRepository">
+    <Position X="17.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\TrackedAppointmentsContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.TrackedHabitsContainerRepository">
+    <Position X="13" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\TrackedHabitsContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.TrackedToDoListContainerRepository">
+    <Position X="15.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\TrackedToDoListContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.UserRepository">
+    <Position X="19.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAEAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\UserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.WishListContainerRepository">
+    <Position X="10.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\WishListContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.Common.AbstractBaseTrackedItemRepository&lt;TChild&gt;">
+    <Position X="7.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Repositories\Common\AbstractBaseTrackedItemRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TT.Diary.BusinessLogic.Repositories.Common.AbstractBaseScheduledItemRepository&lt;TChild&gt;">
+    <Position X="8.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAACCA=</HashCode>
+      <FileName>Repositories\Common\AbstractBaseScheduledItemRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="TT.Diary.BusinessLogic.Repositories.Common.IContainerRepository&lt;T, TChild&gt;">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAACAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Common\IContainerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TT.Diary.BusinessLogic.Repositories.Common.IRepository&lt;T&gt;">
+    <Position X="24" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAgAAAEAAIAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Repositories\Common\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="10" />
+</ClassDiagram>

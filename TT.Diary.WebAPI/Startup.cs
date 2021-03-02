@@ -38,6 +38,7 @@ namespace TT.Diary.WebAPI
             services.AddSingleton<ICategoryTitleList>(sp =>
                 Configuration.GetSection(CATEGORY_LIST).Get<CategoryTitleList>());
 
+            //TODO: pass serilog to dbcontext
             services.AddScoped(d =>
                 new DiaryDBContext(Configuration.GetConnectionString(CONNECTION_STRING), true));
             services.ConfigureDiaryRepositories();

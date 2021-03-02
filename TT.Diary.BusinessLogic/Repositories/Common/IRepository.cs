@@ -9,7 +9,10 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
     public interface IRepository<T> where T : AbstractEntity
     {
         T TryGet(Expression<Func<T, bool>> expression);
-        T Get<TProperty>(int id, Expression<Func<T, TProperty>> expression) where TProperty : AbstractEntity;
+
+        T Get<TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> expression)
+            where TProperty : AbstractEntity;
+
         Task AddAsync(T item, CancellationToken cancellationToken);
         Task RemoveAsync(T item, CancellationToken cancellationToken);
         Task<int> SaveAsync(CancellationToken cancellationToken);

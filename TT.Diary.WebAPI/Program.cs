@@ -29,6 +29,7 @@ namespace TT.Diary.WebAPI
                 .MinimumLevel.Debug()
                 .WriteTo
                 .File(builtConfig[LOG_FILE], rollingInterval: RollingInterval.Day, shared: true)
+                .WriteTo.Debug(Serilog.Events.LogEventLevel.Debug)
                 .CreateLogger();
 
             try

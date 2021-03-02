@@ -4,9 +4,9 @@ using TT.Diary.DataAccessLogic.Model.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.Repositories
 {
-    public class ScheduleRepository : AbstractBaseRepository<ScheduleSettings>
+    public class ScheduleSettingsRepository : AbstractBaseRepository<ScheduleSettings>
     {
-        public ScheduleRepository(DiaryDBContext dbContext) : base(dbContext)
+        public ScheduleSettingsRepository(DiaryDBContext dbContext) : base(dbContext)
         {
         }
     }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using TT.Diary.BusinessLogic.TimeManagement.HabitTracker.Commands;
 
 namespace TT.Diary.BusinessLogic.MappingConfigurations
 {
@@ -7,11 +6,18 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
     {
         public TrackerProfile()
         {
-            CreateMap<AddCommand, DataAccessLogic.Model.TimeManagement.Tracker>()
+            CreateMap<TimeManagement.HabitTracker.Commands.AddCommand, DataAccessLogic.Model.TimeManagement.Tracker>()
                 .ForMember(d => d.ScheduledDateUtc, o => o.MapFrom(s => s.ScheduledDate))
                 .ForMember(d => d.DateTimeUtc, o => o.MapFrom(s => s.DateTime));
 
-            CreateMap<EditCommand, DataAccessLogic.Model.TimeManagement.Tracker>()
+            CreateMap<TimeManagement.HabitTracker.Commands.EditCommand, DataAccessLogic.Model.TimeManagement.Tracker>()
+                .ForMember(d => d.DateTimeUtc, o => o.MapFrom(s => s.DateTime));
+
+            CreateMap<TimeManagement.ToDoTracker.Commands.AddCommand, DataAccessLogic.Model.TimeManagement.Tracker>()
+                .ForMember(d => d.ScheduledDateUtc, o => o.MapFrom(s => s.ScheduledDate))
+                .ForMember(d => d.DateTimeUtc, o => o.MapFrom(s => s.DateTime));
+
+            CreateMap<TimeManagement.ToDoTracker.Commands.EditCommand, DataAccessLogic.Model.TimeManagement.Tracker>()
                 .ForMember(d => d.DateTimeUtc, o => o.MapFrom(s => s.DateTime));
 
             CreateMap<DataAccessLogic.Model.TimeManagement.Tracker, DTO.TimeManagement.Tracker>()

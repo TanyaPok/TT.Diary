@@ -7,7 +7,7 @@ using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.TimeManagement.HabitSchedule.Commands;
 
-namespace TT.Diary.WebAPI.Controllers.TimeManagement
+namespace TT.Diary.WebAPI.Controllers.TimeManagement.Habits
 {
     public class HabitScheduleController : ApiControllerBase
     {

@@ -5,7 +5,7 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.Habits.Commands
 {
-    public class AddHandler : AbstractAddHandler<AddCommand, Habit, Category>
+    public class AddHandler : AbstractAddHandler<AddCommand, Habit>
     {
         public AddHandler(HabitsContainerRepository repository, IMapper mapper) : base(
             repository, mapper,

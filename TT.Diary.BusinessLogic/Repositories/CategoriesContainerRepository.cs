@@ -6,7 +6,7 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Repositories
 {
-    public class CategoriesContainerRepository : AbstractBaseContainerRepository<Category, Category>
+    public class CategoriesContainerRepository : AbstractBaseContainerRepository<Category>
     {
         private readonly DiaryDBContext _dbContext;
         private readonly ICategoryTitleList _categoryTitleList;

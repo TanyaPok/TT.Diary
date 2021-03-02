@@ -8,7 +8,7 @@ using TT.Diary.BusinessLogic.Configurations.Extensions;
 using TT.Diary.BusinessLogic.DTO.Lists;
 using TT.Diary.BusinessLogic.Lists.Notes.Queries;
 
-namespace TT.Diary.WebAPI.Controllers.Lists
+namespace TT.Diary.WebAPI.Controllers.Lists.Notes
 {
     public class NotesController : ApiControllerBase
     {

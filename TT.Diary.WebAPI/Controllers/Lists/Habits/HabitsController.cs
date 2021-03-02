@@ -9,7 +9,7 @@ using TT.Diary.BusinessLogic.DTO.Lists;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Lists.Habits.Queries;
 
-namespace TT.Diary.WebAPI.Controllers.Lists
+namespace TT.Diary.WebAPI.Controllers.Lists.Habits
 {
     public class HabitsController : ApiControllerBase
     {
@@ -21,12 +21,12 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<Category<Habit<ScheduleSettingsSummary>>>> Get(int userId, bool onlyUnscheduled)
+        public async Task<ActionResult<Category<Habit<ScheduleSettingsSummary>>>> Get(int userId)
         {
             try
             {
                 var data = await QueryAsync<Category<Habit<ScheduleSettingsSummary>>>(new GetItemsQuery()
-                    {UserId = userId, OnlyUnscheduled = onlyUnscheduled});
+                    {UserId = userId, OnlyUnscheduled = false});
 
                 if (data == null)
                     return NotFound();

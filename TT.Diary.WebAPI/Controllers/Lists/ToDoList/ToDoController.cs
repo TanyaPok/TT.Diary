@@ -1,20 +1,20 @@
-using System;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.Lists.Habits.Commands;
-using TT.Diary.BusinessLogic.Lists.Habits.Queries;
+using TT.Diary.BusinessLogic.Lists.ToDoList.Commands;
+using TT.Diary.BusinessLogic.Lists.ToDoList.Queries;
 using TT.Diary.BusinessLogic.DTO.Lists;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
-namespace TT.Diary.WebAPI.Controllers.Lists
+namespace TT.Diary.WebAPI.Controllers.Lists.ToDoList
 {
-    public class HabitController : ApiControllerBase
+    public class ToDoController : ApiControllerBase
     {
-        public HabitController(ILogger<HabitController> logger, IMediator mediator) : base(logger, mediator)
+        public ToDoController(ILogger<ToDoController> logger, IMediator mediator) : base(logger, mediator)
         {
         }
 
@@ -22,11 +22,11 @@ namespace TT.Diary.WebAPI.Controllers.Lists
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<Habit<ScheduleSettingsSummary>>> Get(int id)
+        public async Task<ActionResult<ToDo<ScheduleSettingsSummary>>> Get(int id)
         {
             try
             {
-                var data = await QueryAsync<Habit<ScheduleSettingsSummary>>(new GetQuery() {Id = id});
+                var data = await QueryAsync<ToDo<ScheduleSettingsSummary>>(new GetQuery() {Id = id});
 
                 if (data == null)
                     return NotFound();
@@ -35,7 +35,7 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetHabit.GetDescription(),
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.GetToDo.GetDescription(),
                     ex.Message));
             }
         }
@@ -51,7 +51,7 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveHabit.GetDescription(),
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.RemoveToDo.GetDescription(),
                     ex.Message));
             }
         }
@@ -67,7 +67,7 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveHabit.GetDescription(),
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveToDo.GetDescription(),
                     ex.Message));
             }
         }
@@ -83,7 +83,7 @@ namespace TT.Diary.WebAPI.Controllers.Lists
             }
             catch (Exception ex)
             {
-                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveHabit.GetDescription(),
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE, ErrorMessages.SaveToDo.GetDescription(),
                     ex.Message));
             }
         }

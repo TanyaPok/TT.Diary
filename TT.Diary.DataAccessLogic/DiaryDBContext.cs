@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.Extensions.Logging;
 using TT.Diary.DataAccessLogic.Model;
 using TT.Diary.DataAccessLogic.Model.TimeManagement;
 using TT.Diary.DataAccessLogic.Model.TypeList;
@@ -40,6 +41,11 @@ namespace TT.Diary.DataAccessLogic
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddDebug();
+            });
+
             optionsBuilder.UseSqlite(_connectionString,
                 b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName));
 
@@ -48,7 +54,9 @@ namespace TT.Diary.DataAccessLogic
                 optionsBuilder.EnableSensitiveDataLogging();
             }
 
-            optionsBuilder.AddInterceptors(new BaseDbCommandInterceptor());
+            optionsBuilder
+                .UseLoggerFactory(loggerFactory)
+                .AddInterceptors(new BaseDbCommandInterceptor());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

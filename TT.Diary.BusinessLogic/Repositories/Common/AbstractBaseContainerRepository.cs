@@ -11,9 +11,8 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Repositories.Common
 {
-    public abstract class AbstractBaseContainerRepository<T, TChild> : AbstractBaseRepository<TChild>,
-        IContainerRepository<T, TChild>
-        where T : Category
+    public abstract class AbstractBaseContainerRepository<TChild> : AbstractBaseRepository<TChild>,
+        IContainerRepository<Category, TChild>
         where TChild : AbstractEntity
     {
         private readonly DiaryDBContext _dbContext;
@@ -25,19 +24,19 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
             _titleList = titleList ?? throw new ArgumentNullException(nameof(titleList));
         }
 
-        public virtual async Task<int> AddToAsync(T parent, TChild child, CancellationToken cancellationToken)
+        public virtual async Task<int> AddToAsync(Category parent, TChild child, CancellationToken cancellationToken)
         {
             parent.Add(child);
             return await SaveAsync(cancellationToken);
         }
 
-        public virtual async Task<int> RemoveFromAsync(T parent, TChild child, CancellationToken cancellationToken)
+        public virtual async Task<int> RemoveFromAsync(Category parent, TChild child, CancellationToken cancellationToken)
         {
             parent.Remove(child);
             return await SaveAsync(cancellationToken);
         }
 
-        public virtual async Task<int> RemoveFromAsync(T parent, IList<TChild> children,
+        public virtual async Task<int> RemoveFromAsync(Category parent, IList<TChild> children,
             CancellationToken cancellationToken)
         {
             foreach (var child in children.ToArray())
@@ -48,14 +47,14 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
             return await SaveAsync(cancellationToken);
         }
 
-        public virtual T GetFirstLevel(int id, Expression<Func<T, IEnumerable<TChild>>> expression)
+        public virtual Category GetFirstLevel(int id, Expression<Func<Category, IEnumerable<TChild>>> expression)
         {
-            return _dbContext.Set<T>().Include(expression).AsEnumerable().Single(e => e.Id == id);
+            return _dbContext.Set<Category>().Include(expression).AsEnumerable().Single(e => e.Id == id);
         }
 
-        public virtual T GetAllLevels(int userId, Expression<Func<T, IEnumerable<TChild>>> expression)
+        public virtual Category GetAllLevels(int userId, Expression<Func<Category, IEnumerable<TChild>>> expression)
         {
-            return _dbContext.Set<T>().Include(expression).AsEnumerable().SingleOrDefault(e =>
+            return _dbContext.Set<Category>().Include(expression).AsEnumerable().SingleOrDefault(e =>
                 e.UserId == userId && e.Description == _titleList && e.ParentId == null);
         }
     }

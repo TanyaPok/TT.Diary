@@ -4,7 +4,7 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.Habits.Commands
 {
-    public class RemoveHandler : AbstractRemoveHandler<RemoveCommand, Habit, Category>
+    public class RemoveHandler : AbstractRemoveHandler<RemoveCommand, Habit>
     {
         public RemoveHandler(HabitsContainerRepository repository) : base(repository)
         {

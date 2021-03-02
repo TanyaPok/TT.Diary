@@ -5,7 +5,7 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.Habits.Commands
 {
-    public class EditHandler : AbstractEditHandler<EditCommand, Habit, Category>
+    public class EditHandler : AbstractEditHandler<EditCommand, Habit>
     {
         public EditHandler(HabitsContainerRepository repository, IMapper mapper) : base(
             repository, mapper,

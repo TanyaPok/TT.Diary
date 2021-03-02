@@ -11,17 +11,16 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public abstract class AbstractEditHandler<TCommand, TModel, TContainer> : IRequestHandler<TCommand, int>
+    public abstract class AbstractEditHandler<TCommand, TModel> : IRequestHandler<TCommand, int>
         where TCommand : AbstractEditCommand
         where TModel : AbstractItem
-        where TContainer : Category
     {
         private readonly IMapper _mapper;
-        private readonly AbstractBaseContainerRepository<TContainer, TModel> _repository;
-        private readonly Expression<Func<TContainer, IEnumerable<TModel>>> _expression;
+        private readonly AbstractBaseContainerRepository<TModel> _repository;
+        private readonly Expression<Func<Category, IEnumerable<TModel>>> _expression;
 
-        protected AbstractEditHandler(AbstractBaseContainerRepository<TContainer, TModel> repository, IMapper mapper,
-            Expression<Func<TContainer, IEnumerable<TModel>>> expression)
+        protected AbstractEditHandler(AbstractBaseContainerRepository<TModel> repository, IMapper mapper,
+            Expression<Func<Category, IEnumerable<TModel>>> expression)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));

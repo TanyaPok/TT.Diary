@@ -40,10 +40,10 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
             return await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public virtual T Get<TProperty>(int id, Expression<Func<T, TProperty>> expression)
+        public virtual T Get<TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> expression)
             where TProperty : AbstractEntity
         {
-            return _dbContext.Set<T>().Include(expression).Single(e => e.Id == id);
+            return _dbContext.Set<T>().Include(expression).Single(condition);
         }
     }
 }

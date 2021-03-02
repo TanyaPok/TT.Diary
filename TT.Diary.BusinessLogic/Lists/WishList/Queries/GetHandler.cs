@@ -5,7 +5,7 @@ using TT.Diary.BusinessLogic.Repositories;
 
 namespace TT.Diary.BusinessLogic.Lists.WishList.Queries
 {
-    public class GetHandler : GetBaseHandler<DTO.Lists.Wish<ScheduleSettingsSummary>,
+    public class GetHandler : AbstractGetBaseHandler<DTO.Lists.Wish<ScheduleSettingsSummary>,
         DataAccessLogic.Model.TypeList.Wish, GetQuery>
     {
         public GetHandler(WishListContainerRepository repository, IMapper mapper) : base(repository, mapper)

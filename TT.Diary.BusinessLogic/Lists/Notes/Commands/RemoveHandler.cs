@@ -4,7 +4,7 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.Notes.Commands
 {
-    public class RemoveHandler : AbstractRemoveHandler<RemoveCommand, Note, Category>
+    public class RemoveHandler : AbstractRemoveHandler<RemoveCommand, Note>
     {
         public RemoveHandler(NotesContainerRepository repository) : base(repository)
         {

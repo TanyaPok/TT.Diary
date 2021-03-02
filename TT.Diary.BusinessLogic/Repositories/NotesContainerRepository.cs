@@ -7,7 +7,7 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Repositories
 {
-    public class NotesContainerRepository : AbstractBaseContainerRepository<Category, Note>
+    public class NotesContainerRepository : AbstractBaseContainerRepository<Note>
     {
         private readonly DiaryDBContext _dbContext;
 

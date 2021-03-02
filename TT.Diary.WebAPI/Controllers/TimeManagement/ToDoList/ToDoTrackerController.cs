@@ -1,17 +1,17 @@
-﻿using MediatR;
+﻿using System;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 using TT.Diary.BusinessLogic.Configurations;
 using TT.Diary.BusinessLogic.Configurations.Extensions;
-using TT.Diary.BusinessLogic.TimeManagement.HabitTracker.Commands;
+using TT.Diary.BusinessLogic.TimeManagement.ToDoTracker.Commands;
 
-namespace TT.Diary.WebAPI.Controllers.TimeManagement
+namespace TT.Diary.WebAPI.Controllers.TimeManagement.ToDoList
 {
-    public class HabitTrackerController : ApiControllerBase
+    public class ToDoTrackerController  : ApiControllerBase
     {
-        public HabitTrackerController(ILogger<HabitTrackerController> logger, IMediator mediator) : base(logger,
+        public ToDoTrackerController(ILogger<ToDoTrackerController> logger, IMediator mediator) : base(logger,
             mediator)
         {
         }

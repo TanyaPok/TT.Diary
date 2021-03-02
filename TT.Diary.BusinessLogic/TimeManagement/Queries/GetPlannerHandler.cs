@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using TT.Diary.BusinessLogic.DTO.Lists;
 using TT.Diary.BusinessLogic.DTO.TimeManagement;
 using TT.Diary.BusinessLogic.Repositories;
 
@@ -10,12 +12,15 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
     public class GetPlannerHandler : IRequestHandler<GetPlannerQuery, Planner>
     {
         private readonly TrackedHabitsContainerRepository _habitsRepository;
+        private readonly TrackedToDoListContainerRepository _todoListRepository;
         private readonly NotesContainerRepository _notesRepository;
 
         public GetPlannerHandler(TrackedHabitsContainerRepository habitsRepository,
+            TrackedToDoListContainerRepository todoListRepository,
             NotesContainerRepository notesRepository)
         {
             _habitsRepository = habitsRepository ?? throw new ArgumentNullException(nameof(habitsRepository));
+            _todoListRepository = todoListRepository ?? throw new ArgumentNullException(nameof(todoListRepository));
             _notesRepository = notesRepository ?? throw new ArgumentNullException(nameof(notesRepository));
         }
 
@@ -26,21 +31,30 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
                 Habits = _habitsRepository.GetTrackedList(request.UserId, request.StartDate.Date,
                     request.FinishDate.Date)
             };
+            Filter<Habit<ScheduleSettings>>(planner.Habits, request.StartDate, request.FinishDate);
 
-            // filter by repeated options
-            for (var i = planner.Habits.Count - 1; i >= 0; i--)
-            {
-                planner.Habits[i].Schedule.SetTrackerStrategy();
-
-                if (!planner.Habits[i].Schedule.TryGenerateTrackers(request.StartDate.Date, request.FinishDate.Date))
-                {
-                    planner.Habits.Remove(planner.Habits[i]);
-                }
-            }
+            planner.ToDoList = _todoListRepository.GetTrackedList(request.UserId, request.StartDate.Date,
+                request.FinishDate.Date);
+            Filter<ToDo<ScheduleSettings>>(planner.ToDoList, request.StartDate, request.FinishDate);
 
             planner.Notes = _notesRepository.GetNotes(request.UserId, request.StartDate.Date, request.FinishDate.Date);
 
             return Task.FromResult(planner);
+        }
+
+        private void Filter<TDto>(IList<TDto> list, DateTime startDate, DateTime finishDate)
+            where TDto : AbstractScheduledItem<ScheduleSettings>
+        {
+            // filter by repeated options
+            for (var i = list.Count - 1; i >= 0; i--)
+            {
+                list[i].Schedule.SetTrackerStrategy();
+
+                if (!list[i].Schedule.TryGenerateTrackers(startDate.Date, finishDate.Date))
+                {
+                    list.Remove(list[i]);
+                }
+            }
         }
     }
 }

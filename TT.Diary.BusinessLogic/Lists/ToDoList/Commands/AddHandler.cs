@@ -5,7 +5,7 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.ToDoList.Commands
 {
-    public class AddHandler : AbstractAddHandler<AddCommand, ToDo, Category>
+    public class AddHandler : AbstractAddHandler<AddCommand, ToDo>
     {
         public AddHandler(ToDoListContainerRepository repository, IMapper mapper) : base(repository, mapper,
             c => c.ToDoList)

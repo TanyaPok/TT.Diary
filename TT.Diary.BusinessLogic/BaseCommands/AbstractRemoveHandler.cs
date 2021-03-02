@@ -4,18 +4,16 @@ using System.Threading.Tasks;
 using MediatR;
 using TT.Diary.BusinessLogic.Repositories.Common;
 using TT.Diary.DataAccessLogic.Model;
-using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.BaseCommands
 {
-    public abstract class AbstractRemoveHandler<TCommand, TModel, TContainer> : AsyncRequestHandler<TCommand>
+    public abstract class AbstractRemoveHandler<TCommand, TModel> : AsyncRequestHandler<TCommand>
         where TCommand : AbstractRemoveCommand
         where TModel : AbstractEntity
-        where TContainer : Category
     {
-        private readonly AbstractBaseContainerRepository<TContainer, TModel> _repository;
+        private readonly AbstractBaseContainerRepository<TModel> _repository;
 
-        protected AbstractRemoveHandler(AbstractBaseContainerRepository<TContainer, TModel> repository)
+        protected AbstractRemoveHandler(AbstractBaseContainerRepository<TModel> repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
