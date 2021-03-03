@@ -11,8 +11,14 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
                 .ForMember(d => d.ScheduledStartDateTimeUtc, o => o.MapFrom(s => s.ScheduledStartDateTime))
                 .ForMember(d => d.ScheduledCompletionDateUtc, o => o.MapFrom(s => s.ScheduledCompletionDate))
                 .ForMember(d => d.CompletionDateUtc, o => o.MapFrom(s => s.CompletionDate));
-            
+
             CreateMap<TimeManagement.ToDoSchedule.Commands.SetCommand,
+                    DataAccessLogic.Model.TimeManagement.ScheduleSettings>()
+                .ForMember(d => d.ScheduledStartDateTimeUtc, o => o.MapFrom(s => s.ScheduledStartDateTime))
+                .ForMember(d => d.ScheduledCompletionDateUtc, o => o.MapFrom(s => s.ScheduledCompletionDate))
+                .ForMember(d => d.CompletionDateUtc, o => o.MapFrom(s => s.CompletionDate));
+
+            CreateMap<TimeManagement.WishSchedule.Commands.SetCommand,
                     DataAccessLogic.Model.TimeManagement.ScheduleSettings>()
                 .ForMember(d => d.ScheduledStartDateTimeUtc, o => o.MapFrom(s => s.ScheduledStartDateTime))
                 .ForMember(d => d.ScheduledCompletionDateUtc, o => o.MapFrom(s => s.ScheduledCompletionDate))

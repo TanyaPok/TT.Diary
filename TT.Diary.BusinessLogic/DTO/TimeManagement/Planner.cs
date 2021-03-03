@@ -11,7 +11,7 @@ namespace TT.Diary.BusinessLogic.DTO.TimeManagement
 
         public IList<ToDo<ScheduleSettings>> Appointments { get; set; }
 
-        public IList<Wish<ScheduleSettings>> Wishes { get; set; }
+        public IList<Wish<ScheduleSettings>> WishList { get; set; }
 
         public IList<Note> Notes { get; set; }
     }

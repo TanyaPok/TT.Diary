@@ -14,14 +14,16 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
         private readonly TrackedHabitsContainerRepository _habitsRepository;
         private readonly TrackedToDoListContainerRepository _todoListRepository;
         private readonly NotesContainerRepository _notesRepository;
+        private readonly WishListContainerRepository _wishListContainerRepository;
 
         public GetPlannerHandler(TrackedHabitsContainerRepository habitsRepository,
             TrackedToDoListContainerRepository todoListRepository,
-            NotesContainerRepository notesRepository)
+            NotesContainerRepository notesRepository, WishListContainerRepository wishListContainerRepository)
         {
             _habitsRepository = habitsRepository ?? throw new ArgumentNullException(nameof(habitsRepository));
             _todoListRepository = todoListRepository ?? throw new ArgumentNullException(nameof(todoListRepository));
             _notesRepository = notesRepository ?? throw new ArgumentNullException(nameof(notesRepository));
+            _wishListContainerRepository = wishListContainerRepository ?? throw new ArgumentNullException(nameof(wishListContainerRepository));
         }
 
         public Task<Planner> Handle(GetPlannerQuery request, CancellationToken cancellationToken)
@@ -38,6 +40,9 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
             Filter<ToDo<ScheduleSettings>>(planner.ToDoList, request.StartDate, request.FinishDate);
 
             planner.Notes = _notesRepository.GetNotes(request.UserId, request.StartDate.Date, request.FinishDate.Date);
+            
+            planner.WishList = _wishListContainerRepository.GetScheduledList(request.UserId, request.StartDate.Date,
+                request.FinishDate.Date);
 
             return Task.FromResult(planner);
         }
