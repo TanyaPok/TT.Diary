@@ -26,6 +26,10 @@ namespace TT.Diary.BusinessLogic.MappingConfigurations
             CreateMap<DataAccessLogic.Model.TypeList.Category,
                     DTO.Lists.Category<DTO.Lists.Habit<ScheduleSettingsSummary>>>()
                 .ForMember(dest => dest.Items, opt => opt.MapFrom((src, dest) => src.Habits));
+            
+            CreateMap<DataAccessLogic.Model.TypeList.Category,
+                    DTO.Lists.Category<DTO.Lists.ToDo<ScheduleSettingsSummary>>>()
+                .ForMember(dest => dest.Items, opt => opt.MapFrom((src, dest) => src.Appointments));
 
             CreateMap<DataAccessLogic.Model.TypeList.Category, DTO.Lists.Category<DTO.Lists.Note>>()
                 .ForMember(dest => dest.Items, opt => opt.MapFrom((src, dest) => src.Notes));

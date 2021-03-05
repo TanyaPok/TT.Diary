@@ -51,18 +51,28 @@ namespace TT.Diary.BusinessLogic.Configurations
         [Description("Category cannot be removed")]
         RemovedCategory,
 
-        [Description("Category items cannot be recieved")]
-        GetCategoryItems,
+        [Description("Appointment cannot be recieved")]
+        GetAppointment,
+
+        [Description("Appointment cannot be saved")]
+        SaveAppointment,
+
+        [Description("Appointment cannot be removed")]
+        RemoveAppointment,
+        
+        [Description("Appointments cannot be recieved")]
+        GetAppointments,
+
+        [Description("To-do list cannot be recieved")]
+        GetToDoList,
 
         [Description("ToDo cannot be recieved")]
         GetToDo,
+
         [Description("To-do cannot be saved")] SaveToDo,
 
         [Description("To-do cannot be removed")]
         RemoveToDo,
-
-        [Description("To-do list cannot be recieved")]
-        GetToDoList,
 
         [Description("Wish cannot be recieved")]
         GetWish,

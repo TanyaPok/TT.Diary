@@ -14,6 +14,7 @@ namespace TT.Diary.WebAPI
                 mc.AllowNullCollections = true;
                 mc.AddProfile(new UserProfile());
                 mc.AddProfile(new ToDoListProfile());
+                mc.AddProfile(new AppointmentsProfile());
                 mc.AddProfile(new HabitProfile());
                 mc.AddProfile(new WishProfile());
                 mc.AddProfile(new NoteProfile());
@@ -32,6 +33,7 @@ namespace TT.Diary.WebAPI
             services.AddScoped<CategoriesContainerRepository>();
             services.AddScoped<HabitsContainerRepository>();
             services.AddScoped<ToDoListContainerRepository>();
+            services.AddScoped<AppointmentsContainerRepository>();
             services.AddScoped<WishListContainerRepository>();
             services.AddScoped<NotesContainerRepository>();
             services.AddScoped<ScheduleSettingsRepository>();

@@ -68,6 +68,9 @@ namespace TT.Diary.DataAccessLogic.Model.TypeList
                 case ToDo toDo:
                     ToDoList.Add(toDo);
                     break;
+                case Appointment appointment:
+                    Appointments.Add(appointment);
+                    break;
                 case Note note:
                     Notes.Add(note);
                     break;
