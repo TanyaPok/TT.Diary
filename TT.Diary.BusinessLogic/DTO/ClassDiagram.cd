@@ -74,16 +74,15 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TT.Diary.BusinessLogic.DTO.TimeManagement.Planner">
-    <Position X="8.25" Y="7.25" Width="1.5" />
+    <Position X="8.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAgAAQAAAAAACAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAgAAAAAAAAAAgAAAAAAAAAQAAAAAACAAAQAAAAAAA=</HashCode>
       <FileName>DTO\TimeManagement\Planner.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="ToDoList" />
       <Property Name="Habits" />
       <Property Name="Appointments" />
-      <Property Name="Wishes" />
       <Property Name="Notes" />
     </ShowAsCollectionAssociation>
   </Class>

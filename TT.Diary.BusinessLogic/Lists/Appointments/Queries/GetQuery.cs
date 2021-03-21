@@ -4,7 +4,7 @@ using TT.Diary.BusinessLogic.DTO.TimeManagement;
 
 namespace TT.Diary.BusinessLogic.Lists.Appointments.Queries
 {
-    public class GetQuery : AbstractGetBaseQuery<ToDo<ScheduleSettingsSummary>>
+    public class GetQuery : AbstractGetBaseQuery<Appointment<ScheduleSettingsSummary>>
     {
     }
 }

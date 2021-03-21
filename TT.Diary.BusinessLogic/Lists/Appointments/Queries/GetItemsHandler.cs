@@ -7,7 +7,7 @@ using TT.Diary.DataAccessLogic.Model.TypeList;
 
 namespace TT.Diary.BusinessLogic.Lists.Appointments.Queries
 {
-    public class GetItemsHandler : AbstractGetItemsBaseHandler<GetItemsQuery, Appointment, ToDo<ScheduleSettingsSummary>>
+    public class GetItemsHandler : AbstractGetItemsBaseHandler<GetItemsQuery, Appointment, Appointment<ScheduleSettingsSummary>>
     {
         public GetItemsHandler(AppointmentsContainerRepository repository, IMapper mapper) : base(repository, mapper, c => c.Appointments)
         {

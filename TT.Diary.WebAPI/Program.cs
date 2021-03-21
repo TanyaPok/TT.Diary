@@ -35,11 +35,8 @@ namespace TT.Diary.WebAPI
             try
             {
                 return Host.CreateDefaultBuilder(args)
-                     .UseSerilog(Log.Logger, true)
-                     .ConfigureWebHostDefaults(webBuilder =>
-                     {
-                         webBuilder.UseStartup<Startup>();
-                     });
+                    .UseSerilog(Log.Logger, true)
+                    .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
             }
             catch (Exception ex)
             {

@@ -21,11 +21,11 @@ namespace TT.Diary.WebAPI.Controllers.Lists.Appointments
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<Category<ToDo<ScheduleSettingsSummary>>>> Get(int userId)
+        public async Task<ActionResult<Category<Appointment<ScheduleSettingsSummary>>>> Get(int userId)
         {
             try
             {
-                var data = await QueryAsync<Category<ToDo<ScheduleSettingsSummary>>>(new GetItemsQuery()
+                var data = await QueryAsync<Category<Appointment<ScheduleSettingsSummary>>>(new GetItemsQuery()
                     {UserId = userId, OnlyUnscheduled = true});
 
                 if (data == null)

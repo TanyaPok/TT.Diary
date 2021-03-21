@@ -83,7 +83,7 @@
   <Class Name="TT.Diary.BusinessLogic.Repositories.WishListContainerRepository">
     <Position X="10.75" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>Repositories\WishListContainerRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -101,14 +101,14 @@
       <FileName>Repositories\Common\AbstractBaseScheduledItemRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="TT.Diary.BusinessLogic.Repositories.Common.IContainerRepository&lt;T, TChild&gt;">
+  <Interface Name="TT.Diary.BusinessLogic.Repositories.Common.IContainerRepository&lt;T, TChild&gt;" Collapsed="true">
     <Position X="22.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAIAAAAACAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\Common\IContainerRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="TT.Diary.BusinessLogic.Repositories.Common.IRepository&lt;T&gt;">
+  <Interface Name="TT.Diary.BusinessLogic.Repositories.Common.IRepository&lt;T&gt;" Collapsed="true">
     <Position X="24" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAgAAAEAAIAAAAAAAAABAAAAAAA=</HashCode>
