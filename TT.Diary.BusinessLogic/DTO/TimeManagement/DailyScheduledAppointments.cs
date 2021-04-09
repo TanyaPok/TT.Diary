@@ -7,8 +7,8 @@ namespace TT.Diary.BusinessLogic.DTO.TimeManagement
     {
         public DateTime Date { get; set; }
 
-        public List<string> ScheduledAppointmentsDescriptions { get; set; }
+        public List<Tuple<DateTime, string>> ScheduledAppointments { get; set; }
 
-        public List<string> DoneAppointmentsDescriptions { get; set; }
+        public List<Tuple<DateTime, string>> DoneAppointments { get; set; }
     }
 }

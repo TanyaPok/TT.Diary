@@ -27,7 +27,7 @@ namespace TT.Diary.BusinessLogic.TimeManagement.CRST
 
         protected void SetTracker(IList<Tracker> trackers, DateTime date)
         {
-            var tracker = trackers.FirstOrDefault(t => t.ScheduledDate == date);
+            var tracker = trackers.FirstOrDefault(t => t.ScheduledDate.Date == date.Date);
 
             if (tracker == null)
             {

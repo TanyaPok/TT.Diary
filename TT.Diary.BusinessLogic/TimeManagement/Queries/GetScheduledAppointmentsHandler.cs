@@ -12,7 +12,6 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
     public class GetScheduledAppointmentsHandler : IRequestHandler<GetScheduledAppointmentsQuery,
         List<DailyScheduledAppointments>>
     {
-        private readonly string FORMAT_DESCRIPTION = "{0:hh:mm} {1}";
         private readonly TrackedAppointmentsContainerRepository _repository;
 
         public GetScheduledAppointmentsHandler(TrackedAppointmentsContainerRepository repository)
@@ -51,24 +50,34 @@ namespace TT.Diary.BusinessLogic.TimeManagement.Queries
                         item = new DailyScheduledAppointments()
                         {
                             Date = tracker.ScheduledDate.Date,
-                            DoneAppointmentsDescriptions = new List<string>(),
-                            ScheduledAppointmentsDescriptions = new List<string>()
+                            DoneAppointments = new List<Tuple<DateTime, string>>(),
+                            ScheduledAppointments = new List<Tuple<DateTime, string>>()
                         };
                         dailyAppointments.Add(item);
                     }
 
                     if (tracker.Progress == 0)
                     {
-                        item.ScheduledAppointmentsDescriptions.Add(string.Format(FORMAT_DESCRIPTION,
-                            tracker.ScheduledDate, appointment.Description));
+                        item.ScheduledAppointments.Add(new Tuple<DateTime, string>(
+                            tracker.ScheduledDate.Date.AddHours(appointment.Schedule.ScheduledStartDateTime.Hour)
+                                .AddMinutes(appointment.Schedule.ScheduledStartDateTime.Minute),
+                            appointment.Description));
                     }
                     else
                     {
-                        item.DoneAppointmentsDescriptions.Add(string.Format(FORMAT_DESCRIPTION, tracker.ScheduledDate,
+                        item.DoneAppointments.Add(new Tuple<DateTime, string>(
+                            tracker.ScheduledDate.Date.AddHours(appointment.Schedule.ScheduledStartDateTime.Hour)
+                                .AddMinutes(appointment.Schedule.ScheduledStartDateTime.Minute),
                             appointment.Description));
                     }
                 }
             }
+
+            dailyAppointments.ForEach(da =>
+            {
+                da.ScheduledAppointments.Sort();
+                da.DoneAppointments.Sort();
+            });
 
             return Task.FromResult(dailyAppointments.OrderBy(a => a.Date).ToList());
         }
