@@ -25,6 +25,8 @@ namespace TT.Diary.BusinessLogic.DTO.TimeManagement
 
         public uint DaysAmount { set; get; }
 
+        public DateTime? LastCompletedTrackerDate { set; get; }
+
         public IList<Tracker> Trackers { set; get; }
 
         internal void SetTrackerStrategy(Strategy strategy = Strategy.Planner)

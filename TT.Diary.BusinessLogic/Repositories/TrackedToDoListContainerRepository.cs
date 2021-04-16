@@ -53,22 +53,26 @@ namespace TT.Diary.BusinessLogic.Repositories
                         Months = r.Months,
                         Weekdays = r.Weekdays,
                         DaysAmount = r.DaysAmount,
+                        LastCompletedTrackerDate = (from tr in _dbContext.Trackers
+                            where tr.ToDoId == t.Id && (tr.Progress > 0.0 || tr.Value.HasValue && tr.Value.Value > 0.0)
+                            orderby tr.DateTimeUtc descending
+                            select tr.DateTimeUtc).Take(1).FirstOrDefault(),
                         Trackers = (
-                            from tr in _dbContext.Trackers
-                            where t.Id == tr.ToDoId
-                                  && (tr.ScheduledDateUtc.Date >= startDate && tr.ScheduledDateUtc.Date <= finishDate
-                                      || tr.DateTimeUtc.Date >= startDate && tr.DateTimeUtc.Date <= finishDate)
-                            select new Tracker()
-                            {
-                                Id = tr.Id,
-                                ScheduledDate = tr.ScheduledDateUtc,
-                                DateTime = tr.DateTimeUtc,
-                                Progress = tr.Progress,
-                                Value = tr.Value,
-                                Significance = (tr.ScheduledDateUtc.Date < tr.DateTimeUtc.Date) ? WithDelay : InTime
-                            }).ToList()
-                    }
-                }).ToList();
+                        from tr in _dbContext.Trackers
+                        where t.Id == tr.ToDoId
+                        && (tr.ScheduledDateUtc.Date >= startDate && tr.ScheduledDateUtc.Date <= finishDate
+                        || tr.DateTimeUtc.Date >= startDate && tr.DateTimeUtc.Date <= finishDate)
+                        select new Tracker()
+                        {
+                        Id = tr.Id,
+                        ScheduledDate = tr.ScheduledDateUtc,
+                        DateTime = tr.DateTimeUtc,
+                        Progress = tr.Progress,
+                        Value = tr.Value,
+                        Significance = (tr.ScheduledDateUtc.Date < tr.DateTimeUtc.Date) ? WithDelay : InTime
+                    }).ToList()
+                }
+            }).ToList();
             return toDoList;
         }
     }
