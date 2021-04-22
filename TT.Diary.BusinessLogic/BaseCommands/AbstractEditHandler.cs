@@ -32,7 +32,8 @@ namespace TT.Diary.BusinessLogic.BaseCommands
             var item = _repository.TryGet(e => e.Id == request.Id);
             _mapper.Map<TCommand, TModel>(request, item);
             var category = _repository.GetFirstLevel(request.CategoryId, _expression);
-            return await _repository.AddToAsync(category, item, cancellationToken);
+            _repository.AddTo(category, item);
+            return await _repository.SaveAsync(cancellationToken);
         }
     }
 }

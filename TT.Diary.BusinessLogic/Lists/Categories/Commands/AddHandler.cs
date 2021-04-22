@@ -32,9 +32,10 @@ namespace TT.Diary.BusinessLogic.Lists.Categories.Commands
                 var parent = _repository.GetFirstLevel(
                     request.CategoryId,
                     c => c.Subcategories);
-                await _repository.AddToAsync(parent, newCategory, cancellationToken);
+                _repository.AddTo(parent, newCategory);
             }
 
+            await _repository.SaveAsync(cancellationToken);
             return newCategory.Id;
         }
     }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using TT.Diary.DataAccessLogic.Model;
 using TT.Diary.DataAccessLogic.Model.TimeManagement;
 using TT.Diary.DataAccessLogic.Model.TypeList;
@@ -13,6 +14,7 @@ namespace TT.Diary.DataAccessLogic
     public class DiaryDBContext : DbContext
     {
         private readonly string _connectionString;
+        
         private readonly bool _isDevelopment;
 
         public DbSet<User> Users { get; set; }
@@ -33,7 +35,7 @@ namespace TT.Diary.DataAccessLogic
 
         public DbSet<Tracker> Trackers { get; set; }
 
-        public DiaryDBContext(string connectionString, bool isDevelopment = false)
+        public DiaryDBContext(string connectionString, bool isDevelopment)
         {
             _connectionString = connectionString;
             _isDevelopment = isDevelopment;
@@ -42,10 +44,11 @@ namespace TT.Diary.DataAccessLogic
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
-            {
-                builder.AddDebug();
-            });
-
+                           {
+                               builder.AddDebug();
+                               builder.AddSerilog();
+                           });
+            
             optionsBuilder.UseSqlite(_connectionString,
                 b => b.MigrationsAssembly(typeof(DiaryDBContext).Assembly.FullName));
 

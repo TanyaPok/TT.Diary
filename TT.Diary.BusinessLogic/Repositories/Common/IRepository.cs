@@ -14,7 +14,7 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
             where TProperty : AbstractEntity;
 
         Task AddAsync(T item, CancellationToken cancellationToken);
-        Task RemoveAsync(T item, CancellationToken cancellationToken);
+        void Remove(T item);
         Task<int> SaveAsync(CancellationToken cancellationToken);
     }
 }

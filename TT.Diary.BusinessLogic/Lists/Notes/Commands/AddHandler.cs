@@ -24,7 +24,8 @@ namespace TT.Diary.BusinessLogic.Lists.Notes.Commands
         {
             var category = _repository.GetAllLevels(request.UserId, c => c.Notes);
             var item = _mapper.Map<Note>(request);
-            await _repository.AddToAsync(category, item, cancellationToken);
+            _repository.AddTo(category, item);
+            await _repository.SaveAsync(cancellationToken);
             return item.Id;
         }
     }

@@ -26,13 +26,11 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
         public virtual async Task AddAsync(T item, CancellationToken cancellationToken)
         {
             await _dbContext.AddAsync(item, cancellationToken);
-            await SaveAsync(cancellationToken);
         }
 
-        public virtual async Task RemoveAsync(T item, CancellationToken cancellationToken)
+        public virtual void Remove(T item)
         {
             _dbContext.Remove(item);
-            await SaveAsync(cancellationToken);
         }
 
         public virtual async Task<int> SaveAsync(CancellationToken cancellationToken)

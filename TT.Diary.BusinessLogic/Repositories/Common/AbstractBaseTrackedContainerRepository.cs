@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
@@ -30,23 +28,19 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
             return _dbContext.Set<T>().Include(expression).AsEnumerable().Single(e => e.Id == id);
         }
 
-        public virtual async Task<int> AddToAsync(T parent, Tracker child, CancellationToken cancellationToken)
+        public virtual void AddTo(T parent, Tracker child)
         {
             parent.Trackers.Add(child);
-            return await SaveAsync(cancellationToken);
         }
 
-        public virtual async Task<int> RemoveFromAsync(T parent, Tracker child, CancellationToken cancellationToken)
+        public virtual void RemoveFrom(T parent, Tracker child)
         {
             parent.Trackers.Remove(child);
-            return await SaveAsync(cancellationToken);
         }
 
-        public virtual async Task<int> RemoveFromAsync(T parent, IList<Tracker> children,
-            CancellationToken cancellationToken)
+        public virtual void RemoveFrom(T parent, IList<Tracker> children)
         {
             _dbContext.RemoveRange(children);
-            return await SaveAsync(cancellationToken);
         }
     }
 }

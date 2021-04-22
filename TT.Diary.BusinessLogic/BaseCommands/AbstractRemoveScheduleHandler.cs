@@ -24,7 +24,8 @@ namespace TT.Diary.BusinessLogic.BaseCommands
         protected override async Task Handle(TCommand request, CancellationToken cancellationToken)
         {
             var owner = _repository.Get(s => s.ScheduleId == request.Id, s => s.Schedule);
-            await _scheduleRepository.RemoveAsync(owner.Schedule, cancellationToken);
+            _scheduleRepository.Remove(owner.Schedule);
+            await _scheduleRepository.SaveAsync(cancellationToken);
         }
     }
 }

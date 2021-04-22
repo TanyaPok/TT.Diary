@@ -23,15 +23,13 @@ namespace TT.Diary.WebAPI
                 .AddJsonFile(APP_SETTINGS)
                 .AddCommandLine(args)
                 .Build();
-
-            //TODO: after developing, change to .MinimumLevel.Error
+            
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Warning()
                 .WriteTo
                 .File(builtConfig[LOG_FILE], rollingInterval: RollingInterval.Day, shared: true)
                 .WriteTo.Debug(Serilog.Events.LogEventLevel.Debug)
                 .CreateLogger();
-
             try
             {
                 return Host.CreateDefaultBuilder(args)

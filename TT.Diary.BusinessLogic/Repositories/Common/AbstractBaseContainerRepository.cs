@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TT.Diary.DataAccessLogic;
 using TT.Diary.DataAccessLogic.Model;
@@ -24,27 +22,22 @@ namespace TT.Diary.BusinessLogic.Repositories.Common
             _titleList = titleList ?? throw new ArgumentNullException(nameof(titleList));
         }
 
-        public virtual async Task<int> AddToAsync(Category parent, TChild child, CancellationToken cancellationToken)
+        public virtual void AddTo(Category parent, TChild child)
         {
             parent.Add(child);
-            return await SaveAsync(cancellationToken);
         }
 
-        public virtual async Task<int> RemoveFromAsync(Category parent, TChild child, CancellationToken cancellationToken)
+        public virtual void RemoveFrom(Category parent, TChild child)
         {
             parent.Remove(child);
-            return await SaveAsync(cancellationToken);
         }
 
-        public virtual async Task<int> RemoveFromAsync(Category parent, IList<TChild> children,
-            CancellationToken cancellationToken)
+        public virtual void RemoveFrom(Category parent, IList<TChild> children)
         {
             foreach (var child in children.ToArray())
             {
                 parent.Remove(child);
             }
-
-            return await SaveAsync(cancellationToken);
         }
 
         public virtual Category GetFirstLevel(int id, Expression<Func<Category, IEnumerable<TChild>>> expression)

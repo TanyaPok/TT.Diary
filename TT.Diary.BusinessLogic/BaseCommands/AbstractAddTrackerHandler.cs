@@ -27,7 +27,8 @@ namespace TT.Diary.BusinessLogic.BaseCommands
         {
             var owner = _repository.GetFirstLevel(request.OwnerId, o => o.Trackers);
             var item = _mapper.Map<Tracker>(request);
-            await _repository.AddToAsync(owner, item, cancellationToken);
+            _repository.AddTo(owner, item);
+            await _repository.SaveAsync(cancellationToken);
             return item.Id;
         }
     }

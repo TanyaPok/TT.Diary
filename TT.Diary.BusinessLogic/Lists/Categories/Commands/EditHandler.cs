@@ -26,14 +26,12 @@ namespace TT.Diary.BusinessLogic.Lists.Categories.Commands
 
             _mapper.Map<EditCommand, Category>(request, category);
 
-            var changesCount = 0;
-
             if (request.OldCategoryId != 0)
             {
                 var oldParent = _repository.GetFirstLevel(
                     request.OldCategoryId,
                     c => c.Subcategories);
-                changesCount = await _repository.RemoveFromAsync(oldParent, category, cancellationToken);
+                _repository.RemoveFrom(oldParent, category);
             }
 
             if (request.CategoryId != 0)
@@ -41,10 +39,10 @@ namespace TT.Diary.BusinessLogic.Lists.Categories.Commands
                 var parent = _repository.GetFirstLevel(
                     request.CategoryId,
                     c => c.Subcategories);
-                changesCount += await _repository.AddToAsync(parent, category, cancellationToken);
+                _repository.AddTo(parent, category);
             }
 
-            return changesCount;
+            return await _repository.SaveAsync(cancellationToken);
         }
     }
 }
