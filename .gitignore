@@ -31,3 +31,5 @@ TT.Diary.Documentation/
 TT.Diary.Logs/
 TTDiary.db*
 *.7z
+/TT.Diary.WebAPI/Properties/PublishProfiles
+/TT.Diary.sln.DotSettings.user
