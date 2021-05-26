@@ -26,6 +26,7 @@ namespace TT.Diary.BusinessLogic.Users.Commands
             if (user != null) return user.Id;
             user = _mapper.Map<User>(request);
             await _repository.AddAsync(user, cancellationToken);
+            await _repository.SaveAsync(cancellationToken);
             return user.Id;
         }
     }
