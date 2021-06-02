@@ -19,11 +19,27 @@ namespace TT.Diary.WebAPI.Controllers.TimeManagement.Habits
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<int>> SetAsync([FromBody] SetCommand query)
+        public async Task<ActionResult<int>> AddAsync([FromBody] SetCommand query)
         {
             try
             {
-                return Created(nameof(SetAsync), await CommandAsync<int>(query));
+                return Created(nameof(AddAsync), await CommandAsync<int>(query));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(string.Format(CLIENT_ERROR_MESSAGE,
+                    ErrorMessages.SaveScheduleSettings.GetDescription(), ex.Message));
+            }
+        }
+
+        [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<int>> EditAsync([FromBody] SetCommand query)
+        {
+            try
+            {
+                return Ok(await CommandAsync<int>(query));
             }
             catch (Exception ex)
             {
