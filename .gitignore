@@ -24,12 +24,10 @@ TT.Diary.BusinessLogic/bin/
 TT.Diary.BusinessLogic/obj/
 TT.Diary.DataAccessLogic/bin/
 TT.Diary.DataAccessLogic/obj/
-TT.Diary.DataAccessLogic/Migrations
 TT.Diary.UnitTests/bin/
 TT.Diary.UnitTests/obj/
 TT.Diary.Documentation/
 TT.Diary.Logs/
-TTDiary.db*
 *.7z
 /TT.Diary.WebAPI/Properties/PublishProfiles
 /TT.Diary.sln.DotSettings.user
