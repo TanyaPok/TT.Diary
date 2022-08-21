@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TT.Diary.DataAccessLogic;
 
@@ -10,9 +11,10 @@ using TT.Diary.DataAccessLogic;
 namespace TT.Diary.DataAccessLogic.Migrations
 {
     [DbContext(typeof(DiaryDBContext))]
-    partial class DiaryDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220820232621_MPM")]
+    partial class MPM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
@@ -105,7 +107,7 @@ namespace TT.Diary.DataAccessLogic.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("PriorityModifyDateTimeUtc")
+                    b.Property<DateTime>("PriorityModifyDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("ScheduleId")
@@ -162,7 +164,7 @@ namespace TT.Diary.DataAccessLogic.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("PriorityModifyDateTimeUtc")
+                    b.Property<DateTime>("PriorityModifyDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("ScheduleId")
@@ -215,7 +217,7 @@ namespace TT.Diary.DataAccessLogic.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("PriorityModifyDateTimeUtc")
+                    b.Property<DateTime>("PriorityModifyDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("ScheduleId")
@@ -248,7 +250,7 @@ namespace TT.Diary.DataAccessLogic.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("PriorityModifyDateTimeUtc")
+                    b.Property<DateTime>("PriorityModifyDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Rating")

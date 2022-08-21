@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TT.Diary.DataAccessLogic;
 
@@ -10,9 +11,10 @@ using TT.Diary.DataAccessLogic;
 namespace TT.Diary.DataAccessLogic.Migrations
 {
     [DbContext(typeof(DiaryDBContext))]
-    partial class DiaryDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220526004859_PM")]
+    partial class PM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
@@ -105,9 +107,6 @@ namespace TT.Diary.DataAccessLogic.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("PriorityModifyDateTimeUtc")
-                        .HasColumnType("TEXT");
-
                     b.Property<int?>("ScheduleId")
                         .HasColumnType("INTEGER");
 
@@ -162,9 +161,6 @@ namespace TT.Diary.DataAccessLogic.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("PriorityModifyDateTimeUtc")
-                        .HasColumnType("TEXT");
-
                     b.Property<int?>("ScheduleId")
                         .HasColumnType("INTEGER");
 
@@ -215,9 +211,6 @@ namespace TT.Diary.DataAccessLogic.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("PriorityModifyDateTimeUtc")
-                        .HasColumnType("TEXT");
-
                     b.Property<int?>("ScheduleId")
                         .HasColumnType("INTEGER");
 
@@ -247,9 +240,6 @@ namespace TT.Diary.DataAccessLogic.Migrations
 
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("PriorityModifyDateTimeUtc")
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("Rating")
                         .HasColumnType("INTEGER");

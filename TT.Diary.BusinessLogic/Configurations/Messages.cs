@@ -59,7 +59,7 @@ namespace TT.Diary.BusinessLogic.Configurations
 
         [Description("Appointment cannot be removed")]
         RemoveAppointment,
-        
+
         [Description("Appointments cannot be recieved")]
         GetAppointments,
 
@@ -118,6 +118,12 @@ namespace TT.Diary.BusinessLogic.Configurations
         SaveTracker,
 
         [Description("Tracker cannot be removed")]
-        RemoveTracker
+        RemoveTracker,
+
+        [Description("Non-prioritized activities cannot be recieved")]
+        NonPrioritizedActivity,
+        
+        [Description("Prioritized activities cannot be recieved")]
+        PrioritizedActivity
     }
 }

@@ -1,4 +1,5 @@
 ﻿using TT.Diary.BusinessLogic.DTO.TimeManagement;
+using TT.Diary.DataAccessLogic.Model;
 
 namespace TT.Diary.BusinessLogic.DTO.Lists
 {
@@ -7,5 +8,7 @@ namespace TT.Diary.BusinessLogic.DTO.Lists
         public bool IsTracked { get; set; }
 
         public T Schedule { get; set; }
+
+        public Priority Priority { get; set; }
     }
 }

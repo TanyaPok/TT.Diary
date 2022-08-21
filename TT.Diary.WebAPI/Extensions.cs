@@ -40,6 +40,8 @@ namespace TT.Diary.WebAPI
             services.AddScoped<TrackedHabitsContainerRepository>();
             services.AddScoped<TrackedToDoListContainerRepository>();
             services.AddScoped<TrackedAppointmentsContainerRepository>();
+            services.AddScoped<NonPrioritizedActivityRepository>();
+            services.AddScoped<PrioritizedActivityRepository>();
         }
     }
 }
