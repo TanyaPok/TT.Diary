@@ -124,6 +124,9 @@ namespace TT.Diary.BusinessLogic.Configurations
         NonPrioritizedActivity,
         
         [Description("Prioritized activities cannot be recieved")]
-        PrioritizedActivity
+        PrioritizedActivity,
+        
+        [Description("Priority cannot be saved")]
+        SavePriority
     }
 }
